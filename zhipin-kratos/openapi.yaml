@@ -1,0 +1,1237 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: ""
+    version: 0.0.1
+paths:
+    /admin/position/{id}:
+        get:
+            tags:
+                - AdminService
+            description: Position detail with match items and communications
+            operationId: AdminService_GetPositionDetail
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.admin.AdminPositionDetailResp'
+    /admin/positions:
+        get:
+            tags:
+                - AdminService
+            description: All positions with pagination and status filter
+            operationId: AdminService_ListAllPositions
+            parameters:
+                - name: status
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.admin.AdminPositionListResp'
+    /admin/positions/today:
+        get:
+            tags:
+                - AdminService
+            description: Today's positions — most important for the admin to see progress
+            operationId: AdminService_ListTodayPositions
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.admin.AdminPositionListResp'
+    /admin/stats:
+        get:
+            tags:
+                - AdminService
+            description: Stats overview — count by status
+            operationId: AdminService_GetStats
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.admin.GetStatsResp'
+    /api/blacklist:
+        get:
+            tags:
+                - BlacklistService
+            operationId: BlacklistService_ListBlacklist
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.ListBlacklistResp'
+        post:
+            tags:
+                - BlacklistService
+            operationId: BlacklistService_AddBlacklist
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.zhipin.AddBlacklistReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.BlacklistResp'
+    /api/blacklist/check/{company}:
+        get:
+            tags:
+                - BlacklistService
+            operationId: BlacklistService_CheckBlacklist
+            parameters:
+                - name: company
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.CheckBlacklistResp'
+    /api/blacklist/{id}:
+        delete:
+            tags:
+                - BlacklistService
+            operationId: BlacklistService_RemoveBlacklist
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.RemoveBlacklistResp'
+    /api/position:
+        post:
+            tags:
+                - PositionService
+            operationId: PositionService_CreatePosition
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.zhipin.CreatePositionReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.PositionResp'
+    /api/position/check/{jobId}:
+        get:
+            tags:
+                - PositionService
+            operationId: PositionService_CheckJobId
+            parameters:
+                - name: jobId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.CheckJobIdResp'
+    /api/position/job/{jobId}:
+        get:
+            tags:
+                - PositionService
+            operationId: PositionService_GetPositionByJobId
+            parameters:
+                - name: jobId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.PositionDetailResp'
+    /api/position/{id}:
+        get:
+            tags:
+                - PositionService
+            operationId: PositionService_GetPosition
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.PositionDetailResp'
+    /api/position/{id}/duties:
+        put:
+            tags:
+                - PositionService
+            operationId: PositionService_UpdateDuties
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.zhipin.UpdateDutiesReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.PositionResp'
+    /api/position/{id}/enc-boss-id:
+        put:
+            tags:
+                - PositionService
+            description: Update encBossId
+            operationId: PositionService_UpdateEncBossId
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.zhipin.UpdateEncBossIdReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.PositionResp'
+    /api/position/{id}/match-rate:
+        put:
+            tags:
+                - PositionService
+            operationId: PositionService_UpdateMatchRate
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.zhipin.UpdateMatchRateReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.PositionResp'
+    /api/position/{id}/notes:
+        put:
+            tags:
+                - PositionService
+            operationId: PositionService_UpdateNotes
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.zhipin.UpdateNotesReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.PositionResp'
+    /api/position/{id}/recruiter:
+        put:
+            tags:
+                - PositionService
+            operationId: PositionService_UpdateRecruiter
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.zhipin.UpdateRecruiterReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.PositionResp'
+    /api/position/{id}/requirements:
+        put:
+            tags:
+                - PositionService
+            operationId: PositionService_UpdateRequirements
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.zhipin.UpdateRequirementsReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.PositionResp'
+    /api/position/{id}/salary:
+        put:
+            tags:
+                - PositionService
+            operationId: PositionService_UpdateSalary
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.zhipin.UpdateSalaryReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.PositionResp'
+    /api/position/{id}/skip:
+        put:
+            tags:
+                - PositionService
+            operationId: PositionService_MarkSkipped
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.zhipin.MarkSkippedReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.PositionResp'
+    /api/position/{id}/status:
+        put:
+            tags:
+                - PositionService
+            operationId: PositionService_UpdateStatus
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.zhipin.UpdateStatusReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.PositionResp'
+    /api/position/{positionId}/chat-limited:
+        post:
+            tags:
+                - CommunicationService
+            operationId: CommunicationService_RecordChatLimited
+            parameters:
+                - name: positionId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.zhipin.RecordChatLimitedReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.CommunicationResp'
+    /api/position/{positionId}/communications:
+        get:
+            tags:
+                - CommunicationService
+            operationId: CommunicationService_ListCommunications
+            parameters:
+                - name: positionId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.ListCommunicationsResp'
+    /api/position/{positionId}/interview:
+        post:
+            tags:
+                - CommunicationService
+            operationId: CommunicationService_RecordInterview
+            parameters:
+                - name: positionId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.zhipin.RecordInterviewReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.CommunicationResp'
+    /api/position/{positionId}/match-items:
+        get:
+            tags:
+                - MatchItemService
+            operationId: MatchItemService_ListMatchItems
+            parameters:
+                - name: positionId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.ListMatchItemsResp'
+        post:
+            tags:
+                - MatchItemService
+            operationId: MatchItemService_SetMatchItems
+            parameters:
+                - name: positionId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.zhipin.SetMatchItemsReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.SetMatchItemsResp'
+    /api/position/{positionId}/msg-received:
+        post:
+            tags:
+                - CommunicationService
+            operationId: CommunicationService_RecordMsgReceived
+            parameters:
+                - name: positionId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.zhipin.RecordMsgReceivedReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.CommunicationResp'
+    /api/position/{positionId}/msg-sent:
+        post:
+            tags:
+                - CommunicationService
+            operationId: CommunicationService_RecordMsgSent
+            parameters:
+                - name: positionId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.zhipin.RecordMsgSentReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.CommunicationResp'
+    /api/position/{positionId}/rejection:
+        post:
+            tags:
+                - CommunicationService
+            operationId: CommunicationService_RecordRejection
+            parameters:
+                - name: positionId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.zhipin.RecordRejectionReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.CommunicationResp'
+    /api/position/{positionId}/resume-sent:
+        post:
+            tags:
+                - CommunicationService
+            operationId: CommunicationService_RecordResumeSent
+            parameters:
+                - name: positionId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.zhipin.RecordResumeSentReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.CommunicationResp'
+    /api/positions:
+        get:
+            tags:
+                - PositionService
+            operationId: PositionService_ListPositions
+            parameters:
+                - name: status
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.ListPositionsResp'
+    /api/positions/batch-check:
+        post:
+            tags:
+                - PositionService
+            description: Batch check multiple jobIds at once — for dedup after loading full search results
+            operationId: PositionService_BatchCheckJobIds
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.zhipin.BatchCheckJobIdsReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.BatchCheckJobIdsResp'
+    /api/positions/need-reply:
+        get:
+            tags:
+                - PositionService
+            description: Find positions where last message is from recruiter (we need to reply)
+            operationId: PositionService_ListNeedReplyPositions
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.ListPositionsResp'
+    /api/positions/need-resend:
+        get:
+            tags:
+                - PositionService
+            description: Find positions that need resume resend (last resume != given version)
+            operationId: PositionService_ListNeedResendPositions
+            parameters:
+                - name: latestResumeVersion
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.ListPositionsResp'
+    /api/positions/stale:
+        get:
+            tags:
+                - PositionService
+            description: Find positions not contacted in the last N hours — for follow-up
+            operationId: PositionService_ListStalePositions
+            parameters:
+                - name: staleHours
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.ListPositionsResp'
+components:
+    schemas:
+        api.admin.AdminCommItem:
+            type: object
+            properties:
+                eventType:
+                    type: integer
+                    format: int32
+                eventTime:
+                    type: string
+                    format: date-time
+                content:
+                    type: string
+                direction:
+                    type: integer
+                    format: int32
+        api.admin.AdminMatchItem:
+            type: object
+            properties:
+                requirement:
+                    type: string
+                matchStatus:
+                    type: integer
+                    format: int32
+                resumePoint:
+                    type: string
+                remark:
+                    type: string
+        api.admin.AdminPositionDetailResp:
+            type: object
+            properties:
+                position:
+                    $ref: '#/components/schemas/api.admin.AdminPositionItem'
+                matchItems:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.admin.AdminMatchItem'
+                communications:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.admin.AdminCommItem'
+                duties:
+                    type: string
+                requirements:
+                    type: string
+                notes:
+                    type: string
+                skipReason:
+                    type: string
+        api.admin.AdminPositionItem:
+            type: object
+            properties:
+                id:
+                    type: string
+                jobId:
+                    type: string
+                title:
+                    type: string
+                company:
+                    type: string
+                salaryRange:
+                    type: string
+                salaryMin:
+                    type: integer
+                    format: int32
+                salaryMax:
+                    type: integer
+                    format: int32
+                city:
+                    type: string
+                recruiter:
+                    type: string
+                isHunter:
+                    type: boolean
+                status:
+                    type: integer
+                    format: int32
+                matchRate:
+                    type: integer
+                    format: int32
+                lastResume:
+                    type: string
+                lastCommAt:
+                    type: string
+                lastCommDir:
+                    type: integer
+                    format: int32
+                link:
+                    type: string
+        api.admin.AdminPositionListResp:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.admin.AdminPositionItem'
+                total:
+                    type: integer
+                    format: int32
+        api.admin.GetStatsResp:
+            type: object
+            properties:
+                total:
+                    type: integer
+                    format: int32
+                statusCounts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.admin.StatusCount'
+        api.admin.StatusCount:
+            type: object
+            properties:
+                status:
+                    type: integer
+                    format: int32
+                count:
+                    type: integer
+                    format: int32
+        api.zhipin.AddBlacklistReq:
+            type: object
+            properties:
+                company:
+                    type: string
+                reason:
+                    type: string
+        api.zhipin.BatchCheckJobIdsReq:
+            type: object
+            properties:
+                jobIds:
+                    type: array
+                    items:
+                        type: string
+        api.zhipin.BatchCheckJobIdsResp:
+            type: object
+            properties:
+                results:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.zhipin.JobIdCheckResult'
+        api.zhipin.BlacklistResp:
+            type: object
+            properties:
+                id:
+                    type: string
+                company:
+                    type: string
+                reason:
+                    type: string
+        api.zhipin.CheckBlacklistResp:
+            type: object
+            properties:
+                blacklisted:
+                    type: boolean
+        api.zhipin.CheckJobIdResp:
+            type: object
+            properties:
+                exists:
+                    type: boolean
+                positionId:
+                    type: string
+                status:
+                    type: integer
+                    format: int32
+        api.zhipin.CommunicationResp:
+            type: object
+            properties:
+                id:
+                    type: string
+                positionId:
+                    type: string
+                eventType:
+                    type: integer
+                    format: int32
+                eventTime:
+                    type: string
+                    format: date-time
+                content:
+                    type: string
+                direction:
+                    type: integer
+                    format: int32
+        api.zhipin.CreatePositionReq:
+            type: object
+            properties:
+                jobId:
+                    type: string
+                title:
+                    type: string
+                company:
+                    type: string
+                salaryRange:
+                    type: string
+                salaryMin:
+                    type: integer
+                    format: int32
+                salaryMax:
+                    type: integer
+                    format: int32
+                city:
+                    type: string
+                link:
+                    type: string
+                recruiter:
+                    type: string
+                encBossId:
+                    type: string
+                isHunter:
+                    type: boolean
+                duties:
+                    type: string
+                requirements:
+                    type: string
+                notes:
+                    type: string
+                matchItems:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.zhipin.MatchItemInput'
+        api.zhipin.JobIdCheckResult:
+            type: object
+            properties:
+                jobId:
+                    type: string
+                exists:
+                    type: boolean
+                positionId:
+                    type: string
+                status:
+                    type: integer
+                    format: int32
+        api.zhipin.ListBlacklistResp:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.zhipin.BlacklistResp'
+        api.zhipin.ListCommunicationsResp:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.zhipin.CommunicationResp'
+        api.zhipin.ListMatchItemsResp:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.zhipin.MatchItemResp'
+        api.zhipin.ListPositionsResp:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.zhipin.PositionResp'
+                total:
+                    type: integer
+                    format: int32
+        api.zhipin.MarkSkippedReq:
+            type: object
+            properties:
+                id:
+                    type: string
+                reason:
+                    type: string
+        api.zhipin.MatchItemInput:
+            type: object
+            properties:
+                requirement:
+                    type: string
+                matchStatus:
+                    type: integer
+                    format: int32
+                resumePoint:
+                    type: string
+                remark:
+                    type: string
+                sortIndex:
+                    type: integer
+                    format: int32
+        api.zhipin.MatchItemResp:
+            type: object
+            properties:
+                id:
+                    type: string
+                positionId:
+                    type: string
+                requirement:
+                    type: string
+                matchStatus:
+                    type: integer
+                    format: int32
+                resumePoint:
+                    type: string
+                remark:
+                    type: string
+                sortIndex:
+                    type: integer
+                    format: int32
+        api.zhipin.PositionDetailResp:
+            type: object
+            properties:
+                position:
+                    $ref: '#/components/schemas/api.zhipin.PositionResp'
+                matchItems:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.zhipin.MatchItemResp'
+                communications:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.zhipin.CommunicationResp'
+        api.zhipin.PositionResp:
+            type: object
+            properties:
+                id:
+                    type: string
+                jobId:
+                    type: string
+                title:
+                    type: string
+                company:
+                    type: string
+                salaryRange:
+                    type: string
+                salaryMin:
+                    type: integer
+                    format: int32
+                salaryMax:
+                    type: integer
+                    format: int32
+                city:
+                    type: string
+                link:
+                    type: string
+                recruiter:
+                    type: string
+                encBossId:
+                    type: string
+                isHunter:
+                    type: boolean
+                status:
+                    type: integer
+                    format: int32
+                skipReason:
+                    type: string
+                matchRate:
+                    type: integer
+                    format: int32
+                notes:
+                    type: string
+                lastCommAt:
+                    type: string
+                lastCommDir:
+                    type: integer
+                    format: int32
+                lastResume:
+                    type: string
+                duties:
+                    type: string
+                requirements:
+                    type: string
+        api.zhipin.RecordChatLimitedReq:
+            type: object
+            properties:
+                positionId:
+                    type: string
+        api.zhipin.RecordInterviewReq:
+            type: object
+            properties:
+                positionId:
+                    type: string
+                interviewTime:
+                    type: string
+                    format: date-time
+                notes:
+                    type: string
+        api.zhipin.RecordMsgReceivedReq:
+            type: object
+            properties:
+                positionId:
+                    type: string
+                content:
+                    type: string
+        api.zhipin.RecordMsgSentReq:
+            type: object
+            properties:
+                positionId:
+                    type: string
+                content:
+                    type: string
+        api.zhipin.RecordRejectionReq:
+            type: object
+            properties:
+                positionId:
+                    type: string
+                content:
+                    type: string
+        api.zhipin.RecordResumeSentReq:
+            type: object
+            properties:
+                positionId:
+                    type: string
+                resumeVersion:
+                    type: string
+        api.zhipin.RemoveBlacklistResp:
+            type: object
+            properties: {}
+        api.zhipin.SetMatchItemsReq:
+            type: object
+            properties:
+                positionId:
+                    type: string
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.zhipin.MatchItemInput'
+        api.zhipin.SetMatchItemsResp:
+            type: object
+            properties:
+                count:
+                    type: integer
+                    format: int32
+        api.zhipin.UpdateDutiesReq:
+            type: object
+            properties:
+                id:
+                    type: string
+                duties:
+                    type: string
+        api.zhipin.UpdateEncBossIdReq:
+            type: object
+            properties:
+                id:
+                    type: string
+                encBossId:
+                    type: string
+        api.zhipin.UpdateMatchRateReq:
+            type: object
+            properties:
+                id:
+                    type: string
+                matchRate:
+                    type: integer
+                    format: int32
+        api.zhipin.UpdateNotesReq:
+            type: object
+            properties:
+                id:
+                    type: string
+                notes:
+                    type: string
+        api.zhipin.UpdateRecruiterReq:
+            type: object
+            properties:
+                id:
+                    type: string
+                recruiter:
+                    type: string
+        api.zhipin.UpdateRequirementsReq:
+            type: object
+            properties:
+                id:
+                    type: string
+                requirements:
+                    type: string
+        api.zhipin.UpdateSalaryReq:
+            type: object
+            properties:
+                id:
+                    type: string
+                salaryRange:
+                    type: string
+                salaryMin:
+                    type: integer
+                    format: int32
+                salaryMax:
+                    type: integer
+                    format: int32
+        api.zhipin.UpdateStatusReq:
+            type: object
+            properties:
+                id:
+                    type: string
+                status:
+                    type: integer
+                    format: int32
+tags:
+    - name: AdminService
+      description: AdminService — admin dashboard queries, separate from AI-facing APIs
+    - name: BlacklistService
+      description: BlacklistService — company blacklist management
+    - name: CommunicationService
+      description: CommunicationService — fine-grained interaction events per position
+    - name: MatchItemService
+      description: MatchItemService — per-requirement match analysis
+    - name: PositionService
+      description: PositionService — job position CRUD and status tracking

@@ -1,0 +1,12 @@
+# Binary
+zhipin-migrate
+
+# SQLite database files
+zhipin-db
+zhipin-db-journal
+zhipin-db-wal
+zhipin-db-shm
+*.db
+
+# Test binary
+*.test

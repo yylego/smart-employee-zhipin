@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+package api.zhipin;
+
+option go_package = "github.com/yylego/smart-employee-zhipin/zhipin-kratos/api/zhipin;zhipin";
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+enum EventType {
+  EVENT_TYPE_UNKNOWN       = 0;
+  EVENT_TYPE_MSG_SENT      = 1;
+  EVENT_TYPE_MSG_RECEIVED  = 2;
+  EVENT_TYPE_RESUME_SENT   = 3;
+  EVENT_TYPE_CHAT_LIMITED  = 4;
+  EVENT_TYPE_INTERVIEW     = 5;
+  EVENT_TYPE_OFFER         = 6;
+  EVENT_TYPE_REJECTED      = 7;
+}
+
+// CommunicationService — fine-grained interaction events per position
+service CommunicationService {
+  rpc RecordMsgSent (RecordMsgSentReq) returns (CommunicationResp) {
+    option (google.api.http) = { post: "/api/position/{position_id}/msg-sent", body: "*" };
+  }
+  rpc RecordMsgReceived (RecordMsgReceivedReq) returns (CommunicationResp) {
+    option (google.api.http) = { post: "/api/position/{position_id}/msg-received", body: "*" };
+  }
+  rpc RecordResumeSent (RecordResumeSentReq) returns (CommunicationResp) {
+    option (google.api.http) = { post: "/api/position/{position_id}/resume-sent", body: "*" };
+  }
+  rpc RecordChatLimited (RecordChatLimitedReq) returns (CommunicationResp) {
+    option (google.api.http) = { post: "/api/position/{position_id}/chat-limited", body: "*" };
+  }
+  rpc RecordInterview (RecordInterviewReq) returns (CommunicationResp) {
+    option (google.api.http) = { post: "/api/position/{position_id}/interview", body: "*" };
+  }
+  rpc RecordRejection (RecordRejectionReq) returns (CommunicationResp) {
+    option (google.api.http) = { post: "/api/position/{position_id}/rejection", body: "*" };
+  }
+  rpc ListCommunications (ListCommunicationsReq) returns (ListCommunicationsResp) {
+    option (google.api.http) = { get: "/api/position/{position_id}/communications" };
+  }
+}
+
+message RecordMsgSentReq {
+  uint64 position_id = 1;
+  string content = 2;
+}
+
+message RecordMsgReceivedReq {
+  uint64 position_id = 1;
+  string content = 2;
+}
+
+message RecordResumeSentReq {
+  uint64 position_id = 1;
+  string resume_version = 2;
+}
+
+message RecordChatLimitedReq {
+  uint64 position_id = 1;
+}
+
+message RecordInterviewReq {
+  uint64 position_id = 1;
+  google.protobuf.Timestamp interview_time = 2;
+  string notes = 3;
+}
+
+message RecordRejectionReq {
+  uint64 position_id = 1;
+  string content = 2;
+}
+
+message ListCommunicationsReq {
+  uint64 position_id = 1;
+}
+
+message CommunicationResp {
+  uint64 id = 1;
+  uint64 position_id = 2;
+  int32  event_type = 3;
+  google.protobuf.Timestamp event_time = 4;
+  string content = 5;
+  int32  direction = 6;
+}
+
+message ListCommunicationsResp {
+  repeated CommunicationResp items = 1;
+}

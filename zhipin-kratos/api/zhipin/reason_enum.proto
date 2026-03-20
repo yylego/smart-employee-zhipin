@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package api.zhipin;
+
+import "errors/errors.proto";
+
+option go_package = "github.com/yylego/smart-employee-zhipin/zhipin-kratos/api/zhipin;zhipin";
+
+enum ErrorReason {
+  option (errors.default_code) = 500;
+
+  UNKNOWN = 0 [(errors.code) = 500];
+
+  BAD_PARAM = 40000 [(errors.code) = 400];
+  INVALID_JOB_ID = 40001 [(errors.code) = 400];
+  MISSING_FIELD = 40002 [(errors.code) = 400];
+
+  POSITION_NOT_FOUND = 40400 [(errors.code) = 404];
+  BLACKLIST_NOT_FOUND = 40401 [(errors.code) = 404];
+
+  SERVER_ERROR = 50000 [(errors.code) = 500];
+  DB_ERROR = 50001 [(errors.code) = 500];
+  TX_ERROR = 50002 [(errors.code) = 500];
+  POSITION_CREATE_FAILURE = 50003 [(errors.code) = 500];
+  DUPLICATE_JOB_ID = 50004 [(errors.code) = 409];
+}

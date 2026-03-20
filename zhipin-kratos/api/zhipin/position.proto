@@ -1,0 +1,240 @@
+syntax = "proto3";
+
+package api.zhipin;
+
+option go_package = "github.com/yylego/smart-employee-zhipin/zhipin-kratos/api/zhipin;zhipin";
+
+import "google/api/annotations.proto";
+import "api/zhipin/match_item.proto";
+import "api/zhipin/communication.proto";
+
+enum PositionStatus {
+  POSITION_STATUS_UNKNOWN       = 0;
+  POSITION_STATUS_PENDING       = 1;
+  POSITION_STATUS_SKIPPED       = 2;
+  POSITION_STATUS_CHAT_LIMITED  = 3;
+  POSITION_STATUS_MSG_SENT      = 4;
+  POSITION_STATUS_REPLIED       = 5;
+  POSITION_STATUS_RESUME_SENT   = 6;
+  POSITION_STATUS_INTERVIEWING  = 7;
+  POSITION_STATUS_OFFERED       = 8;
+  POSITION_STATUS_REJECTED      = 9;
+  POSITION_STATUS_NO_CONTACT    = 10;
+}
+
+// PositionService — job position CRUD and status tracking
+service PositionService {
+  rpc CreatePosition (CreatePositionReq) returns (PositionResp) {
+    option (google.api.http) = { post: "/api/position", body: "*" };
+  }
+  rpc UpdateSalary (UpdateSalaryReq) returns (PositionResp) {
+    option (google.api.http) = { put: "/api/position/{id}/salary", body: "*" };
+  }
+  rpc UpdateStatus (UpdateStatusReq) returns (PositionResp) {
+    option (google.api.http) = { put: "/api/position/{id}/status", body: "*" };
+  }
+  rpc MarkSkipped (MarkSkippedReq) returns (PositionResp) {
+    option (google.api.http) = { put: "/api/position/{id}/skip", body: "*" };
+  }
+  rpc UpdateDuties (UpdateDutiesReq) returns (PositionResp) {
+    option (google.api.http) = { put: "/api/position/{id}/duties", body: "*" };
+  }
+  rpc UpdateRequirements (UpdateRequirementsReq) returns (PositionResp) {
+    option (google.api.http) = { put: "/api/position/{id}/requirements", body: "*" };
+  }
+  rpc UpdateMatchRate (UpdateMatchRateReq) returns (PositionResp) {
+    option (google.api.http) = { put: "/api/position/{id}/match-rate", body: "*" };
+  }
+  rpc UpdateNotes (UpdateNotesReq) returns (PositionResp) {
+    option (google.api.http) = { put: "/api/position/{id}/notes", body: "*" };
+  }
+  rpc UpdateRecruiter (UpdateRecruiterReq) returns (PositionResp) {
+    option (google.api.http) = { put: "/api/position/{id}/recruiter", body: "*" };
+  }
+  rpc GetPosition (GetPositionReq) returns (PositionDetailResp) {
+    option (google.api.http) = { get: "/api/position/{id}" };
+  }
+  rpc GetPositionByJobId (GetPositionByJobIdReq) returns (PositionDetailResp) {
+    option (google.api.http) = { get: "/api/position/job/{job_id}" };
+  }
+  rpc ListPositions (ListPositionsReq) returns (ListPositionsResp) {
+    option (google.api.http) = { get: "/api/positions" };
+  }
+  rpc CheckJobId (CheckJobIdReq) returns (CheckJobIdResp) {
+    option (google.api.http) = { get: "/api/position/check/{job_id}" };
+  }
+
+  // Batch check multiple jobIds at once — for dedup after loading full search results
+  rpc BatchCheckJobIds (BatchCheckJobIdsReq) returns (BatchCheckJobIdsResp) {
+    option (google.api.http) = { post: "/api/positions/batch-check", body: "*" };
+  }
+
+  // Find positions not contacted in the last N hours — for follow-up
+  rpc ListStalePositions (ListStalePositionsReq) returns (ListPositionsResp) {
+    option (google.api.http) = { get: "/api/positions/stale" };
+  }
+
+  // Find positions where last message is from recruiter (we need to reply)
+  rpc ListNeedReplyPositions (ListNeedReplyPositionsReq) returns (ListPositionsResp) {
+    option (google.api.http) = { get: "/api/positions/need-reply" };
+  }
+
+  // Find positions that need resume resend (last resume != given version)
+  rpc ListNeedResendPositions (ListNeedResendPositionsReq) returns (ListPositionsResp) {
+    option (google.api.http) = { get: "/api/positions/need-resend" };
+  }
+
+  // Update encBossId
+  rpc UpdateEncBossId (UpdateEncBossIdReq) returns (PositionResp) {
+    option (google.api.http) = { put: "/api/position/{id}/enc-boss-id", body: "*" };
+  }
+}
+
+message CreatePositionReq {
+  string job_id = 1;
+  string title = 2;
+  string company = 3;
+  string salary_range = 4;
+  int32  salary_min = 5;
+  int32  salary_max = 6;
+  string city = 7;
+  string link = 8;
+  string recruiter = 9;
+  string enc_boss_id = 10;
+  bool   is_hunter = 11;
+  string duties = 12;
+  string requirements = 13;
+  string notes = 14;
+  repeated MatchItemInput match_items = 15;
+}
+
+message UpdateSalaryReq {
+  uint64 id = 1;
+  string salary_range = 2;
+  int32  salary_min = 3;
+  int32  salary_max = 4;
+}
+
+message UpdateStatusReq {
+  uint64 id = 1;
+  int32  status = 2;
+}
+
+message MarkSkippedReq {
+  uint64 id = 1;
+  string reason = 2;
+}
+
+message UpdateDutiesReq {
+  uint64 id = 1;
+  string duties = 2;
+}
+
+message UpdateRequirementsReq {
+  uint64 id = 1;
+  string requirements = 2;
+}
+
+message UpdateMatchRateReq {
+  uint64 id = 1;
+  int32  match_rate = 2;
+}
+
+message UpdateNotesReq {
+  uint64 id = 1;
+  string notes = 2;
+}
+
+message UpdateRecruiterReq {
+  uint64 id = 1;
+  string recruiter = 2;
+}
+
+message GetPositionReq {
+  uint64 id = 1;
+}
+
+message GetPositionByJobIdReq {
+  string job_id = 1;
+}
+
+message ListPositionsReq {
+  int32  status = 1;
+  int32  page = 2;
+  int32  page_size = 3;
+}
+
+message CheckJobIdReq {
+  string job_id = 1;
+}
+
+message CheckJobIdResp {
+  bool   exists = 1;
+  uint64 position_id = 2;
+  int32  status = 3;
+}
+
+message BatchCheckJobIdsReq {
+  repeated string job_ids = 1;  // list of 28-char jobIds to check
+}
+
+message BatchCheckJobIdsResp {
+  repeated JobIdCheckResult results = 1;
+}
+
+message JobIdCheckResult {
+  string job_id = 1;
+  bool   exists = 2;
+  uint64 position_id = 3;  // 0 if not exists
+  int32  status = 4;       // position status if exists
+}
+
+message ListStalePositionsReq {
+  int32 stale_hours = 1;  // positions not contacted in the last N hours
+}
+
+message ListNeedReplyPositionsReq {}
+
+message ListNeedResendPositionsReq {
+  string latest_resume_version = 1;  // e.g. "简历-杨亦乐-v20260320.pdf"
+}
+
+message UpdateEncBossIdReq {
+  uint64 id = 1;
+  string enc_boss_id = 2;
+}
+
+message PositionResp {
+  uint64 id = 1;
+  string job_id = 2;
+  string title = 3;
+  string company = 4;
+  string salary_range = 5;
+  int32  salary_min = 6;
+  int32  salary_max = 7;
+  string city = 8;
+  string link = 9;
+  string recruiter = 10;
+  string enc_boss_id = 11;
+  bool   is_hunter = 12;
+  int32  status = 13;
+  string skip_reason = 14;
+  int32  match_rate = 15;
+  string notes = 16;
+  int64  last_comm_at = 17;
+  int32  last_comm_dir = 18;
+  string last_resume = 19;
+  string duties = 20;
+  string requirements = 21;
+}
+
+message PositionDetailResp {
+  PositionResp position = 1;
+  repeated MatchItemResp match_items = 2;
+  repeated CommunicationResp communications = 3;
+}
+
+message ListPositionsResp {
+  repeated PositionResp items = 1;
+  int32 total = 2;
+}

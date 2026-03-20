@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package api.zhipin;
+
+option go_package = "github.com/yylego/smart-employee-zhipin/zhipin-kratos/api/zhipin;zhipin";
+
+import "google/api/annotations.proto";
+
+// BlacklistService — company blacklist management
+service BlacklistService {
+  rpc AddBlacklist (AddBlacklistReq) returns (BlacklistResp) {
+    option (google.api.http) = { post: "/api/blacklist", body: "*" };
+  }
+  rpc CheckBlacklist (CheckBlacklistReq) returns (CheckBlacklistResp) {
+    option (google.api.http) = { get: "/api/blacklist/check/{company}" };
+  }
+  rpc ListBlacklist (ListBlacklistReq) returns (ListBlacklistResp) {
+    option (google.api.http) = { get: "/api/blacklist" };
+  }
+  rpc RemoveBlacklist (RemoveBlacklistReq) returns (RemoveBlacklistResp) {
+    option (google.api.http) = { delete: "/api/blacklist/{id}" };
+  }
+}
+
+message AddBlacklistReq {
+  string company = 1;
+  string reason = 2;
+}
+
+message CheckBlacklistReq {
+  string company = 1;
+}
+
+message CheckBlacklistResp {
+  bool blacklisted = 1;
+}
+
+message ListBlacklistReq {}
+
+message BlacklistResp {
+  uint64 id = 1;
+  string company = 2;
+  string reason = 3;
+}
+
+message ListBlacklistResp {
+  repeated BlacklistResp items = 1;
+}
+
+message RemoveBlacklistReq {
+  uint64 id = 1;
+}
+
+message RemoveBlacklistResp {}

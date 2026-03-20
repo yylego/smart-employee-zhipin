@@ -1,0 +1,107 @@
+syntax = "proto3";
+
+package api.admin;
+
+option go_package = "github.com/yylego/smart-employee-zhipin/zhipin-kratos/api/admin;admin";
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+// AdminService — admin dashboard queries, separate from AI-facing APIs
+service AdminService {
+  // Today's positions — most important for the admin to see progress
+  rpc ListTodayPositions (ListTodayPositionsReq) returns (AdminPositionListResp) {
+    option (google.api.http) = { get: "/admin/positions/today" };
+  }
+
+  // All positions with pagination and status filter
+  rpc ListAllPositions (ListAllPositionsReq) returns (AdminPositionListResp) {
+    option (google.api.http) = { get: "/admin/positions" };
+  }
+
+  // Position detail with match items and communications
+  rpc GetPositionDetail (GetPositionDetailReq) returns (AdminPositionDetailResp) {
+    option (google.api.http) = { get: "/admin/position/{id}" };
+  }
+
+  // Stats overview — count by status
+  rpc GetStats (GetStatsReq) returns (GetStatsResp) {
+    option (google.api.http) = { get: "/admin/stats" };
+  }
+}
+
+// =========== Request ===========
+
+message ListTodayPositionsReq {}
+
+message ListAllPositionsReq {
+  int32 status = 1;   // -1 for all
+  int32 page = 2;
+  int32 page_size = 3;
+}
+
+message GetPositionDetailReq {
+  uint64 id = 1;
+}
+
+message GetStatsReq {}
+
+// =========== Response ===========
+
+message AdminPositionItem {
+  uint64 id = 1;
+  string job_id = 2;
+  string title = 3;
+  string company = 4;
+  string salary_range = 5;
+  int32  salary_min = 6;
+  int32  salary_max = 7;
+  string city = 8;
+  string recruiter = 9;
+  bool   is_hunter = 10;
+  int32  status = 11;
+  int32  match_rate = 12;
+  string last_resume = 13;
+  int64  last_comm_at = 14;
+  int32  last_comm_dir = 15;
+  string link = 16;
+}
+
+message AdminPositionListResp {
+  repeated AdminPositionItem items = 1;
+  int32 total = 2;
+}
+
+message AdminMatchItem {
+  string requirement = 1;
+  int32  match_status = 2;
+  string resume_point = 3;
+  string remark = 4;
+}
+
+message AdminCommItem {
+  int32  event_type = 1;
+  google.protobuf.Timestamp event_time = 2;
+  string content = 3;
+  int32  direction = 4;
+}
+
+message AdminPositionDetailResp {
+  AdminPositionItem position = 1;
+  repeated AdminMatchItem match_items = 2;
+  repeated AdminCommItem communications = 3;
+  string duties = 4;
+  string requirements = 5;
+  string notes = 6;
+  string skip_reason = 7;
+}
+
+message StatusCount {
+  int32 status = 1;
+  int32 count = 2;
+}
+
+message GetStatsResp {
+  int32 total = 1;
+  repeated StatusCount status_counts = 2;
+}
