@@ -38,6 +38,7 @@ func (s *Svc岗位管理) CreatePosition(ctx context.Context, req *pb.CreatePosi
 		R招聘者:  req.Recruiter,
 		E招聘者号: req.EncBossId,
 		I猎头标记: req.IsHunter,
+		S岗位状态: enums.Enum岗位状态映射表.MustGetByCode(req.Status).Basic(),
 		D岗位职责: req.Duties,
 		R岗位要求: req.Requirements,
 		N备注信息: req.Notes,

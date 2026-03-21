@@ -28,7 +28,7 @@ func (s *Svc沟通管理) SyncChat(ctx context.Context, req *pb.SyncChatReq) (*p
 			R简历版本: msg.ResumeVersion,
 		})
 	}
-	res, ebz := s.uc.Xqt同步聊天(ctx, uint(req.PositionId), items)
+	res, ebz := s.uc.Xqt同步聊天(ctx, req.JobId, items)
 	if ebz != nil {
 		return nil, ebz.Erk
 	}
@@ -41,7 +41,7 @@ func (s *Svc沟通管理) SyncChat(ctx context.Context, req *pb.SyncChatReq) (*p
 }
 
 func (s *Svc沟通管理) GetChat(ctx context.Context, req *pb.GetChatReq) (*pb.GetChatResp, error) {
-	v记录们, ebz := s.uc.Get聊天记录(ctx, uint(req.PositionId))
+	v记录们, ebz := s.uc.Get聊天记录(ctx, req.JobId)
 	if ebz != nil {
 		return nil, ebz.Erk
 	}

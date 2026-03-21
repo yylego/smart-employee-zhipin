@@ -34,7 +34,7 @@ type BlacklistServiceHTTPServer interface {
 func RegisterBlacklistServiceHTTPServer(s *http.Server, srv BlacklistServiceHTTPServer) {
 	r := s.Route("/")
 	r.POST("/api/blacklist", _BlacklistService_AddBlacklist0_HTTP_Handler(srv))
-	r.GET("/api/blacklist/check/{company}", _BlacklistService_CheckBlacklist0_HTTP_Handler(srv))
+	r.POST("/api/blacklist/check", _BlacklistService_CheckBlacklist0_HTTP_Handler(srv))
 	r.GET("/api/blacklist", _BlacklistService_ListBlacklist0_HTTP_Handler(srv))
 	r.DELETE("/api/blacklist/{id}", _BlacklistService_RemoveBlacklist0_HTTP_Handler(srv))
 }
@@ -64,10 +64,10 @@ func _BlacklistService_AddBlacklist0_HTTP_Handler(srv BlacklistServiceHTTPServer
 func _BlacklistService_CheckBlacklist0_HTTP_Handler(srv BlacklistServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in CheckBlacklistReq
-		if err := ctx.BindQuery(&in); err != nil {
+		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
-		if err := ctx.BindVars(&in); err != nil {
+		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
 		http.SetOperation(ctx, OperationBlacklistServiceCheckBlacklist)
@@ -154,11 +154,11 @@ func (c *BlacklistServiceHTTPClientImpl) AddBlacklist(ctx context.Context, in *A
 
 func (c *BlacklistServiceHTTPClientImpl) CheckBlacklist(ctx context.Context, in *CheckBlacklistReq, opts ...http.CallOption) (*CheckBlacklistResp, error) {
 	var out CheckBlacklistResp
-	pattern := "/api/blacklist/check/{company}"
-	path := binding.EncodeURL(pattern, in, true)
+	pattern := "/api/blacklist/check"
+	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationBlacklistServiceCheckBlacklist))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

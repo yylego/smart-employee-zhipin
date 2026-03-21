@@ -100,7 +100,7 @@ func (x *ChatMessage) GetResumeVersion() string {
 
 type SyncChatReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	PositionId    uint64                 `protobuf:"varint,1,opt,name=position_id,json=positionId,proto3" json:"position_id,omitempty"`
+	JobId         string                 `protobuf:"bytes,1,opt,name=job_id,json=jobId,proto3" json:"job_id,omitempty"`
 	Messages      []*ChatMessage         `protobuf:"bytes,2,rep,name=messages,proto3" json:"messages,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -136,11 +136,11 @@ func (*SyncChatReq) Descriptor() ([]byte, []int) {
 	return file_zhipin_communication_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *SyncChatReq) GetPositionId() uint64 {
+func (x *SyncChatReq) GetJobId() string {
 	if x != nil {
-		return x.PositionId
+		return x.JobId
 	}
-	return 0
+	return ""
 }
 
 func (x *SyncChatReq) GetMessages() []*ChatMessage {
@@ -220,7 +220,7 @@ func (x *SyncChatResp) GetMessageCount() int32 {
 
 type GetChatReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	PositionId    uint64                 `protobuf:"varint,1,opt,name=position_id,json=positionId,proto3" json:"position_id,omitempty"`
+	JobId         string                 `protobuf:"bytes,1,opt,name=job_id,json=jobId,proto3" json:"job_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -255,11 +255,11 @@ func (*GetChatReq) Descriptor() ([]byte, []int) {
 	return file_zhipin_communication_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *GetChatReq) GetPositionId() uint64 {
+func (x *GetChatReq) GetJobId() string {
 	if x != nil {
-		return x.PositionId
+		return x.JobId
 	}
-	return 0
+	return ""
 }
 
 type GetChatResp struct {
@@ -317,10 +317,9 @@ const file_zhipin_communication_proto_rawDesc = "" +
 	"\acontent\x18\x02 \x01(\tR\acontent\x12\x1c\n" +
 	"\ttimestamp\x18\x03 \x01(\x03R\ttimestamp\x12\x1b\n" +
 	"\tis_resume\x18\x04 \x01(\bR\bisResume\x12%\n" +
-	"\x0eresume_version\x18\x05 \x01(\tR\rresumeVersion\"c\n" +
-	"\vSyncChatReq\x12\x1f\n" +
-	"\vposition_id\x18\x01 \x01(\x04R\n" +
-	"positionId\x123\n" +
+	"\x0eresume_version\x18\x05 \x01(\tR\rresumeVersion\"Y\n" +
+	"\vSyncChatReq\x12\x15\n" +
+	"\x06job_id\x18\x01 \x01(\tR\x05jobId\x123\n" +
 	"\bmessages\x18\x02 \x03(\v2\x17.api.zhipin.ChatMessageR\bmessages\"\x9a\x01\n" +
 	"\fSyncChatResp\x12 \n" +
 	"\flast_comm_at\x18\x01 \x01(\x03R\n" +
@@ -328,16 +327,15 @@ const file_zhipin_communication_proto_rawDesc = "" +
 	"\rlast_comm_dir\x18\x02 \x01(\x05R\vlastCommDir\x12\x1f\n" +
 	"\vlast_resume\x18\x03 \x01(\tR\n" +
 	"lastResume\x12#\n" +
-	"\rmessage_count\x18\x04 \x01(\x05R\fmessageCount\"-\n" +
+	"\rmessage_count\x18\x04 \x01(\x05R\fmessageCount\"#\n" +
 	"\n" +
-	"GetChatReq\x12\x1f\n" +
-	"\vposition_id\x18\x01 \x01(\x04R\n" +
-	"positionId\"B\n" +
+	"GetChatReq\x12\x15\n" +
+	"\x06job_id\x18\x01 \x01(\tR\x05jobId\"B\n" +
 	"\vGetChatResp\x123\n" +
-	"\bmessages\x18\x01 \x03(\v2\x17.api.zhipin.ChatMessageR\bmessages2\xe8\x01\n" +
-	"\x14CommunicationService\x12j\n" +
-	"\bSyncChat\x12\x17.api.zhipin.SyncChatReq\x1a\x18.api.zhipin.SyncChatResp\"+\x82\xd3\xe4\x93\x02%:\x01*\" /api/position/{position_id}/chat\x12d\n" +
-	"\aGetChat\x12\x16.api.zhipin.GetChatReq\x1a\x17.api.zhipin.GetChatResp\"(\x82\xd3\xe4\x93\x02\"\x12 /api/position/{position_id}/chatBIZGgithub.com/yylego/smart-employee-zhipin/zhipin-kratos/api/zhipin;zhipinb\x06proto3"
+	"\bmessages\x18\x01 \x03(\v2\x17.api.zhipin.ChatMessageR\bmessages2\xcc\x01\n" +
+	"\x14CommunicationService\x12\\\n" +
+	"\bSyncChat\x12\x17.api.zhipin.SyncChatReq\x1a\x18.api.zhipin.SyncChatResp\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/api/chat/{job_id}\x12V\n" +
+	"\aGetChat\x12\x16.api.zhipin.GetChatReq\x1a\x17.api.zhipin.GetChatResp\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/api/chat/{job_id}BIZGgithub.com/yylego/smart-employee-zhipin/zhipin-kratos/api/zhipin;zhipinb\x06proto3"
 
 var (
 	file_zhipin_communication_proto_rawDescOnce sync.Once

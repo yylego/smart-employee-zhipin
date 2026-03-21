@@ -112,6 +112,7 @@ type CreatePositionReq struct {
 	Requirements  string                  `protobuf:"bytes,13,opt,name=requirements,proto3" json:"requirements,omitempty"`
 	Notes         string                  `protobuf:"bytes,14,opt,name=notes,proto3" json:"notes,omitempty"`
 	MatchItems    []*RequirementItemInput `protobuf:"bytes,15,rep,name=match_items,json=matchItems,proto3" json:"match_items,omitempty"`
+	Status        int32                   `protobuf:"varint,16,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -249,6 +250,13 @@ func (x *CreatePositionReq) GetMatchItems() []*RequirementItemInput {
 		return x.MatchItems
 	}
 	return nil
+}
+
+func (x *CreatePositionReq) GetStatus() int32 {
+	if x != nil {
+		return x.Status
+	}
+	return 0
 }
 
 type UpdateSalaryReq struct {
@@ -1588,7 +1596,7 @@ var File_zhipin_position_proto protoreflect.FileDescriptor
 const file_zhipin_position_proto_rawDesc = "" +
 	"\n" +
 	"\x15zhipin/position.proto\x12\n" +
-	"api.zhipin\x1a\x1cgoogle/api/annotations.proto\x1a\x1dzhipin/requirement_item.proto\x1a\x1azhipin/communication.proto\"\xd3\x03\n" +
+	"api.zhipin\x1a\x1cgoogle/api/annotations.proto\x1a\x1dzhipin/requirement_item.proto\x1a\x1azhipin/communication.proto\"\xeb\x03\n" +
 	"\x11CreatePositionReq\x12\x15\n" +
 	"\x06job_id\x18\x01 \x01(\tR\x05jobId\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x18\n" +
@@ -1608,7 +1616,8 @@ const file_zhipin_position_proto_rawDesc = "" +
 	"\frequirements\x18\r \x01(\tR\frequirements\x12\x14\n" +
 	"\x05notes\x18\x0e \x01(\tR\x05notes\x12A\n" +
 	"\vmatch_items\x18\x0f \x03(\v2 .api.zhipin.RequirementItemInputR\n" +
-	"matchItems\"\x82\x01\n" +
+	"matchItems\x12\x16\n" +
+	"\x06status\x18\x10 \x01(\x05R\x06status\"\x82\x01\n" +
 	"\x0fUpdateSalaryReq\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12!\n" +
 	"\fsalary_range\x18\x02 \x01(\tR\vsalaryRange\x12\x1d\n" +

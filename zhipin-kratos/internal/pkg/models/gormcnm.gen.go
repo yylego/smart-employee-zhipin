@@ -115,6 +115,7 @@ func (c *T沟通记录) Columns() *T沟通记录Columns {
 		UpdatedAt: gormcnm.Cnm(c.UpdatedAt, "updated_at"),
 		DeletedAt: gormcnm.Cnm(c.DeletedAt, "deleted_at"),
 		P岗位主键:     gormcnm.Cnm(c.P岗位主键, "position_id"),
+		J岗位编号:     gormcnm.Cnm(c.J岗位编号, "job_id"),
 		D消息方向:     gormcnm.Cnm(c.D消息方向, "direction"),
 		C消息内容:     gormcnm.Cnm(c.C消息内容, "content"),
 		T消息时间:     gormcnm.Cnm(c.T消息时间, "timestamp"),
@@ -132,6 +133,7 @@ type T沟通记录Columns struct {
 	UpdatedAt gormcnm.ColumnName[time.Time]
 	DeletedAt gormcnm.ColumnName[gorm.DeletedAt]
 	P岗位主键     gormcnm.ColumnName[uint]
+	J岗位编号     gormcnm.ColumnName[string]
 	D消息方向     gormcnm.ColumnName[int32]
 	C消息内容     gormcnm.ColumnName[string]
 	T消息时间     gormcnm.ColumnName[int64]

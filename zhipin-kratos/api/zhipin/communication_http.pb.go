@@ -29,8 +29,8 @@ type CommunicationServiceHTTPServer interface {
 
 func RegisterCommunicationServiceHTTPServer(s *http.Server, srv CommunicationServiceHTTPServer) {
 	r := s.Route("/")
-	r.POST("/api/position/{position_id}/chat", _CommunicationService_SyncChat0_HTTP_Handler(srv))
-	r.GET("/api/position/{position_id}/chat", _CommunicationService_GetChat0_HTTP_Handler(srv))
+	r.POST("/api/chat/{job_id}", _CommunicationService_SyncChat0_HTTP_Handler(srv))
+	r.GET("/api/chat/{job_id}", _CommunicationService_GetChat0_HTTP_Handler(srv))
 }
 
 func _CommunicationService_SyncChat0_HTTP_Handler(srv CommunicationServiceHTTPServer) func(ctx http.Context) error {
@@ -95,7 +95,7 @@ func NewCommunicationServiceHTTPClient(client *http.Client) CommunicationService
 
 func (c *CommunicationServiceHTTPClientImpl) GetChat(ctx context.Context, in *GetChatReq, opts ...http.CallOption) (*GetChatResp, error) {
 	var out GetChatResp
-	pattern := "/api/position/{position_id}/chat"
+	pattern := "/api/chat/{job_id}"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationCommunicationServiceGetChat))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -108,7 +108,7 @@ func (c *CommunicationServiceHTTPClientImpl) GetChat(ctx context.Context, in *Ge
 
 func (c *CommunicationServiceHTTPClientImpl) SyncChat(ctx context.Context, in *SyncChatReq, opts ...http.CallOption) (*SyncChatResp, error) {
 	var out SyncChatResp
-	pattern := "/api/position/{position_id}/chat"
+	pattern := "/api/chat/{job_id}"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationCommunicationServiceSyncChat))
 	opts = append(opts, http.PathTemplate(pattern))

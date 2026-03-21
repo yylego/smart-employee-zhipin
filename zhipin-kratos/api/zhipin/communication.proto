@@ -9,10 +9,10 @@ import "google/api/annotations.proto";
 // CommunicationService — sync and retrieve chat records per position
 service CommunicationService {
   rpc SyncChat (SyncChatReq) returns (SyncChatResp) {
-    option (google.api.http) = { post: "/api/position/{position_id}/chat", body: "*" };
+    option (google.api.http) = { post: "/api/chat/{job_id}", body: "*" };
   }
   rpc GetChat (GetChatReq) returns (GetChatResp) {
-    option (google.api.http) = { get: "/api/position/{position_id}/chat" };
+    option (google.api.http) = { get: "/api/chat/{job_id}" };
   }
 }
 
@@ -25,7 +25,7 @@ message ChatMessage {
 }
 
 message SyncChatReq {
-  uint64 position_id = 1;
+  string job_id = 1;
   repeated ChatMessage messages = 2;
 }
 
@@ -37,7 +37,7 @@ message SyncChatResp {
 }
 
 message GetChatReq {
-  uint64 position_id = 1;
+  string job_id = 1;
 }
 
 message GetChatResp {

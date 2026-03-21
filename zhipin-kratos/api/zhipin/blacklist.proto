@@ -12,7 +12,7 @@ service BlacklistService {
     option (google.api.http) = { post: "/api/blacklist", body: "*" };
   }
   rpc CheckBlacklist (CheckBlacklistReq) returns (CheckBlacklistResp) {
-    option (google.api.http) = { get: "/api/blacklist/check/{company}" };
+    option (google.api.http) = { post: "/api/blacklist/check", body: "*" };
   }
   rpc ListBlacklist (ListBlacklistReq) returns (ListBlacklistResp) {
     option (google.api.http) = { get: "/api/blacklist" };

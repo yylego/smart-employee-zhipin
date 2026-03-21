@@ -66,7 +66,7 @@ func (s *Svc管理面板) GetPositionDetail(ctx context.Context, req *pb.GetPosi
 	if ebz != nil {
 		return nil, ebz.Erk
 	}
-	v沟通们, ebz := s.uc沟通.Get聊天记录(ctx, uint(req.Id))
+	v沟通们, ebz := s.uc沟通.Get聊天记录(ctx, v岗位.J岗位编号)
 	if ebz != nil {
 		return nil, ebz.Erk
 	}

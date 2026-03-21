@@ -106,6 +106,7 @@ message CreatePositionReq {
   string requirements = 13;
   string notes = 14;
   repeated RequirementItemInput match_items = 15;
+  int32  status = 16;
 }
 
 message UpdateSalaryReq {

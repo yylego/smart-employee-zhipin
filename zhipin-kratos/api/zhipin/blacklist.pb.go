@@ -404,10 +404,10 @@ const file_zhipin_blacklist_proto_rawDesc = "" +
 	"\x05items\x18\x01 \x03(\v2\x19.api.zhipin.BlacklistRespR\x05items\"$\n" +
 	"\x12RemoveBlacklistReq\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\"\x15\n" +
-	"\x13RemoveBlacklistResp2\xc5\x03\n" +
+	"\x13RemoveBlacklistResp2\xbe\x03\n" +
 	"\x10BlacklistService\x12a\n" +
-	"\fAddBlacklist\x12\x1b.api.zhipin.AddBlacklistReq\x1a\x19.api.zhipin.BlacklistResp\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/api/blacklist\x12w\n" +
-	"\x0eCheckBlacklist\x12\x1d.api.zhipin.CheckBlacklistReq\x1a\x1e.api.zhipin.CheckBlacklistResp\"&\x82\xd3\xe4\x93\x02 \x12\x1e/api/blacklist/check/{company}\x12d\n" +
+	"\fAddBlacklist\x12\x1b.api.zhipin.AddBlacklistReq\x1a\x19.api.zhipin.BlacklistResp\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/api/blacklist\x12p\n" +
+	"\x0eCheckBlacklist\x12\x1d.api.zhipin.CheckBlacklistReq\x1a\x1e.api.zhipin.CheckBlacklistResp\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/api/blacklist/check\x12d\n" +
 	"\rListBlacklist\x12\x1c.api.zhipin.ListBlacklistReq\x1a\x1d.api.zhipin.ListBlacklistResp\"\x16\x82\xd3\xe4\x93\x02\x10\x12\x0e/api/blacklist\x12o\n" +
 	"\x0fRemoveBlacklist\x12\x1e.api.zhipin.RemoveBlacklistReq\x1a\x1f.api.zhipin.RemoveBlacklistResp\"\x1b\x82\xd3\xe4\x93\x02\x15*\x13/api/blacklist/{id}BIZGgithub.com/yylego/smart-employee-zhipin/zhipin-kratos/api/zhipin;zhipinb\x06proto3"
 
