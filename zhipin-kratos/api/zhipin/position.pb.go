@@ -1591,6 +1591,270 @@ func (x *ListPositionsResp) GetTotal() int32 {
 	return 0
 }
 
+type SyncPositionReq struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	JobId         string                  `protobuf:"bytes,1,opt,name=job_id,json=jobId,proto3" json:"job_id,omitempty"`
+	Title         string                  `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	Company       string                  `protobuf:"bytes,3,opt,name=company,proto3" json:"company,omitempty"`
+	SalaryRange   string                  `protobuf:"bytes,4,opt,name=salary_range,json=salaryRange,proto3" json:"salary_range,omitempty"`
+	SalaryMin     int32                   `protobuf:"varint,5,opt,name=salary_min,json=salaryMin,proto3" json:"salary_min,omitempty"`
+	SalaryMax     int32                   `protobuf:"varint,6,opt,name=salary_max,json=salaryMax,proto3" json:"salary_max,omitempty"`
+	City          string                  `protobuf:"bytes,7,opt,name=city,proto3" json:"city,omitempty"`
+	Link          string                  `protobuf:"bytes,8,opt,name=link,proto3" json:"link,omitempty"`
+	Recruiter     string                  `protobuf:"bytes,9,opt,name=recruiter,proto3" json:"recruiter,omitempty"`
+	EncBossId     string                  `protobuf:"bytes,10,opt,name=enc_boss_id,json=encBossId,proto3" json:"enc_boss_id,omitempty"`
+	IsHunter      bool                    `protobuf:"varint,11,opt,name=is_hunter,json=isHunter,proto3" json:"is_hunter,omitempty"`
+	Status        int32                   `protobuf:"varint,12,opt,name=status,proto3" json:"status,omitempty"`
+	Duties        string                  `protobuf:"bytes,13,opt,name=duties,proto3" json:"duties,omitempty"`
+	Requirements  string                  `protobuf:"bytes,14,opt,name=requirements,proto3" json:"requirements,omitempty"`
+	Notes         string                  `protobuf:"bytes,15,opt,name=notes,proto3" json:"notes,omitempty"`
+	MatchItems    []*RequirementItemInput `protobuf:"bytes,16,rep,name=match_items,json=matchItems,proto3" json:"match_items,omitempty"`
+	ChatMessages  []*ChatMessage          `protobuf:"bytes,17,rep,name=chat_messages,json=chatMessages,proto3" json:"chat_messages,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SyncPositionReq) Reset() {
+	*x = SyncPositionReq{}
+	mi := &file_zhipin_position_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SyncPositionReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SyncPositionReq) ProtoMessage() {}
+
+func (x *SyncPositionReq) ProtoReflect() protoreflect.Message {
+	mi := &file_zhipin_position_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SyncPositionReq.ProtoReflect.Descriptor instead.
+func (*SyncPositionReq) Descriptor() ([]byte, []int) {
+	return file_zhipin_position_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *SyncPositionReq) GetJobId() string {
+	if x != nil {
+		return x.JobId
+	}
+	return ""
+}
+
+func (x *SyncPositionReq) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *SyncPositionReq) GetCompany() string {
+	if x != nil {
+		return x.Company
+	}
+	return ""
+}
+
+func (x *SyncPositionReq) GetSalaryRange() string {
+	if x != nil {
+		return x.SalaryRange
+	}
+	return ""
+}
+
+func (x *SyncPositionReq) GetSalaryMin() int32 {
+	if x != nil {
+		return x.SalaryMin
+	}
+	return 0
+}
+
+func (x *SyncPositionReq) GetSalaryMax() int32 {
+	if x != nil {
+		return x.SalaryMax
+	}
+	return 0
+}
+
+func (x *SyncPositionReq) GetCity() string {
+	if x != nil {
+		return x.City
+	}
+	return ""
+}
+
+func (x *SyncPositionReq) GetLink() string {
+	if x != nil {
+		return x.Link
+	}
+	return ""
+}
+
+func (x *SyncPositionReq) GetRecruiter() string {
+	if x != nil {
+		return x.Recruiter
+	}
+	return ""
+}
+
+func (x *SyncPositionReq) GetEncBossId() string {
+	if x != nil {
+		return x.EncBossId
+	}
+	return ""
+}
+
+func (x *SyncPositionReq) GetIsHunter() bool {
+	if x != nil {
+		return x.IsHunter
+	}
+	return false
+}
+
+func (x *SyncPositionReq) GetStatus() int32 {
+	if x != nil {
+		return x.Status
+	}
+	return 0
+}
+
+func (x *SyncPositionReq) GetDuties() string {
+	if x != nil {
+		return x.Duties
+	}
+	return ""
+}
+
+func (x *SyncPositionReq) GetRequirements() string {
+	if x != nil {
+		return x.Requirements
+	}
+	return ""
+}
+
+func (x *SyncPositionReq) GetNotes() string {
+	if x != nil {
+		return x.Notes
+	}
+	return ""
+}
+
+func (x *SyncPositionReq) GetMatchItems() []*RequirementItemInput {
+	if x != nil {
+		return x.MatchItems
+	}
+	return nil
+}
+
+func (x *SyncPositionReq) GetChatMessages() []*ChatMessage {
+	if x != nil {
+		return x.ChatMessages
+	}
+	return nil
+}
+
+type SyncPositionResp struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Id                uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	JobId             string                 `protobuf:"bytes,2,opt,name=job_id,json=jobId,proto3" json:"job_id,omitempty"`
+	MatchItemsCount   int32                  `protobuf:"varint,3,opt,name=match_items_count,json=matchItemsCount,proto3" json:"match_items_count,omitempty"`
+	ChatMessagesCount int32                  `protobuf:"varint,4,opt,name=chat_messages_count,json=chatMessagesCount,proto3" json:"chat_messages_count,omitempty"`
+	LastCommAt        int64                  `protobuf:"varint,5,opt,name=last_comm_at,json=lastCommAt,proto3" json:"last_comm_at,omitempty"`
+	LastCommDir       int32                  `protobuf:"varint,6,opt,name=last_comm_dir,json=lastCommDir,proto3" json:"last_comm_dir,omitempty"`
+	LastResume        string                 `protobuf:"bytes,7,opt,name=last_resume,json=lastResume,proto3" json:"last_resume,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *SyncPositionResp) Reset() {
+	*x = SyncPositionResp{}
+	mi := &file_zhipin_position_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SyncPositionResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SyncPositionResp) ProtoMessage() {}
+
+func (x *SyncPositionResp) ProtoReflect() protoreflect.Message {
+	mi := &file_zhipin_position_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SyncPositionResp.ProtoReflect.Descriptor instead.
+func (*SyncPositionResp) Descriptor() ([]byte, []int) {
+	return file_zhipin_position_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *SyncPositionResp) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *SyncPositionResp) GetJobId() string {
+	if x != nil {
+		return x.JobId
+	}
+	return ""
+}
+
+func (x *SyncPositionResp) GetMatchItemsCount() int32 {
+	if x != nil {
+		return x.MatchItemsCount
+	}
+	return 0
+}
+
+func (x *SyncPositionResp) GetChatMessagesCount() int32 {
+	if x != nil {
+		return x.ChatMessagesCount
+	}
+	return 0
+}
+
+func (x *SyncPositionResp) GetLastCommAt() int64 {
+	if x != nil {
+		return x.LastCommAt
+	}
+	return 0
+}
+
+func (x *SyncPositionResp) GetLastCommDir() int32 {
+	if x != nil {
+		return x.LastCommDir
+	}
+	return 0
+}
+
+func (x *SyncPositionResp) GetLastResume() string {
+	if x != nil {
+		return x.LastResume
+	}
+	return ""
+}
+
 var File_zhipin_position_proto protoreflect.FileDescriptor
 
 const file_zhipin_position_proto_rawDesc = "" +
@@ -1717,7 +1981,39 @@ const file_zhipin_position_proto_rawDesc = "" +
 	"\rchat_messages\x18\x03 \x03(\v2\x17.api.zhipin.ChatMessageR\fchatMessages\"Y\n" +
 	"\x11ListPositionsResp\x12.\n" +
 	"\x05items\x18\x01 \x03(\v2\x18.api.zhipin.PositionRespR\x05items\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total*\xe2\x02\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\"\xa7\x04\n" +
+	"\x0fSyncPositionReq\x12\x15\n" +
+	"\x06job_id\x18\x01 \x01(\tR\x05jobId\x12\x14\n" +
+	"\x05title\x18\x02 \x01(\tR\x05title\x12\x18\n" +
+	"\acompany\x18\x03 \x01(\tR\acompany\x12!\n" +
+	"\fsalary_range\x18\x04 \x01(\tR\vsalaryRange\x12\x1d\n" +
+	"\n" +
+	"salary_min\x18\x05 \x01(\x05R\tsalaryMin\x12\x1d\n" +
+	"\n" +
+	"salary_max\x18\x06 \x01(\x05R\tsalaryMax\x12\x12\n" +
+	"\x04city\x18\a \x01(\tR\x04city\x12\x12\n" +
+	"\x04link\x18\b \x01(\tR\x04link\x12\x1c\n" +
+	"\trecruiter\x18\t \x01(\tR\trecruiter\x12\x1e\n" +
+	"\venc_boss_id\x18\n" +
+	" \x01(\tR\tencBossId\x12\x1b\n" +
+	"\tis_hunter\x18\v \x01(\bR\bisHunter\x12\x16\n" +
+	"\x06status\x18\f \x01(\x05R\x06status\x12\x16\n" +
+	"\x06duties\x18\r \x01(\tR\x06duties\x12\"\n" +
+	"\frequirements\x18\x0e \x01(\tR\frequirements\x12\x14\n" +
+	"\x05notes\x18\x0f \x01(\tR\x05notes\x12A\n" +
+	"\vmatch_items\x18\x10 \x03(\v2 .api.zhipin.RequirementItemInputR\n" +
+	"matchItems\x12<\n" +
+	"\rchat_messages\x18\x11 \x03(\v2\x17.api.zhipin.ChatMessageR\fchatMessages\"\xfc\x01\n" +
+	"\x10SyncPositionResp\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x15\n" +
+	"\x06job_id\x18\x02 \x01(\tR\x05jobId\x12*\n" +
+	"\x11match_items_count\x18\x03 \x01(\x05R\x0fmatchItemsCount\x12.\n" +
+	"\x13chat_messages_count\x18\x04 \x01(\x05R\x11chatMessagesCount\x12 \n" +
+	"\flast_comm_at\x18\x05 \x01(\x03R\n" +
+	"lastCommAt\x12\"\n" +
+	"\rlast_comm_dir\x18\x06 \x01(\x05R\vlastCommDir\x12\x1f\n" +
+	"\vlast_resume\x18\a \x01(\tR\n" +
+	"lastResume*\xe2\x02\n" +
 	"\x0ePositionStatus\x12\x1b\n" +
 	"\x17POSITION_STATUS_UNKNOWN\x10\x00\x12\x1b\n" +
 	"\x17POSITION_STATUS_PENDING\x10\x01\x12\x1b\n" +
@@ -1730,7 +2026,7 @@ const file_zhipin_position_proto_rawDesc = "" +
 	"\x17POSITION_STATUS_OFFERED\x10\b\x12\x1c\n" +
 	"\x18POSITION_STATUS_REJECTED\x10\t\x12\x1e\n" +
 	"\x1aPOSITION_STATUS_NO_CONTACT\x10\n" +
-	"2\xa8\x10\n" +
+	"2\x92\x11\n" +
 	"\x0fPositionService\x12c\n" +
 	"\x0eCreatePosition\x12\x1d.api.zhipin.CreatePositionReq\x1a\x18.api.zhipin.PositionResp\"\x18\x82\xd3\xe4\x93\x02\x12:\x01*\"\r/api/position\x12k\n" +
 	"\fUpdateSalary\x12\x1b.api.zhipin.UpdateSalaryReq\x1a\x18.api.zhipin.PositionResp\"$\x82\xd3\xe4\x93\x02\x1e:\x01*\x1a\x19/api/position/{id}/salary\x12k\n" +
@@ -1750,7 +2046,8 @@ const file_zhipin_position_proto_rawDesc = "" +
 	"\x12ListStalePositions\x12!.api.zhipin.ListStalePositionsReq\x1a\x1d.api.zhipin.ListPositionsResp\"\x1c\x82\xd3\xe4\x93\x02\x16\x12\x14/api/positions/stale\x12\x81\x01\n" +
 	"\x16ListNeedReplyPositions\x12%.api.zhipin.ListNeedReplyPositionsReq\x1a\x1d.api.zhipin.ListPositionsResp\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/api/positions/need-reply\x12\x84\x01\n" +
 	"\x17ListNeedResendPositions\x12&.api.zhipin.ListNeedResendPositionsReq\x1a\x1d.api.zhipin.ListPositionsResp\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/api/positions/need-resend\x12v\n" +
-	"\x0fUpdateEncBossId\x12\x1e.api.zhipin.UpdateEncBossIdReq\x1a\x18.api.zhipin.PositionResp\")\x82\xd3\xe4\x93\x02#:\x01*\x1a\x1e/api/position/{id}/enc-boss-idBIZGgithub.com/yylego/smart-employee-zhipin/zhipin-kratos/api/zhipin;zhipinb\x06proto3"
+	"\x0fUpdateEncBossId\x12\x1e.api.zhipin.UpdateEncBossIdReq\x1a\x18.api.zhipin.PositionResp\")\x82\xd3\xe4\x93\x02#:\x01*\x1a\x1e/api/position/{id}/enc-boss-id\x12h\n" +
+	"\fSyncPosition\x12\x1b.api.zhipin.SyncPositionReq\x1a\x1c.api.zhipin.SyncPositionResp\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/api/position/syncBIZGgithub.com/yylego/smart-employee-zhipin/zhipin-kratos/api/zhipin;zhipinb\x06proto3"
 
 var (
 	file_zhipin_position_proto_rawDescOnce sync.Once
@@ -1765,7 +2062,7 @@ func file_zhipin_position_proto_rawDescGZIP() []byte {
 }
 
 var file_zhipin_position_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_zhipin_position_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_zhipin_position_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
 var file_zhipin_position_proto_goTypes = []any{
 	(PositionStatus)(0),                // 0: api.zhipin.PositionStatus
 	(*CreatePositionReq)(nil),          // 1: api.zhipin.CreatePositionReq
@@ -1792,58 +2089,64 @@ var file_zhipin_position_proto_goTypes = []any{
 	(*PositionResp)(nil),               // 22: api.zhipin.PositionResp
 	(*PositionDetailResp)(nil),         // 23: api.zhipin.PositionDetailResp
 	(*ListPositionsResp)(nil),          // 24: api.zhipin.ListPositionsResp
-	(*RequirementItemInput)(nil),       // 25: api.zhipin.RequirementItemInput
-	(*RequirementItemResp)(nil),        // 26: api.zhipin.RequirementItemResp
-	(*ChatMessage)(nil),                // 27: api.zhipin.ChatMessage
+	(*SyncPositionReq)(nil),            // 25: api.zhipin.SyncPositionReq
+	(*SyncPositionResp)(nil),           // 26: api.zhipin.SyncPositionResp
+	(*RequirementItemInput)(nil),       // 27: api.zhipin.RequirementItemInput
+	(*RequirementItemResp)(nil),        // 28: api.zhipin.RequirementItemResp
+	(*ChatMessage)(nil),                // 29: api.zhipin.ChatMessage
 }
 var file_zhipin_position_proto_depIdxs = []int32{
-	25, // 0: api.zhipin.CreatePositionReq.match_items:type_name -> api.zhipin.RequirementItemInput
+	27, // 0: api.zhipin.CreatePositionReq.match_items:type_name -> api.zhipin.RequirementItemInput
 	17, // 1: api.zhipin.BatchCheckJobIdsResp.results:type_name -> api.zhipin.JobIdCheckResult
 	22, // 2: api.zhipin.PositionDetailResp.position:type_name -> api.zhipin.PositionResp
-	26, // 3: api.zhipin.PositionDetailResp.match_items:type_name -> api.zhipin.RequirementItemResp
-	27, // 4: api.zhipin.PositionDetailResp.chat_messages:type_name -> api.zhipin.ChatMessage
+	28, // 3: api.zhipin.PositionDetailResp.match_items:type_name -> api.zhipin.RequirementItemResp
+	29, // 4: api.zhipin.PositionDetailResp.chat_messages:type_name -> api.zhipin.ChatMessage
 	22, // 5: api.zhipin.ListPositionsResp.items:type_name -> api.zhipin.PositionResp
-	1,  // 6: api.zhipin.PositionService.CreatePosition:input_type -> api.zhipin.CreatePositionReq
-	2,  // 7: api.zhipin.PositionService.UpdateSalary:input_type -> api.zhipin.UpdateSalaryReq
-	3,  // 8: api.zhipin.PositionService.UpdateStatus:input_type -> api.zhipin.UpdateStatusReq
-	4,  // 9: api.zhipin.PositionService.MarkSkipped:input_type -> api.zhipin.MarkSkippedReq
-	5,  // 10: api.zhipin.PositionService.UpdateDuties:input_type -> api.zhipin.UpdateDutiesReq
-	6,  // 11: api.zhipin.PositionService.UpdateRequirements:input_type -> api.zhipin.UpdateRequirementsReq
-	7,  // 12: api.zhipin.PositionService.UpdateMatchRate:input_type -> api.zhipin.UpdateMatchRateReq
-	8,  // 13: api.zhipin.PositionService.UpdateNotes:input_type -> api.zhipin.UpdateNotesReq
-	9,  // 14: api.zhipin.PositionService.UpdateRecruiter:input_type -> api.zhipin.UpdateRecruiterReq
-	10, // 15: api.zhipin.PositionService.GetPosition:input_type -> api.zhipin.GetPositionReq
-	11, // 16: api.zhipin.PositionService.GetPositionByJobId:input_type -> api.zhipin.GetPositionByJobIdReq
-	12, // 17: api.zhipin.PositionService.ListPositions:input_type -> api.zhipin.ListPositionsReq
-	13, // 18: api.zhipin.PositionService.CheckJobId:input_type -> api.zhipin.CheckJobIdReq
-	15, // 19: api.zhipin.PositionService.BatchCheckJobIds:input_type -> api.zhipin.BatchCheckJobIdsReq
-	18, // 20: api.zhipin.PositionService.ListStalePositions:input_type -> api.zhipin.ListStalePositionsReq
-	19, // 21: api.zhipin.PositionService.ListNeedReplyPositions:input_type -> api.zhipin.ListNeedReplyPositionsReq
-	20, // 22: api.zhipin.PositionService.ListNeedResendPositions:input_type -> api.zhipin.ListNeedResendPositionsReq
-	21, // 23: api.zhipin.PositionService.UpdateEncBossId:input_type -> api.zhipin.UpdateEncBossIdReq
-	22, // 24: api.zhipin.PositionService.CreatePosition:output_type -> api.zhipin.PositionResp
-	22, // 25: api.zhipin.PositionService.UpdateSalary:output_type -> api.zhipin.PositionResp
-	22, // 26: api.zhipin.PositionService.UpdateStatus:output_type -> api.zhipin.PositionResp
-	22, // 27: api.zhipin.PositionService.MarkSkipped:output_type -> api.zhipin.PositionResp
-	22, // 28: api.zhipin.PositionService.UpdateDuties:output_type -> api.zhipin.PositionResp
-	22, // 29: api.zhipin.PositionService.UpdateRequirements:output_type -> api.zhipin.PositionResp
-	22, // 30: api.zhipin.PositionService.UpdateMatchRate:output_type -> api.zhipin.PositionResp
-	22, // 31: api.zhipin.PositionService.UpdateNotes:output_type -> api.zhipin.PositionResp
-	22, // 32: api.zhipin.PositionService.UpdateRecruiter:output_type -> api.zhipin.PositionResp
-	23, // 33: api.zhipin.PositionService.GetPosition:output_type -> api.zhipin.PositionDetailResp
-	23, // 34: api.zhipin.PositionService.GetPositionByJobId:output_type -> api.zhipin.PositionDetailResp
-	24, // 35: api.zhipin.PositionService.ListPositions:output_type -> api.zhipin.ListPositionsResp
-	14, // 36: api.zhipin.PositionService.CheckJobId:output_type -> api.zhipin.CheckJobIdResp
-	16, // 37: api.zhipin.PositionService.BatchCheckJobIds:output_type -> api.zhipin.BatchCheckJobIdsResp
-	24, // 38: api.zhipin.PositionService.ListStalePositions:output_type -> api.zhipin.ListPositionsResp
-	24, // 39: api.zhipin.PositionService.ListNeedReplyPositions:output_type -> api.zhipin.ListPositionsResp
-	24, // 40: api.zhipin.PositionService.ListNeedResendPositions:output_type -> api.zhipin.ListPositionsResp
-	22, // 41: api.zhipin.PositionService.UpdateEncBossId:output_type -> api.zhipin.PositionResp
-	24, // [24:42] is the sub-list for method output_type
-	6,  // [6:24] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	27, // 6: api.zhipin.SyncPositionReq.match_items:type_name -> api.zhipin.RequirementItemInput
+	29, // 7: api.zhipin.SyncPositionReq.chat_messages:type_name -> api.zhipin.ChatMessage
+	1,  // 8: api.zhipin.PositionService.CreatePosition:input_type -> api.zhipin.CreatePositionReq
+	2,  // 9: api.zhipin.PositionService.UpdateSalary:input_type -> api.zhipin.UpdateSalaryReq
+	3,  // 10: api.zhipin.PositionService.UpdateStatus:input_type -> api.zhipin.UpdateStatusReq
+	4,  // 11: api.zhipin.PositionService.MarkSkipped:input_type -> api.zhipin.MarkSkippedReq
+	5,  // 12: api.zhipin.PositionService.UpdateDuties:input_type -> api.zhipin.UpdateDutiesReq
+	6,  // 13: api.zhipin.PositionService.UpdateRequirements:input_type -> api.zhipin.UpdateRequirementsReq
+	7,  // 14: api.zhipin.PositionService.UpdateMatchRate:input_type -> api.zhipin.UpdateMatchRateReq
+	8,  // 15: api.zhipin.PositionService.UpdateNotes:input_type -> api.zhipin.UpdateNotesReq
+	9,  // 16: api.zhipin.PositionService.UpdateRecruiter:input_type -> api.zhipin.UpdateRecruiterReq
+	10, // 17: api.zhipin.PositionService.GetPosition:input_type -> api.zhipin.GetPositionReq
+	11, // 18: api.zhipin.PositionService.GetPositionByJobId:input_type -> api.zhipin.GetPositionByJobIdReq
+	12, // 19: api.zhipin.PositionService.ListPositions:input_type -> api.zhipin.ListPositionsReq
+	13, // 20: api.zhipin.PositionService.CheckJobId:input_type -> api.zhipin.CheckJobIdReq
+	15, // 21: api.zhipin.PositionService.BatchCheckJobIds:input_type -> api.zhipin.BatchCheckJobIdsReq
+	18, // 22: api.zhipin.PositionService.ListStalePositions:input_type -> api.zhipin.ListStalePositionsReq
+	19, // 23: api.zhipin.PositionService.ListNeedReplyPositions:input_type -> api.zhipin.ListNeedReplyPositionsReq
+	20, // 24: api.zhipin.PositionService.ListNeedResendPositions:input_type -> api.zhipin.ListNeedResendPositionsReq
+	21, // 25: api.zhipin.PositionService.UpdateEncBossId:input_type -> api.zhipin.UpdateEncBossIdReq
+	25, // 26: api.zhipin.PositionService.SyncPosition:input_type -> api.zhipin.SyncPositionReq
+	22, // 27: api.zhipin.PositionService.CreatePosition:output_type -> api.zhipin.PositionResp
+	22, // 28: api.zhipin.PositionService.UpdateSalary:output_type -> api.zhipin.PositionResp
+	22, // 29: api.zhipin.PositionService.UpdateStatus:output_type -> api.zhipin.PositionResp
+	22, // 30: api.zhipin.PositionService.MarkSkipped:output_type -> api.zhipin.PositionResp
+	22, // 31: api.zhipin.PositionService.UpdateDuties:output_type -> api.zhipin.PositionResp
+	22, // 32: api.zhipin.PositionService.UpdateRequirements:output_type -> api.zhipin.PositionResp
+	22, // 33: api.zhipin.PositionService.UpdateMatchRate:output_type -> api.zhipin.PositionResp
+	22, // 34: api.zhipin.PositionService.UpdateNotes:output_type -> api.zhipin.PositionResp
+	22, // 35: api.zhipin.PositionService.UpdateRecruiter:output_type -> api.zhipin.PositionResp
+	23, // 36: api.zhipin.PositionService.GetPosition:output_type -> api.zhipin.PositionDetailResp
+	23, // 37: api.zhipin.PositionService.GetPositionByJobId:output_type -> api.zhipin.PositionDetailResp
+	24, // 38: api.zhipin.PositionService.ListPositions:output_type -> api.zhipin.ListPositionsResp
+	14, // 39: api.zhipin.PositionService.CheckJobId:output_type -> api.zhipin.CheckJobIdResp
+	16, // 40: api.zhipin.PositionService.BatchCheckJobIds:output_type -> api.zhipin.BatchCheckJobIdsResp
+	24, // 41: api.zhipin.PositionService.ListStalePositions:output_type -> api.zhipin.ListPositionsResp
+	24, // 42: api.zhipin.PositionService.ListNeedReplyPositions:output_type -> api.zhipin.ListPositionsResp
+	24, // 43: api.zhipin.PositionService.ListNeedResendPositions:output_type -> api.zhipin.ListPositionsResp
+	22, // 44: api.zhipin.PositionService.UpdateEncBossId:output_type -> api.zhipin.PositionResp
+	26, // 45: api.zhipin.PositionService.SyncPosition:output_type -> api.zhipin.SyncPositionResp
+	27, // [27:46] is the sub-list for method output_type
+	8,  // [8:27] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_zhipin_position_proto_init() }
@@ -1859,7 +2162,7 @@ func file_zhipin_position_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_zhipin_position_proto_rawDesc), len(file_zhipin_position_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   24,
+			NumMessages:   26,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

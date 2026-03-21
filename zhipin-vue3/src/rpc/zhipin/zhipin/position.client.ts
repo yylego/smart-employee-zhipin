@@ -4,6 +4,8 @@
 import type { RpcTransport } from "@protobuf-ts/runtime-rpc";
 import type { ServiceInfo } from "@protobuf-ts/runtime-rpc";
 import { PositionService } from "./position";
+import type { SyncPositionResp } from "./position";
+import type { SyncPositionReq } from "./position";
 import type { UpdateEncBossIdReq } from "./position";
 import type { ListNeedResendPositionsReq } from "./position";
 import type { ListNeedReplyPositionsReq } from "./position";
@@ -120,6 +122,12 @@ export interface IPositionServiceClient {
      * @generated from protobuf rpc: UpdateEncBossId
      */
     updateEncBossId(input: UpdateEncBossIdReq, options?: RpcOptions): GrpcToHttpPromise<UpdateEncBossIdReq, PositionResp>;
+    /**
+     * Full sync — upsert position + replace matchItems + replace chat messages in one call
+     *
+     * @generated from protobuf rpc: SyncPosition
+     */
+    syncPosition(input: SyncPositionReq, options?: RpcOptions): GrpcToHttpPromise<SyncPositionReq, SyncPositionResp>;
 }
 /**
  * PositionService — job position CRUD and status tracking
@@ -267,5 +275,14 @@ export class PositionServiceClient implements IPositionServiceClient, ServiceInf
     updateEncBossId(input: UpdateEncBossIdReq, options?: RpcOptions): GrpcToHttpPromise<UpdateEncBossIdReq, PositionResp> {
         const method = this.methods[17], opt = this._transport.mergeOptions(options);
         return executeGrpcToHttp<UpdateEncBossIdReq, PositionResp>("unary", this._transport, method, opt, input);
+    }
+    /**
+     * Full sync — upsert position + replace matchItems + replace chat messages in one call
+     *
+     * @generated from protobuf rpc: SyncPosition
+     */
+    syncPosition(input: SyncPositionReq, options?: RpcOptions): GrpcToHttpPromise<SyncPositionReq, SyncPositionResp> {
+        const method = this.methods[18], opt = this._transport.mergeOptions(options);
+        return executeGrpcToHttp<SyncPositionReq, SyncPositionResp>("unary", this._transport, method, opt, input);
     }
 }

@@ -24,8 +24,8 @@ func wireApp(confServer *conf.Server, confData *conf.Data, zapKratos *zapkratos.
 	}
 	uc岗位管理 := biz.NewUc岗位管理(dataData, zapKratos)
 	uc需求匹配 := biz.NewUc需求匹配(dataData, zapKratos)
-	svc岗位管理 := service.NewSvc岗位管理(uc岗位管理, uc需求匹配)
 	uc沟通管理 := biz.NewUc沟通管理(dataData, zapKratos)
+	svc岗位管理 := service.NewSvc岗位管理(uc岗位管理, uc需求匹配, uc沟通管理)
 	svc沟通管理 := service.NewSvc沟通管理(uc沟通管理)
 	svc需求匹配 := service.NewSvc需求匹配(uc需求匹配)
 	uc黑名单管理 := biz.NewUc黑名单管理(dataData, zapKratos)

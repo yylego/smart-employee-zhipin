@@ -1,3 +1,10 @@
+[![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/yylego/smart-employee-zhipin/release.yml?branch=main&label=BUILD)](https://github.com/yylego/smart-employee-zhipin/actions/workflows/release.yml?query=branch%3Amain)
+[![GoDoc](https://pkg.go.dev/badge/github.com/yylego/smart-employee-zhipin)](https://pkg.go.dev/github.com/yylego/smart-employee-zhipin)
+[![Coverage Status](https://img.shields.io/coveralls/github/yylego/smart-employee-zhipin/main.svg)](https://coveralls.io/github/yylego/smart-employee-zhipin?branch=main)
+[![Supported Go Versions](https://img.shields.io/badge/Go-1.26+-lightgrey.svg)](https://go.dev/)
+[![GitHub Release](https://img.shields.io/badge/release-active-blue.svg)](https://github.com/yylego/smart-employee-zhipin)
+[![Go Report Card](https://goreportcard.com/badge/github.com/yylego/smart-employee-zhipin)](https://goreportcard.com/report/github.com/yylego/smart-employee-zhipin)
+
 # smart-employee-zhipin
 
 **智能求职助手** — 基于 Kratos 微服务框架的求职管理系统，用于记录和跟踪 Boss 直聘上的求职过程。
@@ -16,12 +23,12 @@
 
 将手工 Markdown 记录的求职流程，升级为结构化的 API 服务 + 可视化管理面板，支持：
 
-- 岗位信息录入与状态管理（待处理、已发消息、已读未回、已约面试等）
-- 岗位匹配分析（逐条对比岗位要求与简历匹配度）
-- 沟通记录管理（打招呼、发简历、收到回复等事件流水）
+- 岗位信息录入与状态管理（待处理、已发消息、面试中等）
+- 岗位需求匹配分析（逐条对比岗位要求与简历匹配度）
+- 聊天记录同步——一次推送整个对话，自动提取最后沟通时间和简历状态
 - 公司黑名单管理
-- 待跟进/待回复/待补发简历等智能筛选
-- 管理面板查看今日沟通与全部岗位
+- 智能筛选：待跟进/待回复/待补发简历
+- 管理面板查看岗位和聊天记录
 
 ## 项目结构
 
@@ -73,6 +80,12 @@ docker exec $(docker ps -qf "name=postgres") psql -U postgres -c "CREATE DATABAS
 
 ```bash
 make orz
+```
+
+### 生成 TypeScript 客户端
+
+```bash
+make gen
 ```
 
 ### 构建后端

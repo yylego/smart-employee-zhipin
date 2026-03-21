@@ -37,6 +37,7 @@ const (
 	PositionService_ListNeedReplyPositions_FullMethodName  = "/api.zhipin.PositionService/ListNeedReplyPositions"
 	PositionService_ListNeedResendPositions_FullMethodName = "/api.zhipin.PositionService/ListNeedResendPositions"
 	PositionService_UpdateEncBossId_FullMethodName         = "/api.zhipin.PositionService/UpdateEncBossId"
+	PositionService_SyncPosition_FullMethodName            = "/api.zhipin.PositionService/SyncPosition"
 )
 
 // PositionServiceClient is the client API for PositionService service.
@@ -68,6 +69,8 @@ type PositionServiceClient interface {
 	ListNeedResendPositions(ctx context.Context, in *ListNeedResendPositionsReq, opts ...grpc.CallOption) (*ListPositionsResp, error)
 	// Update encBossId
 	UpdateEncBossId(ctx context.Context, in *UpdateEncBossIdReq, opts ...grpc.CallOption) (*PositionResp, error)
+	// Full sync — upsert position + replace matchItems + replace chat messages in one call
+	SyncPosition(ctx context.Context, in *SyncPositionReq, opts ...grpc.CallOption) (*SyncPositionResp, error)
 }
 
 type positionServiceClient struct {
@@ -258,6 +261,16 @@ func (c *positionServiceClient) UpdateEncBossId(ctx context.Context, in *UpdateE
 	return out, nil
 }
 
+func (c *positionServiceClient) SyncPosition(ctx context.Context, in *SyncPositionReq, opts ...grpc.CallOption) (*SyncPositionResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SyncPositionResp)
+	err := c.cc.Invoke(ctx, PositionService_SyncPosition_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PositionServiceServer is the server API for PositionService service.
 // All implementations must embed UnimplementedPositionServiceServer
 // for forward compatibility.
@@ -287,6 +300,8 @@ type PositionServiceServer interface {
 	ListNeedResendPositions(context.Context, *ListNeedResendPositionsReq) (*ListPositionsResp, error)
 	// Update encBossId
 	UpdateEncBossId(context.Context, *UpdateEncBossIdReq) (*PositionResp, error)
+	// Full sync — upsert position + replace matchItems + replace chat messages in one call
+	SyncPosition(context.Context, *SyncPositionReq) (*SyncPositionResp, error)
 	mustEmbedUnimplementedPositionServiceServer()
 }
 
@@ -350,6 +365,9 @@ func (UnimplementedPositionServiceServer) ListNeedResendPositions(context.Contex
 }
 func (UnimplementedPositionServiceServer) UpdateEncBossId(context.Context, *UpdateEncBossIdReq) (*PositionResp, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateEncBossId not implemented")
+}
+func (UnimplementedPositionServiceServer) SyncPosition(context.Context, *SyncPositionReq) (*SyncPositionResp, error) {
+	return nil, status.Error(codes.Unimplemented, "method SyncPosition not implemented")
 }
 func (UnimplementedPositionServiceServer) mustEmbedUnimplementedPositionServiceServer() {}
 func (UnimplementedPositionServiceServer) testEmbeddedByValue()                         {}
@@ -696,6 +714,24 @@ func _PositionService_UpdateEncBossId_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PositionService_SyncPosition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SyncPositionReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PositionServiceServer).SyncPosition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PositionService_SyncPosition_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PositionServiceServer).SyncPosition(ctx, req.(*SyncPositionReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PositionService_ServiceDesc is the grpc.ServiceDesc for PositionService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -774,6 +810,10 @@ var PositionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateEncBossId",
 			Handler:    _PositionService_UpdateEncBossId_Handler,
+		},
+		{
+			MethodName: "SyncPosition",
+			Handler:    _PositionService_SyncPosition_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

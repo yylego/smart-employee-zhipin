@@ -14,10 +14,11 @@ type Svc岗位管理 struct {
 
 	uc      *biz.Uc岗位管理
 	ucMatch *biz.Uc需求匹配
+	ucChat  *biz.Uc沟通管理
 }
 
-func NewSvc岗位管理(uc *biz.Uc岗位管理, ucMatch *biz.Uc需求匹配) *Svc岗位管理 {
-	return &Svc岗位管理{uc: uc, ucMatch: ucMatch}
+func NewSvc岗位管理(uc *biz.Uc岗位管理, ucMatch *biz.Uc需求匹配, ucChat *biz.Uc沟通管理) *Svc岗位管理 {
+	return &Svc岗位管理{uc: uc, ucMatch: ucMatch, ucChat: ucChat}
 }
 
 func (s *Svc岗位管理) CreatePosition(ctx context.Context, req *pb.CreatePositionReq) (*pb.PositionResp, error) {
@@ -301,4 +302,118 @@ func (s *Svc岗位管理) UpdateEncBossId(ctx context.Context, req *pb.UpdateEnc
 		return nil, ebz.Erk
 	}
 	return toPositionResp(v岗位), nil
+}
+
+func (s *Svc岗位管理) SyncPosition(ctx context.Context, req *pb.SyncPositionReq) (*pb.SyncPositionResp, error) {
+	// strict validation — all fields must be present
+	if len(req.JobId) != 28 {
+		return nil, pb.ErrorInvalidJobId("jobId must be 28 chars, got %d", len(req.JobId))
+	}
+	if req.Title == "" {
+		return nil, pb.ErrorMissingField("title is required")
+	}
+	if req.Company == "" {
+		return nil, pb.ErrorMissingField("company is required")
+	}
+	if req.SalaryRange == "" {
+		return nil, pb.ErrorMissingField("salaryRange is required")
+	}
+	if req.City == "" {
+		return nil, pb.ErrorMissingField("city is required")
+	}
+	if req.Recruiter == "" {
+		return nil, pb.ErrorMissingField("recruiter is required")
+	}
+	if req.Status == 0 {
+		return nil, pb.ErrorMissingField("status is required")
+	}
+	if req.Duties == "" {
+		return nil, pb.ErrorMissingField("duties is required")
+	}
+	if req.Requirements == "" {
+		return nil, pb.ErrorMissingField("requirements is required")
+	}
+	if len(req.MatchItems) == 0 {
+		return nil, pb.ErrorMissingField("matchItems is required and must not be empty")
+	}
+	if len(req.ChatMessages) == 0 {
+		return nil, pb.ErrorMissingField("chatMessages is required — this endpoint is designed for syncing from chat page")
+	} else if req.EncBossId == "" {
+		return nil, pb.ErrorMissingField("encBossId is required when chatMessages is present — chat requires encBossId")
+	}
+
+	// upsert position: check if exists, create or update
+	reqBiz := &biz.Req创建岗位{
+		J岗位编号: req.JobId,
+		T岗位名称: req.Title,
+		C公司名称: req.Company,
+		S薪资范围: req.SalaryRange,
+		S薪资下限: req.SalaryMin,
+		S薪资上限: req.SalaryMax,
+		C城市名称: req.City,
+		L岗位链接: req.Link,
+		R招聘者:  req.Recruiter,
+		E招聘者号: req.EncBossId,
+		I猎头标记: req.IsHunter,
+		S岗位状态: enums.Enum岗位状态映射表.MustGetByCode(req.Status).Basic(),
+		D岗位职责: req.Duties,
+		R岗位要求: req.Requirements,
+		N备注信息: req.Notes,
+	}
+
+	v岗位, ebz := s.uc.Get按编号查(ctx, req.JobId)
+	if ebz != nil {
+		return nil, ebz.Erk
+	}
+	if v岗位 == nil {
+		v岗位, ebz = s.uc.Xqt创建岗位(ctx, reqBiz)
+		if ebz != nil {
+			return nil, ebz.Erk
+		}
+	} else {
+		if ebz := s.uc.Xqt全量更新(ctx, v岗位.ID, reqBiz); ebz != nil {
+			return nil, ebz.Erk
+		}
+	}
+
+	// replace matchItems (full replacement)
+	matchItems := make([]*biz.Req需求匹配项, 0, len(req.MatchItems))
+	for _, item := range req.MatchItems {
+		matchItems = append(matchItems, &biz.Req需求匹配项{
+			R岗位要求: item.Requirement,
+			M匹配状态: enums.Enum匹配状态映射表.MustGetByCode(item.MatchStatus).Basic(),
+			R简历对应: item.ResumePoint,
+			R补充说明: item.Remark,
+			S排序序号: item.SortIndex,
+		})
+	}
+	if _, ebz := s.ucMatch.Xqt批量设置(ctx, req.JobId, matchItems); ebz != nil {
+		return nil, ebz.Erk
+	}
+
+	// replace chat messages (full replacement)
+	chatItems := make([]*biz.Req聊天消息, 0, len(req.ChatMessages))
+	for _, msg := range req.ChatMessages {
+		chatItems = append(chatItems, &biz.Req聊天消息{
+			D消息方向: msg.Direction,
+			C消息内容: msg.Content,
+			T消息时间: msg.Timestamp,
+			B简历消息: msg.IsResume,
+			R简历版本: msg.ResumeVersion,
+		})
+	}
+	chatRes, ebz := s.ucChat.Xqt同步聊天(ctx, req.JobId, chatItems)
+	if ebz != nil {
+		return nil, ebz.Erk
+	}
+
+	return &pb.SyncPositionResp{
+		Id:                uint64(v岗位.ID),
+		JobId:             req.JobId,
+		MatchItemsCount:   int32(len(matchItems)),
+		ChatMessagesCount: chatRes.N消息数量,
+		LastCommAt:        chatRes.L最后沟通,
+		LastCommDir:       chatRes.L最后方向,
+		LastResume:        chatRes.L简历版本,
+	}, nil
 }

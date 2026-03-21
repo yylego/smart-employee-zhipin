@@ -451,6 +451,112 @@ export interface ListPositionsResp {
     total: number;
 }
 /**
+ * @generated from protobuf message api.zhipin.SyncPositionReq
+ */
+export interface SyncPositionReq {
+    /**
+     * @generated from protobuf field: string job_id = 1
+     */
+    jobId: string;
+    /**
+     * @generated from protobuf field: string title = 2
+     */
+    title: string;
+    /**
+     * @generated from protobuf field: string company = 3
+     */
+    company: string;
+    /**
+     * @generated from protobuf field: string salary_range = 4
+     */
+    salaryRange: string;
+    /**
+     * @generated from protobuf field: int32 salary_min = 5
+     */
+    salaryMin: number;
+    /**
+     * @generated from protobuf field: int32 salary_max = 6
+     */
+    salaryMax: number;
+    /**
+     * @generated from protobuf field: string city = 7
+     */
+    city: string;
+    /**
+     * @generated from protobuf field: string link = 8
+     */
+    link: string;
+    /**
+     * @generated from protobuf field: string recruiter = 9
+     */
+    recruiter: string;
+    /**
+     * @generated from protobuf field: string enc_boss_id = 10
+     */
+    encBossId: string;
+    /**
+     * @generated from protobuf field: bool is_hunter = 11
+     */
+    isHunter: boolean;
+    /**
+     * @generated from protobuf field: int32 status = 12
+     */
+    status: number;
+    /**
+     * @generated from protobuf field: string duties = 13
+     */
+    duties: string;
+    /**
+     * @generated from protobuf field: string requirements = 14
+     */
+    requirements: string;
+    /**
+     * @generated from protobuf field: string notes = 15
+     */
+    notes: string;
+    /**
+     * @generated from protobuf field: repeated api.zhipin.RequirementItemInput match_items = 16
+     */
+    matchItems: RequirementItemInput[];
+    /**
+     * @generated from protobuf field: repeated api.zhipin.ChatMessage chat_messages = 17
+     */
+    chatMessages: ChatMessage[];
+}
+/**
+ * @generated from protobuf message api.zhipin.SyncPositionResp
+ */
+export interface SyncPositionResp {
+    /**
+     * @generated from protobuf field: uint64 id = 1
+     */
+    id: string;
+    /**
+     * @generated from protobuf field: string job_id = 2
+     */
+    jobId: string;
+    /**
+     * @generated from protobuf field: int32 match_items_count = 3
+     */
+    matchItemsCount: number;
+    /**
+     * @generated from protobuf field: int32 chat_messages_count = 4
+     */
+    chatMessagesCount: number;
+    /**
+     * @generated from protobuf field: int64 last_comm_at = 5
+     */
+    lastCommAt: string;
+    /**
+     * @generated from protobuf field: int32 last_comm_dir = 6
+     */
+    lastCommDir: number;
+    /**
+     * @generated from protobuf field: string last_resume = 7
+     */
+    lastResume: string;
+}
+/**
  * @generated from protobuf enum api.zhipin.PositionStatus
  */
 export enum PositionStatus {
@@ -2065,6 +2171,276 @@ class ListPositionsResp$Type extends MessageType<ListPositionsResp> {
  * @generated MessageType for protobuf message api.zhipin.ListPositionsResp
  */
 export const ListPositionsResp = new ListPositionsResp$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class SyncPositionReq$Type extends MessageType<SyncPositionReq> {
+    constructor() {
+        super("api.zhipin.SyncPositionReq", [
+            { no: 1, name: "job_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "title", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "company", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "salary_range", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 5, name: "salary_min", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
+            { no: 6, name: "salary_max", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
+            { no: 7, name: "city", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 8, name: "link", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 9, name: "recruiter", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 10, name: "enc_boss_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 11, name: "is_hunter", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 12, name: "status", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
+            { no: 13, name: "duties", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 14, name: "requirements", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 15, name: "notes", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 16, name: "match_items", kind: "message", repeat: 2 /*RepeatType.UNPACKED*/, T: () => RequirementItemInput },
+            { no: 17, name: "chat_messages", kind: "message", repeat: 2 /*RepeatType.UNPACKED*/, T: () => ChatMessage }
+        ]);
+    }
+    create(value?: PartialMessage<SyncPositionReq>): SyncPositionReq {
+        const message = globalThis.Object.create((this.messagePrototype!));
+        message.jobId = "";
+        message.title = "";
+        message.company = "";
+        message.salaryRange = "";
+        message.salaryMin = 0;
+        message.salaryMax = 0;
+        message.city = "";
+        message.link = "";
+        message.recruiter = "";
+        message.encBossId = "";
+        message.isHunter = false;
+        message.status = 0;
+        message.duties = "";
+        message.requirements = "";
+        message.notes = "";
+        message.matchItems = [];
+        message.chatMessages = [];
+        if (value !== undefined)
+            reflectionMergePartial<SyncPositionReq>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: SyncPositionReq): SyncPositionReq {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* string job_id */ 1:
+                    message.jobId = reader.string();
+                    break;
+                case /* string title */ 2:
+                    message.title = reader.string();
+                    break;
+                case /* string company */ 3:
+                    message.company = reader.string();
+                    break;
+                case /* string salary_range */ 4:
+                    message.salaryRange = reader.string();
+                    break;
+                case /* int32 salary_min */ 5:
+                    message.salaryMin = reader.int32();
+                    break;
+                case /* int32 salary_max */ 6:
+                    message.salaryMax = reader.int32();
+                    break;
+                case /* string city */ 7:
+                    message.city = reader.string();
+                    break;
+                case /* string link */ 8:
+                    message.link = reader.string();
+                    break;
+                case /* string recruiter */ 9:
+                    message.recruiter = reader.string();
+                    break;
+                case /* string enc_boss_id */ 10:
+                    message.encBossId = reader.string();
+                    break;
+                case /* bool is_hunter */ 11:
+                    message.isHunter = reader.bool();
+                    break;
+                case /* int32 status */ 12:
+                    message.status = reader.int32();
+                    break;
+                case /* string duties */ 13:
+                    message.duties = reader.string();
+                    break;
+                case /* string requirements */ 14:
+                    message.requirements = reader.string();
+                    break;
+                case /* string notes */ 15:
+                    message.notes = reader.string();
+                    break;
+                case /* repeated api.zhipin.RequirementItemInput match_items */ 16:
+                    message.matchItems.push(RequirementItemInput.internalBinaryRead(reader, reader.uint32(), options));
+                    break;
+                case /* repeated api.zhipin.ChatMessage chat_messages */ 17:
+                    message.chatMessages.push(ChatMessage.internalBinaryRead(reader, reader.uint32(), options));
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: SyncPositionReq, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string job_id = 1; */
+        if (message.jobId !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.jobId);
+        /* string title = 2; */
+        if (message.title !== "")
+            writer.tag(2, WireType.LengthDelimited).string(message.title);
+        /* string company = 3; */
+        if (message.company !== "")
+            writer.tag(3, WireType.LengthDelimited).string(message.company);
+        /* string salary_range = 4; */
+        if (message.salaryRange !== "")
+            writer.tag(4, WireType.LengthDelimited).string(message.salaryRange);
+        /* int32 salary_min = 5; */
+        if (message.salaryMin !== 0)
+            writer.tag(5, WireType.Varint).int32(message.salaryMin);
+        /* int32 salary_max = 6; */
+        if (message.salaryMax !== 0)
+            writer.tag(6, WireType.Varint).int32(message.salaryMax);
+        /* string city = 7; */
+        if (message.city !== "")
+            writer.tag(7, WireType.LengthDelimited).string(message.city);
+        /* string link = 8; */
+        if (message.link !== "")
+            writer.tag(8, WireType.LengthDelimited).string(message.link);
+        /* string recruiter = 9; */
+        if (message.recruiter !== "")
+            writer.tag(9, WireType.LengthDelimited).string(message.recruiter);
+        /* string enc_boss_id = 10; */
+        if (message.encBossId !== "")
+            writer.tag(10, WireType.LengthDelimited).string(message.encBossId);
+        /* bool is_hunter = 11; */
+        if (message.isHunter !== false)
+            writer.tag(11, WireType.Varint).bool(message.isHunter);
+        /* int32 status = 12; */
+        if (message.status !== 0)
+            writer.tag(12, WireType.Varint).int32(message.status);
+        /* string duties = 13; */
+        if (message.duties !== "")
+            writer.tag(13, WireType.LengthDelimited).string(message.duties);
+        /* string requirements = 14; */
+        if (message.requirements !== "")
+            writer.tag(14, WireType.LengthDelimited).string(message.requirements);
+        /* string notes = 15; */
+        if (message.notes !== "")
+            writer.tag(15, WireType.LengthDelimited).string(message.notes);
+        /* repeated api.zhipin.RequirementItemInput match_items = 16; */
+        for (let i = 0; i < message.matchItems.length; i++)
+            RequirementItemInput.internalBinaryWrite(message.matchItems[i], writer.tag(16, WireType.LengthDelimited).fork(), options).join();
+        /* repeated api.zhipin.ChatMessage chat_messages = 17; */
+        for (let i = 0; i < message.chatMessages.length; i++)
+            ChatMessage.internalBinaryWrite(message.chatMessages[i], writer.tag(17, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message api.zhipin.SyncPositionReq
+ */
+export const SyncPositionReq = new SyncPositionReq$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class SyncPositionResp$Type extends MessageType<SyncPositionResp> {
+    constructor() {
+        super("api.zhipin.SyncPositionResp", [
+            { no: 1, name: "id", kind: "scalar", T: 4 /*ScalarType.UINT64*/ },
+            { no: 2, name: "job_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "match_items_count", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
+            { no: 4, name: "chat_messages_count", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
+            { no: 5, name: "last_comm_at", kind: "scalar", T: 3 /*ScalarType.INT64*/ },
+            { no: 6, name: "last_comm_dir", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
+            { no: 7, name: "last_resume", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+    create(value?: PartialMessage<SyncPositionResp>): SyncPositionResp {
+        const message = globalThis.Object.create((this.messagePrototype!));
+        message.id = "0";
+        message.jobId = "";
+        message.matchItemsCount = 0;
+        message.chatMessagesCount = 0;
+        message.lastCommAt = "0";
+        message.lastCommDir = 0;
+        message.lastResume = "";
+        if (value !== undefined)
+            reflectionMergePartial<SyncPositionResp>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: SyncPositionResp): SyncPositionResp {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* uint64 id */ 1:
+                    message.id = reader.uint64().toString();
+                    break;
+                case /* string job_id */ 2:
+                    message.jobId = reader.string();
+                    break;
+                case /* int32 match_items_count */ 3:
+                    message.matchItemsCount = reader.int32();
+                    break;
+                case /* int32 chat_messages_count */ 4:
+                    message.chatMessagesCount = reader.int32();
+                    break;
+                case /* int64 last_comm_at */ 5:
+                    message.lastCommAt = reader.int64().toString();
+                    break;
+                case /* int32 last_comm_dir */ 6:
+                    message.lastCommDir = reader.int32();
+                    break;
+                case /* string last_resume */ 7:
+                    message.lastResume = reader.string();
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: SyncPositionResp, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* uint64 id = 1; */
+        if (message.id !== "0")
+            writer.tag(1, WireType.Varint).uint64(message.id);
+        /* string job_id = 2; */
+        if (message.jobId !== "")
+            writer.tag(2, WireType.LengthDelimited).string(message.jobId);
+        /* int32 match_items_count = 3; */
+        if (message.matchItemsCount !== 0)
+            writer.tag(3, WireType.Varint).int32(message.matchItemsCount);
+        /* int32 chat_messages_count = 4; */
+        if (message.chatMessagesCount !== 0)
+            writer.tag(4, WireType.Varint).int32(message.chatMessagesCount);
+        /* int64 last_comm_at = 5; */
+        if (message.lastCommAt !== "0")
+            writer.tag(5, WireType.Varint).int64(message.lastCommAt);
+        /* int32 last_comm_dir = 6; */
+        if (message.lastCommDir !== 0)
+            writer.tag(6, WireType.Varint).int32(message.lastCommDir);
+        /* string last_resume = 7; */
+        if (message.lastResume !== "")
+            writer.tag(7, WireType.LengthDelimited).string(message.lastResume);
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message api.zhipin.SyncPositionResp
+ */
+export const SyncPositionResp = new SyncPositionResp$Type();
 /**
  * @generated ServiceType for protobuf service api.zhipin.PositionService
  */
@@ -2086,5 +2462,6 @@ export const PositionService = new ServiceType("api.zhipin.PositionService", [
     { name: "ListStalePositions", options: { "google.api.http": { get: "/api/positions/stale" } }, I: ListStalePositionsReq, O: ListPositionsResp },
     { name: "ListNeedReplyPositions", options: { "google.api.http": { get: "/api/positions/need-reply" } }, I: ListNeedReplyPositionsReq, O: ListPositionsResp },
     { name: "ListNeedResendPositions", options: { "google.api.http": { get: "/api/positions/need-resend" } }, I: ListNeedResendPositionsReq, O: ListPositionsResp },
-    { name: "UpdateEncBossId", options: { "google.api.http": { put: "/api/position/{id}/enc-boss-id", body: "*" } }, I: UpdateEncBossIdReq, O: PositionResp }
+    { name: "UpdateEncBossId", options: { "google.api.http": { put: "/api/position/{id}/enc-boss-id", body: "*" } }, I: UpdateEncBossIdReq, O: PositionResp },
+    { name: "SyncPosition", options: { "google.api.http": { post: "/api/position/sync", body: "*" } }, I: SyncPositionReq, O: SyncPositionResp }
 ]);

@@ -51,7 +51,8 @@ func (uc *Uc需求匹配) Xqt批量设置(ctx context.Context, j岗位编号 str
 	}
 	p岗位主键 := v岗位.ID
 
-	if err := uc.repo.With(ctx, db).DeleteW(func(db *gorm.DB, cls *models.T需求匹配项Columns) *gorm.DB {
+	// hard delete old items for full replacement (not soft delete)
+	if err := uc.repo.With(ctx, db).Unscoped().DeleteW(func(db *gorm.DB, cls *models.T需求匹配项Columns) *gorm.DB {
 		return db.Where(cls.P岗位主键.Eq(p岗位主键))
 	}); err != nil {
 		return 0, ebzkratos.New(pb.ErrorDbError("delete: %v", err))

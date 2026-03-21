@@ -1,3 +1,10 @@
+[![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/yylego/smart-employee-zhipin/release.yml?branch=main&label=BUILD)](https://github.com/yylego/smart-employee-zhipin/actions/workflows/release.yml?query=branch%3Amain)
+[![GoDoc](https://pkg.go.dev/badge/github.com/yylego/smart-employee-zhipin)](https://pkg.go.dev/github.com/yylego/smart-employee-zhipin)
+[![Coverage Status](https://img.shields.io/coveralls/github/yylego/smart-employee-zhipin/main.svg)](https://coveralls.io/github/yylego/smart-employee-zhipin?branch=main)
+[![Supported Go Versions](https://img.shields.io/badge/Go-1.26+-lightgrey.svg)](https://go.dev/)
+[![GitHub Release](https://img.shields.io/badge/release-active-blue.svg)](https://github.com/yylego/smart-employee-zhipin)
+[![Go Report Card](https://goreportcard.com/badge/github.com/yylego/smart-employee-zhipin)](https://goreportcard.com/report/github.com/yylego/smart-employee-zhipin)
+
 # smart-employee-zhipin
 
 **Smart Job Seeking Assistant** — A job tracking system built on the Kratos microservice framework for recording and managing the job seeking process on Boss Zhipin.
@@ -16,12 +23,12 @@
 
 Upgrade the manual Markdown-based job tracking workflow into a structured API service + visual admin panel, supporting:
 
-- Position recording and status management (pending, messaged, replied, interviewing, etc.)
+- Position recording and status management (pending, messaged, interviewing, etc.)
 - Requirement-level match analysis (compare each job requirement against resume)
-- Communication history management (greetings, resume sends, replies, etc.)
+- Chat sync — push entire conversation at once, auto-extract last contact time and resume status
 - Company blacklist management
-- Smart filtering: stale positions, need-reply, need-resend
-- Admin dashboard for today's communications and all positions
+- Smart filtering: stale positions, need-response, need-resend
+- Admin dashboard for browsing positions and chat histories
 
 ## Project Structure
 
@@ -73,6 +80,12 @@ Database connection is configured in `zhipin-kratos/configs/config.yaml`.
 
 ```bash
 make orz
+```
+
+### Generate TypeScript Clients
+
+```bash
+make gen
 ```
 
 ### Build Backend

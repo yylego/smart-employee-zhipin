@@ -240,6 +240,25 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.zhipin.PositionDetailResp'
+    /api/position/sync:
+        post:
+            tags:
+                - PositionService
+            description: Full sync — upsert position + replace matchItems + replace chat messages in one call
+            operationId: PositionService_SyncPosition
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.zhipin.SyncPositionReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.SyncPositionResp'
     /api/position/{id}:
         get:
             tags:
@@ -1022,6 +1041,70 @@ components:
                 messageCount:
                     type: integer
                     format: int32
+        api.zhipin.SyncPositionReq:
+            type: object
+            properties:
+                jobId:
+                    type: string
+                title:
+                    type: string
+                company:
+                    type: string
+                salaryRange:
+                    type: string
+                salaryMin:
+                    type: integer
+                    format: int32
+                salaryMax:
+                    type: integer
+                    format: int32
+                city:
+                    type: string
+                link:
+                    type: string
+                recruiter:
+                    type: string
+                encBossId:
+                    type: string
+                isHunter:
+                    type: boolean
+                status:
+                    type: integer
+                    format: int32
+                duties:
+                    type: string
+                requirements:
+                    type: string
+                notes:
+                    type: string
+                matchItems:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.zhipin.RequirementItemInput'
+                chatMessages:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.zhipin.ChatMessage'
+        api.zhipin.SyncPositionResp:
+            type: object
+            properties:
+                id:
+                    type: string
+                jobId:
+                    type: string
+                matchItemsCount:
+                    type: integer
+                    format: int32
+                chatMessagesCount:
+                    type: integer
+                    format: int32
+                lastCommAt:
+                    type: string
+                lastCommDir:
+                    type: integer
+                    format: int32
+                lastResume:
+                    type: string
         api.zhipin.UpdateDutiesReq:
             type: object
             properties:

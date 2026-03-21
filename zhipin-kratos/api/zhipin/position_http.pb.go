@@ -29,6 +29,7 @@ const OperationPositionServiceListNeedResendPositions = "/api.zhipin.PositionSer
 const OperationPositionServiceListPositions = "/api.zhipin.PositionService/ListPositions"
 const OperationPositionServiceListStalePositions = "/api.zhipin.PositionService/ListStalePositions"
 const OperationPositionServiceMarkSkipped = "/api.zhipin.PositionService/MarkSkipped"
+const OperationPositionServiceSyncPosition = "/api.zhipin.PositionService/SyncPosition"
 const OperationPositionServiceUpdateDuties = "/api.zhipin.PositionService/UpdateDuties"
 const OperationPositionServiceUpdateEncBossId = "/api.zhipin.PositionService/UpdateEncBossId"
 const OperationPositionServiceUpdateMatchRate = "/api.zhipin.PositionService/UpdateMatchRate"
@@ -53,6 +54,8 @@ type PositionServiceHTTPServer interface {
 	// ListStalePositions Find positions not contacted in the last N hours — for follow-up
 	ListStalePositions(context.Context, *ListStalePositionsReq) (*ListPositionsResp, error)
 	MarkSkipped(context.Context, *MarkSkippedReq) (*PositionResp, error)
+	// SyncPosition Full sync — upsert position + replace matchItems + replace chat messages in one call
+	SyncPosition(context.Context, *SyncPositionReq) (*SyncPositionResp, error)
 	UpdateDuties(context.Context, *UpdateDutiesReq) (*PositionResp, error)
 	// UpdateEncBossId Update encBossId
 	UpdateEncBossId(context.Context, *UpdateEncBossIdReq) (*PositionResp, error)
@@ -84,6 +87,7 @@ func RegisterPositionServiceHTTPServer(s *http.Server, srv PositionServiceHTTPSe
 	r.GET("/api/positions/need-reply", _PositionService_ListNeedReplyPositions0_HTTP_Handler(srv))
 	r.GET("/api/positions/need-resend", _PositionService_ListNeedResendPositions0_HTTP_Handler(srv))
 	r.PUT("/api/position/{id}/enc-boss-id", _PositionService_UpdateEncBossId0_HTTP_Handler(srv))
+	r.POST("/api/position/sync", _PositionService_SyncPosition0_HTTP_Handler(srv))
 }
 
 func _PositionService_CreatePosition0_HTTP_Handler(srv PositionServiceHTTPServer) func(ctx http.Context) error {
@@ -497,6 +501,28 @@ func _PositionService_UpdateEncBossId0_HTTP_Handler(srv PositionServiceHTTPServe
 	}
 }
 
+func _PositionService_SyncPosition0_HTTP_Handler(srv PositionServiceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in SyncPositionReq
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		if err := ctx.BindQuery(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, OperationPositionServiceSyncPosition)
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.SyncPosition(ctx, req.(*SyncPositionReq))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*SyncPositionResp)
+		return ctx.Result(200, reply)
+	}
+}
+
 type PositionServiceHTTPClient interface {
 	// BatchCheckJobIds Batch check multiple jobIds at once — for dedup after loading full search results
 	BatchCheckJobIds(ctx context.Context, req *BatchCheckJobIdsReq, opts ...http.CallOption) (rsp *BatchCheckJobIdsResp, err error)
@@ -512,6 +538,8 @@ type PositionServiceHTTPClient interface {
 	// ListStalePositions Find positions not contacted in the last N hours — for follow-up
 	ListStalePositions(ctx context.Context, req *ListStalePositionsReq, opts ...http.CallOption) (rsp *ListPositionsResp, err error)
 	MarkSkipped(ctx context.Context, req *MarkSkippedReq, opts ...http.CallOption) (rsp *PositionResp, err error)
+	// SyncPosition Full sync — upsert position + replace matchItems + replace chat messages in one call
+	SyncPosition(ctx context.Context, req *SyncPositionReq, opts ...http.CallOption) (rsp *SyncPositionResp, err error)
 	UpdateDuties(ctx context.Context, req *UpdateDutiesReq, opts ...http.CallOption) (rsp *PositionResp, err error)
 	// UpdateEncBossId Update encBossId
 	UpdateEncBossId(ctx context.Context, req *UpdateEncBossIdReq, opts ...http.CallOption) (rsp *PositionResp, err error)
@@ -659,6 +687,20 @@ func (c *PositionServiceHTTPClientImpl) MarkSkipped(ctx context.Context, in *Mar
 	opts = append(opts, http.Operation(OperationPositionServiceMarkSkipped))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "PUT", path, in, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
+// SyncPosition Full sync — upsert position + replace matchItems + replace chat messages in one call
+func (c *PositionServiceHTTPClientImpl) SyncPosition(ctx context.Context, in *SyncPositionReq, opts ...http.CallOption) (*SyncPositionResp, error) {
+	var out SyncPositionResp
+	pattern := "/api/position/sync"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation(OperationPositionServiceSyncPosition))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

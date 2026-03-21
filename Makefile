@@ -12,3 +12,6 @@ test-with-flags:
 # Proto-Service 自动同步：生成 proto 代码并同步服务实现
 orz:
 	cd zhipin-kratos && make orz
+
+gen:
+	cd zhipin-codegen && make gen

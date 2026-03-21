@@ -88,6 +88,11 @@ service PositionService {
   rpc UpdateEncBossId (UpdateEncBossIdReq) returns (PositionResp) {
     option (google.api.http) = { put: "/api/position/{id}/enc-boss-id", body: "*" };
   }
+
+  // Full sync — upsert position + replace matchItems + replace chat messages in one call
+  rpc SyncPosition (SyncPositionReq) returns (SyncPositionResp) {
+    option (google.api.http) = { post: "/api/position/sync", body: "*" };
+  }
 }
 
 message CreatePositionReq {
@@ -238,4 +243,34 @@ message PositionDetailResp {
 message ListPositionsResp {
   repeated PositionResp items = 1;
   int32 total = 2;
+}
+
+message SyncPositionReq {
+  string job_id = 1;
+  string title = 2;
+  string company = 3;
+  string salary_range = 4;
+  int32  salary_min = 5;
+  int32  salary_max = 6;
+  string city = 7;
+  string link = 8;
+  string recruiter = 9;
+  string enc_boss_id = 10;
+  bool   is_hunter = 11;
+  int32  status = 12;
+  string duties = 13;
+  string requirements = 14;
+  string notes = 15;
+  repeated RequirementItemInput match_items = 16;
+  repeated ChatMessage chat_messages = 17;
+}
+
+message SyncPositionResp {
+  uint64 id = 1;
+  string job_id = 2;
+  int32  match_items_count = 3;
+  int32  chat_messages_count = 4;
+  int64  last_comm_at = 5;
+  int32  last_comm_dir = 6;
+  string last_resume = 7;
 }

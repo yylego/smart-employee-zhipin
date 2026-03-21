@@ -59,9 +59,10 @@ func (uc *Uc沟通管理) Xqt同步聊天(ctx context.Context, j岗位编号 str
 	}
 	p岗位主键 := v岗位.ID
 
-	// hard delete old messages for this position (not soft delete, since we do full replacement)
-	cls := (&models.T沟通记录{}).Columns()
-	if err := db.Unscoped().Where(cls.P岗位主键.Eq(p岗位主键)).Delete(&models.T沟通记录{}).Error; err != nil {
+	// hard delete old messages for full replacement (not soft delete)
+	if err := uc.repo.With(ctx, db).Unscoped().DeleteW(func(db *gorm.DB, cls *models.T沟通记录Columns) *gorm.DB {
+		return db.Where(cls.P岗位主键.Eq(p岗位主键))
+	}); err != nil {
 		return nil, ebzkratos.New(pb.ErrorDbError("delete: %v", err))
 	}
 

@@ -84,6 +84,32 @@ func (uc *Uc岗位管理) Xqt创建岗位(ctx context.Context, req *Req创建岗
 	return v岗位, nil
 }
 
+func (uc *Uc岗位管理) Xqt全量更新(ctx context.Context, id uint, req *Req创建岗位) *ebzkratos.Ebz {
+	must.True(id > 0)
+	db := uc.data.DB()
+	if err := uc.repo.With(ctx, db).UpdatesM(func(db *gorm.DB, cls *models.T岗位Columns) *gorm.DB {
+		return db.Where(cls.ID.Eq(id))
+	}, func(cls *models.T岗位Columns) gormcnm.ColumnValueMap {
+		return cls.Kw(cls.T岗位名称.Kv(req.T岗位名称)).
+			Kw(cls.C公司名称.Kv(req.C公司名称)).
+			Kw(cls.S薪资范围.Kv(req.S薪资范围)).
+			Kw(cls.S薪资下限.Kv(req.S薪资下限)).
+			Kw(cls.S薪资上限.Kv(req.S薪资上限)).
+			Kw(cls.C城市名称.Kv(req.C城市名称)).
+			Kw(cls.L岗位链接.Kv(req.L岗位链接)).
+			Kw(cls.R招聘者.Kv(req.R招聘者)).
+			Kw(cls.E招聘者号.Kv(req.E招聘者号)).
+			Kw(cls.I猎头标记.Kv(req.I猎头标记)).
+			Kw(cls.S岗位状态.Kv(req.S岗位状态)).
+			Kw(cls.D岗位职责.Kv(req.D岗位职责)).
+			Kw(cls.R岗位要求.Kv(req.R岗位要求)).
+			Kw(cls.N备注信息.Kv(req.N备注信息))
+	}); err != nil {
+		return ebzkratos.New(pb.ErrorDbError("update: %v", err))
+	}
+	return nil
+}
+
 type Req更新薪资 struct {
 	ID       uint
 	S薪资范围 string
