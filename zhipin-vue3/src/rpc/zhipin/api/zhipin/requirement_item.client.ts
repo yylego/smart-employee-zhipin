@@ -3,12 +3,12 @@
 // tslint:disable
 import type { RpcTransport } from "@protobuf-ts/runtime-rpc";
 import type { ServiceInfo } from "@protobuf-ts/runtime-rpc";
-import { MatchItemService } from "./match_item";
-import type { ListMatchItemsResp } from "./match_item";
-import type { ListMatchItemsReq } from "./match_item";
+import { MatchItemService } from "./requirement_item";
+import type { ListMatchItemsResp } from "./requirement_item";
+import type { ListMatchItemsReq } from "./requirement_item";
 import { stackIntercept } from "@protobuf-ts/runtime-rpc";
-import type { SetMatchItemsResp } from "./match_item";
-import type { SetMatchItemsReq } from "./match_item";
+import type { SetMatchItemsResp } from "./requirement_item";
+import type { SetMatchItemsReq } from "./requirement_item";
 import type { UnaryCall } from "@protobuf-ts/runtime-rpc";
 import type { RpcOptions } from "@protobuf-ts/runtime-rpc";
 import { executeGrpcToHttp } from '@yylego/grpc-to-http';

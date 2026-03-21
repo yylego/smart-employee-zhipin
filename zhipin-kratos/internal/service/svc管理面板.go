@@ -15,11 +15,11 @@ type Svc管理面板 struct {
 	pb.UnimplementedAdminServiceServer
 
 	uc岗位 *biz.Uc岗位管理
-	uc匹配 *biz.Uc匹配管理
+	uc匹配 *biz.Uc需求匹配
 	uc沟通 *biz.Uc沟通管理
 }
 
-func NewSvc管理面板(uc岗位 *biz.Uc岗位管理, uc匹配 *biz.Uc匹配管理, uc沟通 *biz.Uc沟通管理) *Svc管理面板 {
+func NewSvc管理面板(uc岗位 *biz.Uc岗位管理, uc匹配 *biz.Uc需求匹配, uc沟通 *biz.Uc沟通管理) *Svc管理面板 {
 	return &Svc管理面板{uc岗位: uc岗位, uc匹配: uc匹配, uc沟通: uc沟通}
 }
 

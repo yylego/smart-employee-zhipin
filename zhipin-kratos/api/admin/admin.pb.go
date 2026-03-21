@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        v7.34.0
-// source: api/admin/admin.proto
+// source: admin/admin.proto
 
 package admin
 
@@ -31,7 +31,7 @@ type ListTodayPositionsReq struct {
 
 func (x *ListTodayPositionsReq) Reset() {
 	*x = ListTodayPositionsReq{}
-	mi := &file_api_admin_admin_proto_msgTypes[0]
+	mi := &file_admin_admin_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +43,7 @@ func (x *ListTodayPositionsReq) String() string {
 func (*ListTodayPositionsReq) ProtoMessage() {}
 
 func (x *ListTodayPositionsReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_admin_admin_proto_msgTypes[0]
+	mi := &file_admin_admin_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +56,7 @@ func (x *ListTodayPositionsReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTodayPositionsReq.ProtoReflect.Descriptor instead.
 func (*ListTodayPositionsReq) Descriptor() ([]byte, []int) {
-	return file_api_admin_admin_proto_rawDescGZIP(), []int{0}
+	return file_admin_admin_proto_rawDescGZIP(), []int{0}
 }
 
 type ListAllPositionsReq struct {
@@ -70,7 +70,7 @@ type ListAllPositionsReq struct {
 
 func (x *ListAllPositionsReq) Reset() {
 	*x = ListAllPositionsReq{}
-	mi := &file_api_admin_admin_proto_msgTypes[1]
+	mi := &file_admin_admin_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -82,7 +82,7 @@ func (x *ListAllPositionsReq) String() string {
 func (*ListAllPositionsReq) ProtoMessage() {}
 
 func (x *ListAllPositionsReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_admin_admin_proto_msgTypes[1]
+	mi := &file_admin_admin_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -95,7 +95,7 @@ func (x *ListAllPositionsReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAllPositionsReq.ProtoReflect.Descriptor instead.
 func (*ListAllPositionsReq) Descriptor() ([]byte, []int) {
-	return file_api_admin_admin_proto_rawDescGZIP(), []int{1}
+	return file_admin_admin_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ListAllPositionsReq) GetStatus() int32 {
@@ -128,7 +128,7 @@ type GetPositionDetailReq struct {
 
 func (x *GetPositionDetailReq) Reset() {
 	*x = GetPositionDetailReq{}
-	mi := &file_api_admin_admin_proto_msgTypes[2]
+	mi := &file_admin_admin_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -140,7 +140,7 @@ func (x *GetPositionDetailReq) String() string {
 func (*GetPositionDetailReq) ProtoMessage() {}
 
 func (x *GetPositionDetailReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_admin_admin_proto_msgTypes[2]
+	mi := &file_admin_admin_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -153,7 +153,7 @@ func (x *GetPositionDetailReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPositionDetailReq.ProtoReflect.Descriptor instead.
 func (*GetPositionDetailReq) Descriptor() ([]byte, []int) {
-	return file_api_admin_admin_proto_rawDescGZIP(), []int{2}
+	return file_admin_admin_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *GetPositionDetailReq) GetId() uint64 {
@@ -171,7 +171,7 @@ type GetStatsReq struct {
 
 func (x *GetStatsReq) Reset() {
 	*x = GetStatsReq{}
-	mi := &file_api_admin_admin_proto_msgTypes[3]
+	mi := &file_admin_admin_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -183,7 +183,7 @@ func (x *GetStatsReq) String() string {
 func (*GetStatsReq) ProtoMessage() {}
 
 func (x *GetStatsReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_admin_admin_proto_msgTypes[3]
+	mi := &file_admin_admin_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -196,7 +196,7 @@ func (x *GetStatsReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetStatsReq.ProtoReflect.Descriptor instead.
 func (*GetStatsReq) Descriptor() ([]byte, []int) {
-	return file_api_admin_admin_proto_rawDescGZIP(), []int{3}
+	return file_admin_admin_proto_rawDescGZIP(), []int{3}
 }
 
 type AdminPositionItem struct {
@@ -223,7 +223,7 @@ type AdminPositionItem struct {
 
 func (x *AdminPositionItem) Reset() {
 	*x = AdminPositionItem{}
-	mi := &file_api_admin_admin_proto_msgTypes[4]
+	mi := &file_admin_admin_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -235,7 +235,7 @@ func (x *AdminPositionItem) String() string {
 func (*AdminPositionItem) ProtoMessage() {}
 
 func (x *AdminPositionItem) ProtoReflect() protoreflect.Message {
-	mi := &file_api_admin_admin_proto_msgTypes[4]
+	mi := &file_admin_admin_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -248,7 +248,7 @@ func (x *AdminPositionItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AdminPositionItem.ProtoReflect.Descriptor instead.
 func (*AdminPositionItem) Descriptor() ([]byte, []int) {
-	return file_api_admin_admin_proto_rawDescGZIP(), []int{4}
+	return file_admin_admin_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *AdminPositionItem) GetId() uint64 {
@@ -373,7 +373,7 @@ type AdminPositionListResp struct {
 
 func (x *AdminPositionListResp) Reset() {
 	*x = AdminPositionListResp{}
-	mi := &file_api_admin_admin_proto_msgTypes[5]
+	mi := &file_admin_admin_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -385,7 +385,7 @@ func (x *AdminPositionListResp) String() string {
 func (*AdminPositionListResp) ProtoMessage() {}
 
 func (x *AdminPositionListResp) ProtoReflect() protoreflect.Message {
-	mi := &file_api_admin_admin_proto_msgTypes[5]
+	mi := &file_admin_admin_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -398,7 +398,7 @@ func (x *AdminPositionListResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AdminPositionListResp.ProtoReflect.Descriptor instead.
 func (*AdminPositionListResp) Descriptor() ([]byte, []int) {
-	return file_api_admin_admin_proto_rawDescGZIP(), []int{5}
+	return file_admin_admin_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *AdminPositionListResp) GetItems() []*AdminPositionItem {
@@ -427,7 +427,7 @@ type AdminMatchItem struct {
 
 func (x *AdminMatchItem) Reset() {
 	*x = AdminMatchItem{}
-	mi := &file_api_admin_admin_proto_msgTypes[6]
+	mi := &file_admin_admin_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -439,7 +439,7 @@ func (x *AdminMatchItem) String() string {
 func (*AdminMatchItem) ProtoMessage() {}
 
 func (x *AdminMatchItem) ProtoReflect() protoreflect.Message {
-	mi := &file_api_admin_admin_proto_msgTypes[6]
+	mi := &file_admin_admin_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -452,7 +452,7 @@ func (x *AdminMatchItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AdminMatchItem.ProtoReflect.Descriptor instead.
 func (*AdminMatchItem) Descriptor() ([]byte, []int) {
-	return file_api_admin_admin_proto_rawDescGZIP(), []int{6}
+	return file_admin_admin_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *AdminMatchItem) GetRequirement() string {
@@ -495,7 +495,7 @@ type AdminCommItem struct {
 
 func (x *AdminCommItem) Reset() {
 	*x = AdminCommItem{}
-	mi := &file_api_admin_admin_proto_msgTypes[7]
+	mi := &file_admin_admin_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -507,7 +507,7 @@ func (x *AdminCommItem) String() string {
 func (*AdminCommItem) ProtoMessage() {}
 
 func (x *AdminCommItem) ProtoReflect() protoreflect.Message {
-	mi := &file_api_admin_admin_proto_msgTypes[7]
+	mi := &file_admin_admin_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -520,7 +520,7 @@ func (x *AdminCommItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AdminCommItem.ProtoReflect.Descriptor instead.
 func (*AdminCommItem) Descriptor() ([]byte, []int) {
-	return file_api_admin_admin_proto_rawDescGZIP(), []int{7}
+	return file_admin_admin_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *AdminCommItem) GetEventType() int32 {
@@ -566,7 +566,7 @@ type AdminPositionDetailResp struct {
 
 func (x *AdminPositionDetailResp) Reset() {
 	*x = AdminPositionDetailResp{}
-	mi := &file_api_admin_admin_proto_msgTypes[8]
+	mi := &file_admin_admin_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -578,7 +578,7 @@ func (x *AdminPositionDetailResp) String() string {
 func (*AdminPositionDetailResp) ProtoMessage() {}
 
 func (x *AdminPositionDetailResp) ProtoReflect() protoreflect.Message {
-	mi := &file_api_admin_admin_proto_msgTypes[8]
+	mi := &file_admin_admin_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -591,7 +591,7 @@ func (x *AdminPositionDetailResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AdminPositionDetailResp.ProtoReflect.Descriptor instead.
 func (*AdminPositionDetailResp) Descriptor() ([]byte, []int) {
-	return file_api_admin_admin_proto_rawDescGZIP(), []int{8}
+	return file_admin_admin_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *AdminPositionDetailResp) GetPosition() *AdminPositionItem {
@@ -653,7 +653,7 @@ type StatusCount struct {
 
 func (x *StatusCount) Reset() {
 	*x = StatusCount{}
-	mi := &file_api_admin_admin_proto_msgTypes[9]
+	mi := &file_admin_admin_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -665,7 +665,7 @@ func (x *StatusCount) String() string {
 func (*StatusCount) ProtoMessage() {}
 
 func (x *StatusCount) ProtoReflect() protoreflect.Message {
-	mi := &file_api_admin_admin_proto_msgTypes[9]
+	mi := &file_admin_admin_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -678,7 +678,7 @@ func (x *StatusCount) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StatusCount.ProtoReflect.Descriptor instead.
 func (*StatusCount) Descriptor() ([]byte, []int) {
-	return file_api_admin_admin_proto_rawDescGZIP(), []int{9}
+	return file_admin_admin_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *StatusCount) GetStatus() int32 {
@@ -705,7 +705,7 @@ type GetStatsResp struct {
 
 func (x *GetStatsResp) Reset() {
 	*x = GetStatsResp{}
-	mi := &file_api_admin_admin_proto_msgTypes[10]
+	mi := &file_admin_admin_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -717,7 +717,7 @@ func (x *GetStatsResp) String() string {
 func (*GetStatsResp) ProtoMessage() {}
 
 func (x *GetStatsResp) ProtoReflect() protoreflect.Message {
-	mi := &file_api_admin_admin_proto_msgTypes[10]
+	mi := &file_admin_admin_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -730,7 +730,7 @@ func (x *GetStatsResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetStatsResp.ProtoReflect.Descriptor instead.
 func (*GetStatsResp) Descriptor() ([]byte, []int) {
-	return file_api_admin_admin_proto_rawDescGZIP(), []int{10}
+	return file_admin_admin_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *GetStatsResp) GetTotal() int32 {
@@ -747,11 +747,11 @@ func (x *GetStatsResp) GetStatusCounts() []*StatusCount {
 	return nil
 }
 
-var File_api_admin_admin_proto protoreflect.FileDescriptor
+var File_admin_admin_proto protoreflect.FileDescriptor
 
-const file_api_admin_admin_proto_rawDesc = "" +
+const file_admin_admin_proto_rawDesc = "" +
 	"\n" +
-	"\x15api/admin/admin.proto\x12\tapi.admin\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x17\n" +
+	"\x11admin/admin.proto\x12\tapi.admin\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x17\n" +
 	"\x15ListTodayPositionsReq\"^\n" +
 	"\x13ListAllPositionsReq\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\x05R\x06status\x12\x12\n" +
@@ -821,19 +821,19 @@ const file_api_admin_admin_proto_rawDesc = "" +
 	"\bGetStats\x12\x16.api.admin.GetStatsReq\x1a\x17.api.admin.GetStatsResp\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\f/admin/statsBGZEgithub.com/yylego/smart-employee-zhipin/zhipin-kratos/api/admin;adminb\x06proto3"
 
 var (
-	file_api_admin_admin_proto_rawDescOnce sync.Once
-	file_api_admin_admin_proto_rawDescData []byte
+	file_admin_admin_proto_rawDescOnce sync.Once
+	file_admin_admin_proto_rawDescData []byte
 )
 
-func file_api_admin_admin_proto_rawDescGZIP() []byte {
-	file_api_admin_admin_proto_rawDescOnce.Do(func() {
-		file_api_admin_admin_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_api_admin_admin_proto_rawDesc), len(file_api_admin_admin_proto_rawDesc)))
+func file_admin_admin_proto_rawDescGZIP() []byte {
+	file_admin_admin_proto_rawDescOnce.Do(func() {
+		file_admin_admin_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_admin_admin_proto_rawDesc), len(file_admin_admin_proto_rawDesc)))
 	})
-	return file_api_admin_admin_proto_rawDescData
+	return file_admin_admin_proto_rawDescData
 }
 
-var file_api_admin_admin_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
-var file_api_admin_admin_proto_goTypes = []any{
+var file_admin_admin_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_admin_admin_proto_goTypes = []any{
 	(*ListTodayPositionsReq)(nil),   // 0: api.admin.ListTodayPositionsReq
 	(*ListAllPositionsReq)(nil),     // 1: api.admin.ListAllPositionsReq
 	(*GetPositionDetailReq)(nil),    // 2: api.admin.GetPositionDetailReq
@@ -847,7 +847,7 @@ var file_api_admin_admin_proto_goTypes = []any{
 	(*GetStatsResp)(nil),            // 10: api.admin.GetStatsResp
 	(*timestamppb.Timestamp)(nil),   // 11: google.protobuf.Timestamp
 }
-var file_api_admin_admin_proto_depIdxs = []int32{
+var file_admin_admin_proto_depIdxs = []int32{
 	4,  // 0: api.admin.AdminPositionListResp.items:type_name -> api.admin.AdminPositionItem
 	11, // 1: api.admin.AdminCommItem.event_time:type_name -> google.protobuf.Timestamp
 	4,  // 2: api.admin.AdminPositionDetailResp.position:type_name -> api.admin.AdminPositionItem
@@ -869,26 +869,26 @@ var file_api_admin_admin_proto_depIdxs = []int32{
 	0,  // [0:6] is the sub-list for field type_name
 }
 
-func init() { file_api_admin_admin_proto_init() }
-func file_api_admin_admin_proto_init() {
-	if File_api_admin_admin_proto != nil {
+func init() { file_admin_admin_proto_init() }
+func file_admin_admin_proto_init() {
+	if File_admin_admin_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_admin_admin_proto_rawDesc), len(file_api_admin_admin_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_admin_admin_proto_rawDesc), len(file_admin_admin_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_api_admin_admin_proto_goTypes,
-		DependencyIndexes: file_api_admin_admin_proto_depIdxs,
-		MessageInfos:      file_api_admin_admin_proto_msgTypes,
+		GoTypes:           file_admin_admin_proto_goTypes,
+		DependencyIndexes: file_admin_admin_proto_depIdxs,
+		MessageInfos:      file_admin_admin_proto_msgTypes,
 	}.Build()
-	File_api_admin_admin_proto = out.File
-	file_api_admin_admin_proto_goTypes = nil
-	file_api_admin_admin_proto_depIdxs = nil
+	File_admin_admin_proto = out.File
+	file_admin_admin_proto_goTypes = nil
+	file_admin_admin_proto_depIdxs = nil
 }

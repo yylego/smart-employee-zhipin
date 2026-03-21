@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-http v2.9.2
 // - protoc             v7.34.0
-// source: api/zhipin/communication.proto
+// source: zhipin/communication.proto
 
 package zhipin
 

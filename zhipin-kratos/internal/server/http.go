@@ -4,17 +4,25 @@ import (
 	"github.com/go-kratos/kratos/v2/middleware/logging"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
 	"github.com/go-kratos/kratos/v2/transport/http"
+	"github.com/yylego/kratos-swaggo/swaggokratos"
+	"github.com/yylego/kratos-swaggo/swaggokratos/swaggogin"
+	"github.com/yylego/kratos-zap/zapkratos"
 	zhipin_kratos "github.com/yylego/smart-employee-zhipin/zhipin-kratos"
 	adminpb "github.com/yylego/smart-employee-zhipin/zhipin-kratos/api/admin"
 	pb "github.com/yylego/smart-employee-zhipin/zhipin-kratos/api/zhipin"
 	"github.com/yylego/smart-employee-zhipin/zhipin-kratos/internal/conf"
 	"github.com/yylego/smart-employee-zhipin/zhipin-kratos/internal/service"
-	"github.com/yylego/kratos-swaggo/swaggokratos"
-	"github.com/yylego/kratos-swaggo/swaggokratos/swaggogin"
-	"github.com/yylego/kratos-zap/zapkratos"
 )
 
-func NewHTTPServer(c *conf.Server, position *service.Svc岗位管理, communication *service.Svc沟通管理, matchItem *service.Svc匹配管理, blacklist *service.Svc黑名单管理, admin *service.Svc管理面板, zapKratos *zapkratos.ZapKratos) *http.Server {
+func NewHTTPServer(
+	c *conf.Server,
+	position *service.Svc岗位管理,
+	communication *service.Svc沟通管理,
+	matchItem *service.Svc需求匹配,
+	blacklist *service.Svc黑名单管理,
+	admin *service.Svc管理面板,
+	zapKratos *zapkratos.ZapKratos,
+) *http.Server {
 	var opts = []http.ServerOption{
 		http.Middleware(
 			recovery.Recovery(),
@@ -33,7 +41,7 @@ func NewHTTPServer(c *conf.Server, position *service.Svc岗位管理, communicat
 	srv := http.NewServer(opts...)
 	pb.RegisterPositionServiceHTTPServer(srv, position)
 	pb.RegisterCommunicationServiceHTTPServer(srv, communication)
-	pb.RegisterMatchItemServiceHTTPServer(srv, matchItem)
+	pb.RegisterRequirementItemServiceHTTPServer(srv, matchItem)
 	pb.RegisterBlacklistServiceHTTPServer(srv, blacklist)
 	adminpb.RegisterAdminServiceHTTPServer(srv, admin)
 

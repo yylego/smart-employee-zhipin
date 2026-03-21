@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.1
 // - protoc             v7.34.0
-// source: api/zhipin/blacklist.proto
+// source: zhipin/blacklist.proto
 
 package zhipin
 
@@ -235,5 +235,5 @@ var BlacklistService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "api/zhipin/blacklist.proto",
+	Metadata: "zhipin/blacklist.proto",
 }

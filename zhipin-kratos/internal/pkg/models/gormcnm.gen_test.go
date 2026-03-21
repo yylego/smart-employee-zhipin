@@ -22,7 +22,7 @@ func TestGenerateColumns(t *testing.T) {
 	// Define data objects used in column generation
 	objects := []any{
 		&models.T岗位{},
-		&models.T匹配项{},
+		&models.T需求匹配项{},
 		&models.T沟通记录{},
 		&models.T黑名单{},
 	}

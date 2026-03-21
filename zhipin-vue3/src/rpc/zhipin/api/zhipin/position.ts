@@ -12,8 +12,8 @@ import type { PartialMessage } from "@protobuf-ts/runtime";
 import { reflectionMergePartial } from "@protobuf-ts/runtime";
 import { MessageType } from "@protobuf-ts/runtime";
 import { CommunicationResp } from "./communication";
-import { MatchItemResp } from "./match_item";
-import { MatchItemInput } from "./match_item";
+import { MatchItemResp } from "./requirement_item";
+import { MatchItemInput } from "./requirement_item";
 /**
  * @generated from protobuf message api.zhipin.CreatePositionReq
  */

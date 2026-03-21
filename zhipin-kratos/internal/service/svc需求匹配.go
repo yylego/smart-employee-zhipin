@@ -8,20 +8,20 @@ import (
 	"github.com/yylego/smart-employee-zhipin/zhipin-kratos/internal/enums"
 )
 
-type Svc匹配管理 struct {
-	pb.UnimplementedMatchItemServiceServer
+type Svc需求匹配 struct {
+	pb.UnimplementedRequirementItemServiceServer
 
-	uc *biz.Uc匹配管理
+	uc *biz.Uc需求匹配
 }
 
-func NewSvc匹配管理(uc *biz.Uc匹配管理) *Svc匹配管理 {
-	return &Svc匹配管理{uc: uc}
+func NewSvc需求匹配(uc *biz.Uc需求匹配) *Svc需求匹配 {
+	return &Svc需求匹配{uc: uc}
 }
 
-func (s *Svc匹配管理) SetMatchItems(ctx context.Context, req *pb.SetMatchItemsReq) (*pb.SetMatchItemsResp, error) {
-	items := make([]*biz.Req匹配项, 0, len(req.Items))
+func (s *Svc需求匹配) SetRequirementItems(ctx context.Context, req *pb.SetRequirementItemsReq) (*pb.SetRequirementItemsResp, error) {
+	items := make([]*biz.Req需求匹配项, 0, len(req.Items))
 	for _, item := range req.Items {
-		items = append(items, &biz.Req匹配项{
+		items = append(items, &biz.Req需求匹配项{
 			R岗位要求: item.Requirement,
 			M匹配状态: enums.Enum匹配状态映射表.MustGetByCode(item.MatchStatus).Basic(),
 			R简历对应: item.ResumePoint,
@@ -33,17 +33,17 @@ func (s *Svc匹配管理) SetMatchItems(ctx context.Context, req *pb.SetMatchIte
 	if ebz != nil {
 		return nil, ebz.Erk
 	}
-	return &pb.SetMatchItemsResp{Count: count}, nil
+	return &pb.SetRequirementItemsResp{Count: count}, nil
 }
 
-func (s *Svc匹配管理) ListMatchItems(ctx context.Context, req *pb.ListMatchItemsReq) (*pb.ListMatchItemsResp, error) {
+func (s *Svc需求匹配) ListRequirementItems(ctx context.Context, req *pb.ListRequirementItemsReq) (*pb.ListRequirementItemsResp, error) {
 	v匹配们, ebz := s.uc.Get匹配列表(ctx, uint(req.PositionId))
 	if ebz != nil {
 		return nil, ebz.Erk
 	}
-	items := make([]*pb.MatchItemResp, 0, len(v匹配们))
+	items := make([]*pb.RequirementItemResp, 0, len(v匹配们))
 	for _, v := range v匹配们 {
-		items = append(items, &pb.MatchItemResp{
+		items = append(items, &pb.RequirementItemResp{
 			Id:          uint64(v.ID),
 			PositionId:  uint64(v.P岗位主键),
 			Requirement: v.R岗位要求,
@@ -53,5 +53,5 @@ func (s *Svc匹配管理) ListMatchItems(ctx context.Context, req *pb.ListMatchI
 			SortIndex:   v.S排序序号,
 		})
 	}
-	return &pb.ListMatchItemsResp{Items: items}, nil
+	return &pb.ListRequirementItemsResp{Items: items}, nil
 }

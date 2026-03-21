@@ -38,21 +38,21 @@ config:
 .PHONY: api
 # generate api proto
 api:
-	protoc --proto_path=. \
+	protoc --proto_path=./api \
 	       --proto_path=./third_party \
- 	       --go_out=paths=source_relative:. \
- 	       --go-http_out=paths=source_relative:. \
- 	       --go-grpc_out=paths=source_relative:. \
+ 	       --go_out=paths=source_relative:./api \
+ 	       --go-http_out=paths=source_relative:./api \
+ 	       --go-grpc_out=paths=source_relative:./api \
 	       --openapi_out=fq_schema_naming=true,default_response=false:. \
 	       $(API_PROTO_FILES)
 
 .PHONY: errors
 # generate errors code
 errors:
-	protoc --proto_path=. \
+	protoc --proto_path=./api \
 		   --proto_path=./third_party \
-		   --go_out=paths=source_relative:. \
-		   --orzkratos-errors_out=include_nested=true,separate_named=true,paths=source_relative:. \
+		   --go_out=paths=source_relative:./api \
+		   --orzkratos-errors_out=include_nested=true,separate_named=true,paths=source_relative:./api \
 		   $(API_PROTO_FILES)
 
 .PHONY: build

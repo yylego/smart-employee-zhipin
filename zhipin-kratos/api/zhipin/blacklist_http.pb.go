@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-http v2.9.2
 // - protoc             v7.34.0
-// source: api/zhipin/blacklist.proto
+// source: zhipin/blacklist.proto
 
 package zhipin
 

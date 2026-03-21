@@ -5,8 +5,8 @@ package api.zhipin;
 option go_package = "github.com/yylego/smart-employee-zhipin/zhipin-kratos/api/zhipin;zhipin";
 
 import "google/api/annotations.proto";
-import "api/zhipin/match_item.proto";
-import "api/zhipin/communication.proto";
+import "zhipin/requirement_item.proto";
+import "zhipin/communication.proto";
 
 enum PositionStatus {
   POSITION_STATUS_UNKNOWN       = 0;
@@ -105,7 +105,7 @@ message CreatePositionReq {
   string duties = 12;
   string requirements = 13;
   string notes = 14;
-  repeated MatchItemInput match_items = 15;
+  repeated RequirementItemInput match_items = 15;
 }
 
 message UpdateSalaryReq {
@@ -230,7 +230,7 @@ message PositionResp {
 
 message PositionDetailResp {
   PositionResp position = 1;
-  repeated MatchItemResp match_items = 2;
+  repeated RequirementItemResp match_items = 2;
   repeated CommunicationResp communications = 3;
 }
 

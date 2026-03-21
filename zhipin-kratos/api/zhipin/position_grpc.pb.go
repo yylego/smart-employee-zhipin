@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.1
 // - protoc             v7.34.0
-// source: api/zhipin/position.proto
+// source: zhipin/position.proto
 
 package zhipin
 
@@ -777,5 +777,5 @@ var PositionService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "api/zhipin/position.proto",
+	Metadata: "zhipin/position.proto",
 }

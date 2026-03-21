@@ -500,47 +500,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.zhipin.CommunicationResp'
-    /api/position/{positionId}/match-items:
-        get:
-            tags:
-                - MatchItemService
-            operationId: MatchItemService_ListMatchItems
-            parameters:
-                - name: positionId
-                  in: path
-                  required: true
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.zhipin.ListMatchItemsResp'
-        post:
-            tags:
-                - MatchItemService
-            operationId: MatchItemService_SetMatchItems
-            parameters:
-                - name: positionId
-                  in: path
-                  required: true
-                  schema:
-                    type: string
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.zhipin.SetMatchItemsReq'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.zhipin.SetMatchItemsResp'
     /api/position/{positionId}/msg-received:
         post:
             tags:
@@ -613,6 +572,47 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.zhipin.CommunicationResp'
+    /api/position/{positionId}/requirement-items:
+        get:
+            tags:
+                - RequirementItemService
+            operationId: RequirementItemService_ListRequirementItems
+            parameters:
+                - name: positionId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.ListRequirementItemsResp'
+        post:
+            tags:
+                - RequirementItemService
+            operationId: RequirementItemService_SetRequirementItems
+            parameters:
+                - name: positionId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.zhipin.SetRequirementItemsReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.SetRequirementItemsResp'
     /api/position/{positionId}/resume-sent:
         post:
             tags:
@@ -951,7 +951,7 @@ components:
                 matchItems:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.zhipin.MatchItemInput'
+                        $ref: '#/components/schemas/api.zhipin.RequirementItemInput'
         api.zhipin.JobIdCheckResult:
             type: object
             properties:
@@ -978,13 +978,6 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.zhipin.CommunicationResp'
-        api.zhipin.ListMatchItemsResp:
-            type: object
-            properties:
-                items:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.zhipin.MatchItemResp'
         api.zhipin.ListPositionsResp:
             type: object
             properties:
@@ -995,6 +988,13 @@ components:
                 total:
                     type: integer
                     format: int32
+        api.zhipin.ListRequirementItemsResp:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.zhipin.RequirementItemResp'
         api.zhipin.MarkSkippedReq:
             type: object
             properties:
@@ -1002,40 +1002,6 @@ components:
                     type: string
                 reason:
                     type: string
-        api.zhipin.MatchItemInput:
-            type: object
-            properties:
-                requirement:
-                    type: string
-                matchStatus:
-                    type: integer
-                    format: int32
-                resumePoint:
-                    type: string
-                remark:
-                    type: string
-                sortIndex:
-                    type: integer
-                    format: int32
-        api.zhipin.MatchItemResp:
-            type: object
-            properties:
-                id:
-                    type: string
-                positionId:
-                    type: string
-                requirement:
-                    type: string
-                matchStatus:
-                    type: integer
-                    format: int32
-                resumePoint:
-                    type: string
-                remark:
-                    type: string
-                sortIndex:
-                    type: integer
-                    format: int32
         api.zhipin.PositionDetailResp:
             type: object
             properties:
@@ -1044,7 +1010,7 @@ components:
                 matchItems:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.zhipin.MatchItemResp'
+                        $ref: '#/components/schemas/api.zhipin.RequirementItemResp'
                 communications:
                     type: array
                     items:
@@ -1145,7 +1111,41 @@ components:
         api.zhipin.RemoveBlacklistResp:
             type: object
             properties: {}
-        api.zhipin.SetMatchItemsReq:
+        api.zhipin.RequirementItemInput:
+            type: object
+            properties:
+                requirement:
+                    type: string
+                matchStatus:
+                    type: integer
+                    format: int32
+                resumePoint:
+                    type: string
+                remark:
+                    type: string
+                sortIndex:
+                    type: integer
+                    format: int32
+        api.zhipin.RequirementItemResp:
+            type: object
+            properties:
+                id:
+                    type: string
+                positionId:
+                    type: string
+                requirement:
+                    type: string
+                matchStatus:
+                    type: integer
+                    format: int32
+                resumePoint:
+                    type: string
+                remark:
+                    type: string
+                sortIndex:
+                    type: integer
+                    format: int32
+        api.zhipin.SetRequirementItemsReq:
             type: object
             properties:
                 positionId:
@@ -1153,8 +1153,8 @@ components:
                 items:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.zhipin.MatchItemInput'
-        api.zhipin.SetMatchItemsResp:
+                        $ref: '#/components/schemas/api.zhipin.RequirementItemInput'
+        api.zhipin.SetRequirementItemsResp:
             type: object
             properties:
                 count:
@@ -1231,7 +1231,7 @@ tags:
       description: BlacklistService — company blacklist management
     - name: CommunicationService
       description: CommunicationService — fine-grained interaction events per position
-    - name: MatchItemService
-      description: MatchItemService — per-requirement match analysis
     - name: PositionService
       description: PositionService — job position CRUD and status tracking
+    - name: RequirementItemService
+      description: RequirementItemService — per-requirement match analysis

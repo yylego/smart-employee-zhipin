@@ -5,7 +5,7 @@ package models
 func Objects() []any {
 	return []any{
 		&T岗位{},
-		&T匹配项{},
+		&T需求匹配项{},
 		&T沟通记录{},
 		&T黑名单{},
 	}

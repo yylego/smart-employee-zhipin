@@ -15,21 +15,21 @@ import (
 	"gorm.io/gorm"
 )
 
-type Uc匹配管理 struct {
+type Uc需求匹配 struct {
 	data *data.Data
-	repo *gormrepo.Repo[models.T匹配项, *models.T匹配项Columns]
+	repo *gormrepo.Repo[models.T需求匹配项, *models.T需求匹配项Columns]
 	zapLog *zaplog.Zap
 }
 
-func NewUc匹配管理(data *data.Data, zapKratos *zapkratos.ZapKratos) *Uc匹配管理 {
-	return &Uc匹配管理{
+func NewUc需求匹配(data *data.Data, zapKratos *zapkratos.ZapKratos) *Uc需求匹配 {
+	return &Uc需求匹配{
 		data: data,
-		repo: gormrepo.NewRepo(gormclass.Use(&models.T匹配项{})),
+		repo: gormrepo.NewRepo(gormclass.Use(&models.T需求匹配项{})),
 		zapLog: zapKratos.SubZap(),
 	}
 }
 
-type Req匹配项 struct {
+type Req需求匹配项 struct {
 	R岗位要求 string
 	M匹配状态 models.E匹配状态
 	R简历对应 string
@@ -37,17 +37,17 @@ type Req匹配项 struct {
 	S排序序号 int32
 }
 
-func (uc *Uc匹配管理) Xqt批量设置(ctx context.Context, p岗位主键 uint, items []*Req匹配项) (int32, *ebzkratos.Ebz) {
+func (uc *Uc需求匹配) Xqt批量设置(ctx context.Context, p岗位主键 uint, items []*Req需求匹配项) (int32, *ebzkratos.Ebz) {
 	must.True(p岗位主键 > 0)
 	db := uc.data.DB()
 
-	if err := uc.repo.With(ctx, db).DeleteW(func(db *gorm.DB, cls *models.T匹配项Columns) *gorm.DB {
+	if err := uc.repo.With(ctx, db).DeleteW(func(db *gorm.DB, cls *models.T需求匹配项Columns) *gorm.DB {
 		return db.Where(cls.P岗位主键.Eq(p岗位主键))
 	}); err != nil {
 		return 0, ebzkratos.New(pb.ErrorDbError("delete: %v", err))
 	}
 	for _, item := range items {
-		v匹配 := &models.T匹配项{
+		v匹配 := &models.T需求匹配项{
 			P岗位主键: p岗位主键,
 			R岗位要求: item.R岗位要求,
 			M匹配状态: item.M匹配状态,
@@ -62,10 +62,10 @@ func (uc *Uc匹配管理) Xqt批量设置(ctx context.Context, p岗位主键 uin
 	return int32(len(items)), nil
 }
 
-func (uc *Uc匹配管理) Get匹配列表(ctx context.Context, p岗位主键 uint) ([]*models.T匹配项, *ebzkratos.Ebz) {
+func (uc *Uc需求匹配) Get匹配列表(ctx context.Context, p岗位主键 uint) ([]*models.T需求匹配项, *ebzkratos.Ebz) {
 	must.True(p岗位主键 > 0)
 	db := uc.data.DB()
-	v匹配们, err := uc.repo.With(ctx, db).Find(func(db *gorm.DB, cls *models.T匹配项Columns) *gorm.DB {
+	v匹配们, err := uc.repo.With(ctx, db).Find(func(db *gorm.DB, cls *models.T需求匹配项Columns) *gorm.DB {
 		return db.Where(cls.P岗位主键.Eq(p岗位主键)).Order(cls.S排序序号.Ob("ASC").Ox())
 	})
 	if err != nil {

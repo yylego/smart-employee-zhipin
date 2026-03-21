@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.1
 // - protoc             v7.34.0
-// source: api/zhipin/communication.proto
+// source: zhipin/communication.proto
 
 package zhipin
 
@@ -349,5 +349,5 @@ var CommunicationService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "api/zhipin/communication.proto",
+	Metadata: "zhipin/communication.proto",
 }

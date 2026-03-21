@@ -24,16 +24,16 @@ func wireApp(confServer *conf.Server, confData *conf.Data, zapKratos *zapkratos.
 		return nil, nil, err
 	}
 	uc岗位管理 := biz.NewUc岗位管理(dataData, zapKratos)
-	uc匹配管理 := biz.NewUc匹配管理(dataData, zapKratos)
-	svc岗位管理 := service.NewSvc岗位管理(uc岗位管理, uc匹配管理)
+	uc需求匹配 := biz.NewUc需求匹配(dataData, zapKratos)
+	svc岗位管理 := service.NewSvc岗位管理(uc岗位管理, uc需求匹配)
 	uc沟通管理 := biz.NewUc沟通管理(dataData, zapKratos)
 	svc沟通管理 := service.NewSvc沟通管理(uc沟通管理)
-	svc匹配管理 := service.NewSvc匹配管理(uc匹配管理)
+	svc需求匹配 := service.NewSvc需求匹配(uc需求匹配)
 	uc黑名单管理 := biz.NewUc黑名单管理(dataData, zapKratos)
 	svc黑名单管理 := service.NewSvc黑名单管理(uc黑名单管理)
-	svc管理面板 := service.NewSvc管理面板(uc岗位管理, uc匹配管理, uc沟通管理)
-	grpcServer := server.NewGRPCServer(confServer, svc岗位管理, svc沟通管理, svc匹配管理, svc黑名单管理, svc管理面板, zapKratos)
-	httpServer := server.NewHTTPServer(confServer, svc岗位管理, svc沟通管理, svc匹配管理, svc黑名单管理, svc管理面板, zapKratos)
+	svc管理面板 := service.NewSvc管理面板(uc岗位管理, uc需求匹配, uc沟通管理)
+	grpcServer := server.NewGRPCServer(confServer, svc岗位管理, svc沟通管理, svc需求匹配, svc黑名单管理, svc管理面板, zapKratos)
+	httpServer := server.NewHTTPServer(confServer, svc岗位管理, svc沟通管理, svc需求匹配, svc黑名单管理, svc管理面板, zapKratos)
 	app := newApp(grpcServer, httpServer, zapKratos)
 	return app, func() {
 		cleanup()

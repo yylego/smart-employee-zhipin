@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package api.zhipin;
+
+option go_package = "github.com/yylego/smart-employee-zhipin/zhipin-kratos/api/zhipin;zhipin";
+
+import "google/api/annotations.proto";
+
+enum MatchStatus {
+  MATCH_STATUS_UNKNOWN = 0;
+  MATCH_STATUS_MATCHED = 1;
+  MATCH_STATUS_PARTIAL = 2;
+  MATCH_STATUS_MISSING = 3;
+}
+
+// RequirementItemService — per-requirement match analysis
+service RequirementItemService {
+  rpc SetRequirementItems (SetRequirementItemsReq) returns (SetRequirementItemsResp) {
+    option (google.api.http) = { post: "/api/position/{position_id}/requirement-items", body: "*" };
+  }
+  rpc ListRequirementItems (ListRequirementItemsReq) returns (ListRequirementItemsResp) {
+    option (google.api.http) = { get: "/api/position/{position_id}/requirement-items" };
+  }
+}
+
+message RequirementItemInput {
+  string requirement = 1;
+  int32  match_status = 2;
+  string resume_point = 3;
+  string remark = 4;
+  int32  sort_index = 5;
+}
+
+message SetRequirementItemsReq {
+  uint64 position_id = 1;
+  repeated RequirementItemInput items = 2;
+}
+
+message SetRequirementItemsResp {
+  int32 count = 1;
+}
+
+message ListRequirementItemsReq {
+  uint64 position_id = 1;
+}
+
+message RequirementItemResp {
+  uint64 id = 1;
+  uint64 position_id = 2;
+  string requirement = 3;
+  int32  match_status = 4;
+  string resume_point = 5;
+  string remark = 6;
+  int32  sort_index = 7;
+}
+
+message ListRequirementItemsResp {
+  repeated RequirementItemResp items = 1;
+}

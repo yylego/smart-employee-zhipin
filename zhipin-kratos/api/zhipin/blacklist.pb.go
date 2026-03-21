@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        v7.34.0
-// source: api/zhipin/blacklist.proto
+// source: zhipin/blacklist.proto
 
 package zhipin
 
@@ -32,7 +32,7 @@ type AddBlacklistReq struct {
 
 func (x *AddBlacklistReq) Reset() {
 	*x = AddBlacklistReq{}
-	mi := &file_api_zhipin_blacklist_proto_msgTypes[0]
+	mi := &file_zhipin_blacklist_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -44,7 +44,7 @@ func (x *AddBlacklistReq) String() string {
 func (*AddBlacklistReq) ProtoMessage() {}
 
 func (x *AddBlacklistReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_blacklist_proto_msgTypes[0]
+	mi := &file_zhipin_blacklist_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -57,7 +57,7 @@ func (x *AddBlacklistReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddBlacklistReq.ProtoReflect.Descriptor instead.
 func (*AddBlacklistReq) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_blacklist_proto_rawDescGZIP(), []int{0}
+	return file_zhipin_blacklist_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *AddBlacklistReq) GetCompany() string {
@@ -83,7 +83,7 @@ type CheckBlacklistReq struct {
 
 func (x *CheckBlacklistReq) Reset() {
 	*x = CheckBlacklistReq{}
-	mi := &file_api_zhipin_blacklist_proto_msgTypes[1]
+	mi := &file_zhipin_blacklist_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -95,7 +95,7 @@ func (x *CheckBlacklistReq) String() string {
 func (*CheckBlacklistReq) ProtoMessage() {}
 
 func (x *CheckBlacklistReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_blacklist_proto_msgTypes[1]
+	mi := &file_zhipin_blacklist_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -108,7 +108,7 @@ func (x *CheckBlacklistReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckBlacklistReq.ProtoReflect.Descriptor instead.
 func (*CheckBlacklistReq) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_blacklist_proto_rawDescGZIP(), []int{1}
+	return file_zhipin_blacklist_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *CheckBlacklistReq) GetCompany() string {
@@ -127,7 +127,7 @@ type CheckBlacklistResp struct {
 
 func (x *CheckBlacklistResp) Reset() {
 	*x = CheckBlacklistResp{}
-	mi := &file_api_zhipin_blacklist_proto_msgTypes[2]
+	mi := &file_zhipin_blacklist_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -139,7 +139,7 @@ func (x *CheckBlacklistResp) String() string {
 func (*CheckBlacklistResp) ProtoMessage() {}
 
 func (x *CheckBlacklistResp) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_blacklist_proto_msgTypes[2]
+	mi := &file_zhipin_blacklist_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -152,7 +152,7 @@ func (x *CheckBlacklistResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckBlacklistResp.ProtoReflect.Descriptor instead.
 func (*CheckBlacklistResp) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_blacklist_proto_rawDescGZIP(), []int{2}
+	return file_zhipin_blacklist_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *CheckBlacklistResp) GetBlacklisted() bool {
@@ -170,7 +170,7 @@ type ListBlacklistReq struct {
 
 func (x *ListBlacklistReq) Reset() {
 	*x = ListBlacklistReq{}
-	mi := &file_api_zhipin_blacklist_proto_msgTypes[3]
+	mi := &file_zhipin_blacklist_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -182,7 +182,7 @@ func (x *ListBlacklistReq) String() string {
 func (*ListBlacklistReq) ProtoMessage() {}
 
 func (x *ListBlacklistReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_blacklist_proto_msgTypes[3]
+	mi := &file_zhipin_blacklist_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -195,7 +195,7 @@ func (x *ListBlacklistReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBlacklistReq.ProtoReflect.Descriptor instead.
 func (*ListBlacklistReq) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_blacklist_proto_rawDescGZIP(), []int{3}
+	return file_zhipin_blacklist_proto_rawDescGZIP(), []int{3}
 }
 
 type BlacklistResp struct {
@@ -209,7 +209,7 @@ type BlacklistResp struct {
 
 func (x *BlacklistResp) Reset() {
 	*x = BlacklistResp{}
-	mi := &file_api_zhipin_blacklist_proto_msgTypes[4]
+	mi := &file_zhipin_blacklist_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -221,7 +221,7 @@ func (x *BlacklistResp) String() string {
 func (*BlacklistResp) ProtoMessage() {}
 
 func (x *BlacklistResp) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_blacklist_proto_msgTypes[4]
+	mi := &file_zhipin_blacklist_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -234,7 +234,7 @@ func (x *BlacklistResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlacklistResp.ProtoReflect.Descriptor instead.
 func (*BlacklistResp) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_blacklist_proto_rawDescGZIP(), []int{4}
+	return file_zhipin_blacklist_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *BlacklistResp) GetId() uint64 {
@@ -267,7 +267,7 @@ type ListBlacklistResp struct {
 
 func (x *ListBlacklistResp) Reset() {
 	*x = ListBlacklistResp{}
-	mi := &file_api_zhipin_blacklist_proto_msgTypes[5]
+	mi := &file_zhipin_blacklist_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -279,7 +279,7 @@ func (x *ListBlacklistResp) String() string {
 func (*ListBlacklistResp) ProtoMessage() {}
 
 func (x *ListBlacklistResp) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_blacklist_proto_msgTypes[5]
+	mi := &file_zhipin_blacklist_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -292,7 +292,7 @@ func (x *ListBlacklistResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBlacklistResp.ProtoReflect.Descriptor instead.
 func (*ListBlacklistResp) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_blacklist_proto_rawDescGZIP(), []int{5}
+	return file_zhipin_blacklist_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ListBlacklistResp) GetItems() []*BlacklistResp {
@@ -311,7 +311,7 @@ type RemoveBlacklistReq struct {
 
 func (x *RemoveBlacklistReq) Reset() {
 	*x = RemoveBlacklistReq{}
-	mi := &file_api_zhipin_blacklist_proto_msgTypes[6]
+	mi := &file_zhipin_blacklist_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -323,7 +323,7 @@ func (x *RemoveBlacklistReq) String() string {
 func (*RemoveBlacklistReq) ProtoMessage() {}
 
 func (x *RemoveBlacklistReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_blacklist_proto_msgTypes[6]
+	mi := &file_zhipin_blacklist_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -336,7 +336,7 @@ func (x *RemoveBlacklistReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveBlacklistReq.ProtoReflect.Descriptor instead.
 func (*RemoveBlacklistReq) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_blacklist_proto_rawDescGZIP(), []int{6}
+	return file_zhipin_blacklist_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *RemoveBlacklistReq) GetId() uint64 {
@@ -354,7 +354,7 @@ type RemoveBlacklistResp struct {
 
 func (x *RemoveBlacklistResp) Reset() {
 	*x = RemoveBlacklistResp{}
-	mi := &file_api_zhipin_blacklist_proto_msgTypes[7]
+	mi := &file_zhipin_blacklist_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -366,7 +366,7 @@ func (x *RemoveBlacklistResp) String() string {
 func (*RemoveBlacklistResp) ProtoMessage() {}
 
 func (x *RemoveBlacklistResp) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_blacklist_proto_msgTypes[7]
+	mi := &file_zhipin_blacklist_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -379,14 +379,14 @@ func (x *RemoveBlacklistResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveBlacklistResp.ProtoReflect.Descriptor instead.
 func (*RemoveBlacklistResp) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_blacklist_proto_rawDescGZIP(), []int{7}
+	return file_zhipin_blacklist_proto_rawDescGZIP(), []int{7}
 }
 
-var File_api_zhipin_blacklist_proto protoreflect.FileDescriptor
+var File_zhipin_blacklist_proto protoreflect.FileDescriptor
 
-const file_api_zhipin_blacklist_proto_rawDesc = "" +
+const file_zhipin_blacklist_proto_rawDesc = "" +
 	"\n" +
-	"\x1aapi/zhipin/blacklist.proto\x12\n" +
+	"\x16zhipin/blacklist.proto\x12\n" +
 	"api.zhipin\x1a\x1cgoogle/api/annotations.proto\"C\n" +
 	"\x0fAddBlacklistReq\x12\x18\n" +
 	"\acompany\x18\x01 \x01(\tR\acompany\x12\x16\n" +
@@ -412,19 +412,19 @@ const file_api_zhipin_blacklist_proto_rawDesc = "" +
 	"\x0fRemoveBlacklist\x12\x1e.api.zhipin.RemoveBlacklistReq\x1a\x1f.api.zhipin.RemoveBlacklistResp\"\x1b\x82\xd3\xe4\x93\x02\x15*\x13/api/blacklist/{id}BIZGgithub.com/yylego/smart-employee-zhipin/zhipin-kratos/api/zhipin;zhipinb\x06proto3"
 
 var (
-	file_api_zhipin_blacklist_proto_rawDescOnce sync.Once
-	file_api_zhipin_blacklist_proto_rawDescData []byte
+	file_zhipin_blacklist_proto_rawDescOnce sync.Once
+	file_zhipin_blacklist_proto_rawDescData []byte
 )
 
-func file_api_zhipin_blacklist_proto_rawDescGZIP() []byte {
-	file_api_zhipin_blacklist_proto_rawDescOnce.Do(func() {
-		file_api_zhipin_blacklist_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_api_zhipin_blacklist_proto_rawDesc), len(file_api_zhipin_blacklist_proto_rawDesc)))
+func file_zhipin_blacklist_proto_rawDescGZIP() []byte {
+	file_zhipin_blacklist_proto_rawDescOnce.Do(func() {
+		file_zhipin_blacklist_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_zhipin_blacklist_proto_rawDesc), len(file_zhipin_blacklist_proto_rawDesc)))
 	})
-	return file_api_zhipin_blacklist_proto_rawDescData
+	return file_zhipin_blacklist_proto_rawDescData
 }
 
-var file_api_zhipin_blacklist_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
-var file_api_zhipin_blacklist_proto_goTypes = []any{
+var file_zhipin_blacklist_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_zhipin_blacklist_proto_goTypes = []any{
 	(*AddBlacklistReq)(nil),     // 0: api.zhipin.AddBlacklistReq
 	(*CheckBlacklistReq)(nil),   // 1: api.zhipin.CheckBlacklistReq
 	(*CheckBlacklistResp)(nil),  // 2: api.zhipin.CheckBlacklistResp
@@ -434,7 +434,7 @@ var file_api_zhipin_blacklist_proto_goTypes = []any{
 	(*RemoveBlacklistReq)(nil),  // 6: api.zhipin.RemoveBlacklistReq
 	(*RemoveBlacklistResp)(nil), // 7: api.zhipin.RemoveBlacklistResp
 }
-var file_api_zhipin_blacklist_proto_depIdxs = []int32{
+var file_zhipin_blacklist_proto_depIdxs = []int32{
 	4, // 0: api.zhipin.ListBlacklistResp.items:type_name -> api.zhipin.BlacklistResp
 	0, // 1: api.zhipin.BlacklistService.AddBlacklist:input_type -> api.zhipin.AddBlacklistReq
 	1, // 2: api.zhipin.BlacklistService.CheckBlacklist:input_type -> api.zhipin.CheckBlacklistReq
@@ -451,26 +451,26 @@ var file_api_zhipin_blacklist_proto_depIdxs = []int32{
 	0, // [0:1] is the sub-list for field type_name
 }
 
-func init() { file_api_zhipin_blacklist_proto_init() }
-func file_api_zhipin_blacklist_proto_init() {
-	if File_api_zhipin_blacklist_proto != nil {
+func init() { file_zhipin_blacklist_proto_init() }
+func file_zhipin_blacklist_proto_init() {
+	if File_zhipin_blacklist_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zhipin_blacklist_proto_rawDesc), len(file_api_zhipin_blacklist_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_zhipin_blacklist_proto_rawDesc), len(file_zhipin_blacklist_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_api_zhipin_blacklist_proto_goTypes,
-		DependencyIndexes: file_api_zhipin_blacklist_proto_depIdxs,
-		MessageInfos:      file_api_zhipin_blacklist_proto_msgTypes,
+		GoTypes:           file_zhipin_blacklist_proto_goTypes,
+		DependencyIndexes: file_zhipin_blacklist_proto_depIdxs,
+		MessageInfos:      file_zhipin_blacklist_proto_msgTypes,
 	}.Build()
-	File_api_zhipin_blacklist_proto = out.File
-	file_api_zhipin_blacklist_proto_goTypes = nil
-	file_api_zhipin_blacklist_proto_depIdxs = nil
+	File_zhipin_blacklist_proto = out.File
+	file_zhipin_blacklist_proto_goTypes = nil
+	file_zhipin_blacklist_proto_depIdxs = nil
 }

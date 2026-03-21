@@ -13,10 +13,10 @@ type Svc岗位管理 struct {
 	pb.UnimplementedPositionServiceServer
 
 	uc      *biz.Uc岗位管理
-	ucMatch *biz.Uc匹配管理
+	ucMatch *biz.Uc需求匹配
 }
 
-func NewSvc岗位管理(uc *biz.Uc岗位管理, ucMatch *biz.Uc匹配管理) *Svc岗位管理 {
+func NewSvc岗位管理(uc *biz.Uc岗位管理, ucMatch *biz.Uc需求匹配) *Svc岗位管理 {
 	return &Svc岗位管理{uc: uc, ucMatch: ucMatch}
 }
 
@@ -48,9 +48,9 @@ func (s *Svc岗位管理) CreatePosition(ctx context.Context, req *pb.CreatePosi
 
 	// create match items together with position
 	{
-		items := make([]*biz.Req匹配项, 0, len(req.MatchItems))
+		items := make([]*biz.Req需求匹配项, 0, len(req.MatchItems))
 		for _, item := range req.MatchItems {
-			items = append(items, &biz.Req匹配项{
+			items = append(items, &biz.Req需求匹配项{
 				R岗位要求: item.Requirement,
 				M匹配状态: enums.Enum匹配状态映射表.MustGetByCode(item.MatchStatus).Basic(),
 				R简历对应: item.ResumePoint,

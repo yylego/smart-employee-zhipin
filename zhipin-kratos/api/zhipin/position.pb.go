@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        v7.34.0
-// source: api/zhipin/position.proto
+// source: zhipin/position.proto
 
 package zhipin
 
@@ -79,11 +79,11 @@ func (x PositionStatus) String() string {
 }
 
 func (PositionStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_api_zhipin_position_proto_enumTypes[0].Descriptor()
+	return file_zhipin_position_proto_enumTypes[0].Descriptor()
 }
 
 func (PositionStatus) Type() protoreflect.EnumType {
-	return &file_api_zhipin_position_proto_enumTypes[0]
+	return &file_zhipin_position_proto_enumTypes[0]
 }
 
 func (x PositionStatus) Number() protoreflect.EnumNumber {
@@ -92,33 +92,33 @@ func (x PositionStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use PositionStatus.Descriptor instead.
 func (PositionStatus) EnumDescriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{0}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{0}
 }
 
 type CreatePositionReq struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	JobId         string                 `protobuf:"bytes,1,opt,name=job_id,json=jobId,proto3" json:"job_id,omitempty"`
-	Title         string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
-	Company       string                 `protobuf:"bytes,3,opt,name=company,proto3" json:"company,omitempty"`
-	SalaryRange   string                 `protobuf:"bytes,4,opt,name=salary_range,json=salaryRange,proto3" json:"salary_range,omitempty"`
-	SalaryMin     int32                  `protobuf:"varint,5,opt,name=salary_min,json=salaryMin,proto3" json:"salary_min,omitempty"`
-	SalaryMax     int32                  `protobuf:"varint,6,opt,name=salary_max,json=salaryMax,proto3" json:"salary_max,omitempty"`
-	City          string                 `protobuf:"bytes,7,opt,name=city,proto3" json:"city,omitempty"`
-	Link          string                 `protobuf:"bytes,8,opt,name=link,proto3" json:"link,omitempty"`
-	Recruiter     string                 `protobuf:"bytes,9,opt,name=recruiter,proto3" json:"recruiter,omitempty"`
-	EncBossId     string                 `protobuf:"bytes,10,opt,name=enc_boss_id,json=encBossId,proto3" json:"enc_boss_id,omitempty"`
-	IsHunter      bool                   `protobuf:"varint,11,opt,name=is_hunter,json=isHunter,proto3" json:"is_hunter,omitempty"`
-	Duties        string                 `protobuf:"bytes,12,opt,name=duties,proto3" json:"duties,omitempty"`
-	Requirements  string                 `protobuf:"bytes,13,opt,name=requirements,proto3" json:"requirements,omitempty"`
-	Notes         string                 `protobuf:"bytes,14,opt,name=notes,proto3" json:"notes,omitempty"`
-	MatchItems    []*MatchItemInput      `protobuf:"bytes,15,rep,name=match_items,json=matchItems,proto3" json:"match_items,omitempty"`
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	JobId         string                  `protobuf:"bytes,1,opt,name=job_id,json=jobId,proto3" json:"job_id,omitempty"`
+	Title         string                  `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	Company       string                  `protobuf:"bytes,3,opt,name=company,proto3" json:"company,omitempty"`
+	SalaryRange   string                  `protobuf:"bytes,4,opt,name=salary_range,json=salaryRange,proto3" json:"salary_range,omitempty"`
+	SalaryMin     int32                   `protobuf:"varint,5,opt,name=salary_min,json=salaryMin,proto3" json:"salary_min,omitempty"`
+	SalaryMax     int32                   `protobuf:"varint,6,opt,name=salary_max,json=salaryMax,proto3" json:"salary_max,omitempty"`
+	City          string                  `protobuf:"bytes,7,opt,name=city,proto3" json:"city,omitempty"`
+	Link          string                  `protobuf:"bytes,8,opt,name=link,proto3" json:"link,omitempty"`
+	Recruiter     string                  `protobuf:"bytes,9,opt,name=recruiter,proto3" json:"recruiter,omitempty"`
+	EncBossId     string                  `protobuf:"bytes,10,opt,name=enc_boss_id,json=encBossId,proto3" json:"enc_boss_id,omitempty"`
+	IsHunter      bool                    `protobuf:"varint,11,opt,name=is_hunter,json=isHunter,proto3" json:"is_hunter,omitempty"`
+	Duties        string                  `protobuf:"bytes,12,opt,name=duties,proto3" json:"duties,omitempty"`
+	Requirements  string                  `protobuf:"bytes,13,opt,name=requirements,proto3" json:"requirements,omitempty"`
+	Notes         string                  `protobuf:"bytes,14,opt,name=notes,proto3" json:"notes,omitempty"`
+	MatchItems    []*RequirementItemInput `protobuf:"bytes,15,rep,name=match_items,json=matchItems,proto3" json:"match_items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreatePositionReq) Reset() {
 	*x = CreatePositionReq{}
-	mi := &file_api_zhipin_position_proto_msgTypes[0]
+	mi := &file_zhipin_position_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -130,7 +130,7 @@ func (x *CreatePositionReq) String() string {
 func (*CreatePositionReq) ProtoMessage() {}
 
 func (x *CreatePositionReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_position_proto_msgTypes[0]
+	mi := &file_zhipin_position_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -143,7 +143,7 @@ func (x *CreatePositionReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreatePositionReq.ProtoReflect.Descriptor instead.
 func (*CreatePositionReq) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{0}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *CreatePositionReq) GetJobId() string {
@@ -244,7 +244,7 @@ func (x *CreatePositionReq) GetNotes() string {
 	return ""
 }
 
-func (x *CreatePositionReq) GetMatchItems() []*MatchItemInput {
+func (x *CreatePositionReq) GetMatchItems() []*RequirementItemInput {
 	if x != nil {
 		return x.MatchItems
 	}
@@ -263,7 +263,7 @@ type UpdateSalaryReq struct {
 
 func (x *UpdateSalaryReq) Reset() {
 	*x = UpdateSalaryReq{}
-	mi := &file_api_zhipin_position_proto_msgTypes[1]
+	mi := &file_zhipin_position_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -275,7 +275,7 @@ func (x *UpdateSalaryReq) String() string {
 func (*UpdateSalaryReq) ProtoMessage() {}
 
 func (x *UpdateSalaryReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_position_proto_msgTypes[1]
+	mi := &file_zhipin_position_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -288,7 +288,7 @@ func (x *UpdateSalaryReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateSalaryReq.ProtoReflect.Descriptor instead.
 func (*UpdateSalaryReq) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{1}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *UpdateSalaryReq) GetId() uint64 {
@@ -329,7 +329,7 @@ type UpdateStatusReq struct {
 
 func (x *UpdateStatusReq) Reset() {
 	*x = UpdateStatusReq{}
-	mi := &file_api_zhipin_position_proto_msgTypes[2]
+	mi := &file_zhipin_position_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -341,7 +341,7 @@ func (x *UpdateStatusReq) String() string {
 func (*UpdateStatusReq) ProtoMessage() {}
 
 func (x *UpdateStatusReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_position_proto_msgTypes[2]
+	mi := &file_zhipin_position_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -354,7 +354,7 @@ func (x *UpdateStatusReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateStatusReq.ProtoReflect.Descriptor instead.
 func (*UpdateStatusReq) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{2}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *UpdateStatusReq) GetId() uint64 {
@@ -381,7 +381,7 @@ type MarkSkippedReq struct {
 
 func (x *MarkSkippedReq) Reset() {
 	*x = MarkSkippedReq{}
-	mi := &file_api_zhipin_position_proto_msgTypes[3]
+	mi := &file_zhipin_position_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -393,7 +393,7 @@ func (x *MarkSkippedReq) String() string {
 func (*MarkSkippedReq) ProtoMessage() {}
 
 func (x *MarkSkippedReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_position_proto_msgTypes[3]
+	mi := &file_zhipin_position_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -406,7 +406,7 @@ func (x *MarkSkippedReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MarkSkippedReq.ProtoReflect.Descriptor instead.
 func (*MarkSkippedReq) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{3}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *MarkSkippedReq) GetId() uint64 {
@@ -433,7 +433,7 @@ type UpdateDutiesReq struct {
 
 func (x *UpdateDutiesReq) Reset() {
 	*x = UpdateDutiesReq{}
-	mi := &file_api_zhipin_position_proto_msgTypes[4]
+	mi := &file_zhipin_position_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -445,7 +445,7 @@ func (x *UpdateDutiesReq) String() string {
 func (*UpdateDutiesReq) ProtoMessage() {}
 
 func (x *UpdateDutiesReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_position_proto_msgTypes[4]
+	mi := &file_zhipin_position_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -458,7 +458,7 @@ func (x *UpdateDutiesReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateDutiesReq.ProtoReflect.Descriptor instead.
 func (*UpdateDutiesReq) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{4}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *UpdateDutiesReq) GetId() uint64 {
@@ -485,7 +485,7 @@ type UpdateRequirementsReq struct {
 
 func (x *UpdateRequirementsReq) Reset() {
 	*x = UpdateRequirementsReq{}
-	mi := &file_api_zhipin_position_proto_msgTypes[5]
+	mi := &file_zhipin_position_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -497,7 +497,7 @@ func (x *UpdateRequirementsReq) String() string {
 func (*UpdateRequirementsReq) ProtoMessage() {}
 
 func (x *UpdateRequirementsReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_position_proto_msgTypes[5]
+	mi := &file_zhipin_position_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -510,7 +510,7 @@ func (x *UpdateRequirementsReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateRequirementsReq.ProtoReflect.Descriptor instead.
 func (*UpdateRequirementsReq) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{5}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *UpdateRequirementsReq) GetId() uint64 {
@@ -537,7 +537,7 @@ type UpdateMatchRateReq struct {
 
 func (x *UpdateMatchRateReq) Reset() {
 	*x = UpdateMatchRateReq{}
-	mi := &file_api_zhipin_position_proto_msgTypes[6]
+	mi := &file_zhipin_position_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -549,7 +549,7 @@ func (x *UpdateMatchRateReq) String() string {
 func (*UpdateMatchRateReq) ProtoMessage() {}
 
 func (x *UpdateMatchRateReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_position_proto_msgTypes[6]
+	mi := &file_zhipin_position_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -562,7 +562,7 @@ func (x *UpdateMatchRateReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateMatchRateReq.ProtoReflect.Descriptor instead.
 func (*UpdateMatchRateReq) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{6}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *UpdateMatchRateReq) GetId() uint64 {
@@ -589,7 +589,7 @@ type UpdateNotesReq struct {
 
 func (x *UpdateNotesReq) Reset() {
 	*x = UpdateNotesReq{}
-	mi := &file_api_zhipin_position_proto_msgTypes[7]
+	mi := &file_zhipin_position_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -601,7 +601,7 @@ func (x *UpdateNotesReq) String() string {
 func (*UpdateNotesReq) ProtoMessage() {}
 
 func (x *UpdateNotesReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_position_proto_msgTypes[7]
+	mi := &file_zhipin_position_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -614,7 +614,7 @@ func (x *UpdateNotesReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateNotesReq.ProtoReflect.Descriptor instead.
 func (*UpdateNotesReq) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{7}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *UpdateNotesReq) GetId() uint64 {
@@ -641,7 +641,7 @@ type UpdateRecruiterReq struct {
 
 func (x *UpdateRecruiterReq) Reset() {
 	*x = UpdateRecruiterReq{}
-	mi := &file_api_zhipin_position_proto_msgTypes[8]
+	mi := &file_zhipin_position_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -653,7 +653,7 @@ func (x *UpdateRecruiterReq) String() string {
 func (*UpdateRecruiterReq) ProtoMessage() {}
 
 func (x *UpdateRecruiterReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_position_proto_msgTypes[8]
+	mi := &file_zhipin_position_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -666,7 +666,7 @@ func (x *UpdateRecruiterReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateRecruiterReq.ProtoReflect.Descriptor instead.
 func (*UpdateRecruiterReq) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{8}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *UpdateRecruiterReq) GetId() uint64 {
@@ -692,7 +692,7 @@ type GetPositionReq struct {
 
 func (x *GetPositionReq) Reset() {
 	*x = GetPositionReq{}
-	mi := &file_api_zhipin_position_proto_msgTypes[9]
+	mi := &file_zhipin_position_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -704,7 +704,7 @@ func (x *GetPositionReq) String() string {
 func (*GetPositionReq) ProtoMessage() {}
 
 func (x *GetPositionReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_position_proto_msgTypes[9]
+	mi := &file_zhipin_position_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -717,7 +717,7 @@ func (x *GetPositionReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPositionReq.ProtoReflect.Descriptor instead.
 func (*GetPositionReq) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{9}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GetPositionReq) GetId() uint64 {
@@ -736,7 +736,7 @@ type GetPositionByJobIdReq struct {
 
 func (x *GetPositionByJobIdReq) Reset() {
 	*x = GetPositionByJobIdReq{}
-	mi := &file_api_zhipin_position_proto_msgTypes[10]
+	mi := &file_zhipin_position_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -748,7 +748,7 @@ func (x *GetPositionByJobIdReq) String() string {
 func (*GetPositionByJobIdReq) ProtoMessage() {}
 
 func (x *GetPositionByJobIdReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_position_proto_msgTypes[10]
+	mi := &file_zhipin_position_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -761,7 +761,7 @@ func (x *GetPositionByJobIdReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPositionByJobIdReq.ProtoReflect.Descriptor instead.
 func (*GetPositionByJobIdReq) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{10}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *GetPositionByJobIdReq) GetJobId() string {
@@ -782,7 +782,7 @@ type ListPositionsReq struct {
 
 func (x *ListPositionsReq) Reset() {
 	*x = ListPositionsReq{}
-	mi := &file_api_zhipin_position_proto_msgTypes[11]
+	mi := &file_zhipin_position_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -794,7 +794,7 @@ func (x *ListPositionsReq) String() string {
 func (*ListPositionsReq) ProtoMessage() {}
 
 func (x *ListPositionsReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_position_proto_msgTypes[11]
+	mi := &file_zhipin_position_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -807,7 +807,7 @@ func (x *ListPositionsReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListPositionsReq.ProtoReflect.Descriptor instead.
 func (*ListPositionsReq) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{11}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ListPositionsReq) GetStatus() int32 {
@@ -840,7 +840,7 @@ type CheckJobIdReq struct {
 
 func (x *CheckJobIdReq) Reset() {
 	*x = CheckJobIdReq{}
-	mi := &file_api_zhipin_position_proto_msgTypes[12]
+	mi := &file_zhipin_position_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -852,7 +852,7 @@ func (x *CheckJobIdReq) String() string {
 func (*CheckJobIdReq) ProtoMessage() {}
 
 func (x *CheckJobIdReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_position_proto_msgTypes[12]
+	mi := &file_zhipin_position_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -865,7 +865,7 @@ func (x *CheckJobIdReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckJobIdReq.ProtoReflect.Descriptor instead.
 func (*CheckJobIdReq) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{12}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *CheckJobIdReq) GetJobId() string {
@@ -886,7 +886,7 @@ type CheckJobIdResp struct {
 
 func (x *CheckJobIdResp) Reset() {
 	*x = CheckJobIdResp{}
-	mi := &file_api_zhipin_position_proto_msgTypes[13]
+	mi := &file_zhipin_position_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -898,7 +898,7 @@ func (x *CheckJobIdResp) String() string {
 func (*CheckJobIdResp) ProtoMessage() {}
 
 func (x *CheckJobIdResp) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_position_proto_msgTypes[13]
+	mi := &file_zhipin_position_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -911,7 +911,7 @@ func (x *CheckJobIdResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckJobIdResp.ProtoReflect.Descriptor instead.
 func (*CheckJobIdResp) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{13}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *CheckJobIdResp) GetExists() bool {
@@ -944,7 +944,7 @@ type BatchCheckJobIdsReq struct {
 
 func (x *BatchCheckJobIdsReq) Reset() {
 	*x = BatchCheckJobIdsReq{}
-	mi := &file_api_zhipin_position_proto_msgTypes[14]
+	mi := &file_zhipin_position_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -956,7 +956,7 @@ func (x *BatchCheckJobIdsReq) String() string {
 func (*BatchCheckJobIdsReq) ProtoMessage() {}
 
 func (x *BatchCheckJobIdsReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_position_proto_msgTypes[14]
+	mi := &file_zhipin_position_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -969,7 +969,7 @@ func (x *BatchCheckJobIdsReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchCheckJobIdsReq.ProtoReflect.Descriptor instead.
 func (*BatchCheckJobIdsReq) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{14}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *BatchCheckJobIdsReq) GetJobIds() []string {
@@ -988,7 +988,7 @@ type BatchCheckJobIdsResp struct {
 
 func (x *BatchCheckJobIdsResp) Reset() {
 	*x = BatchCheckJobIdsResp{}
-	mi := &file_api_zhipin_position_proto_msgTypes[15]
+	mi := &file_zhipin_position_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1000,7 +1000,7 @@ func (x *BatchCheckJobIdsResp) String() string {
 func (*BatchCheckJobIdsResp) ProtoMessage() {}
 
 func (x *BatchCheckJobIdsResp) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_position_proto_msgTypes[15]
+	mi := &file_zhipin_position_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1013,7 +1013,7 @@ func (x *BatchCheckJobIdsResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchCheckJobIdsResp.ProtoReflect.Descriptor instead.
 func (*BatchCheckJobIdsResp) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{15}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *BatchCheckJobIdsResp) GetResults() []*JobIdCheckResult {
@@ -1035,7 +1035,7 @@ type JobIdCheckResult struct {
 
 func (x *JobIdCheckResult) Reset() {
 	*x = JobIdCheckResult{}
-	mi := &file_api_zhipin_position_proto_msgTypes[16]
+	mi := &file_zhipin_position_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1047,7 +1047,7 @@ func (x *JobIdCheckResult) String() string {
 func (*JobIdCheckResult) ProtoMessage() {}
 
 func (x *JobIdCheckResult) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_position_proto_msgTypes[16]
+	mi := &file_zhipin_position_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1060,7 +1060,7 @@ func (x *JobIdCheckResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JobIdCheckResult.ProtoReflect.Descriptor instead.
 func (*JobIdCheckResult) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{16}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *JobIdCheckResult) GetJobId() string {
@@ -1100,7 +1100,7 @@ type ListStalePositionsReq struct {
 
 func (x *ListStalePositionsReq) Reset() {
 	*x = ListStalePositionsReq{}
-	mi := &file_api_zhipin_position_proto_msgTypes[17]
+	mi := &file_zhipin_position_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1112,7 +1112,7 @@ func (x *ListStalePositionsReq) String() string {
 func (*ListStalePositionsReq) ProtoMessage() {}
 
 func (x *ListStalePositionsReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_position_proto_msgTypes[17]
+	mi := &file_zhipin_position_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1125,7 +1125,7 @@ func (x *ListStalePositionsReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListStalePositionsReq.ProtoReflect.Descriptor instead.
 func (*ListStalePositionsReq) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{17}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *ListStalePositionsReq) GetStaleHours() int32 {
@@ -1143,7 +1143,7 @@ type ListNeedReplyPositionsReq struct {
 
 func (x *ListNeedReplyPositionsReq) Reset() {
 	*x = ListNeedReplyPositionsReq{}
-	mi := &file_api_zhipin_position_proto_msgTypes[18]
+	mi := &file_zhipin_position_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1155,7 +1155,7 @@ func (x *ListNeedReplyPositionsReq) String() string {
 func (*ListNeedReplyPositionsReq) ProtoMessage() {}
 
 func (x *ListNeedReplyPositionsReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_position_proto_msgTypes[18]
+	mi := &file_zhipin_position_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1168,7 +1168,7 @@ func (x *ListNeedReplyPositionsReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListNeedReplyPositionsReq.ProtoReflect.Descriptor instead.
 func (*ListNeedReplyPositionsReq) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{18}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{18}
 }
 
 type ListNeedResendPositionsReq struct {
@@ -1180,7 +1180,7 @@ type ListNeedResendPositionsReq struct {
 
 func (x *ListNeedResendPositionsReq) Reset() {
 	*x = ListNeedResendPositionsReq{}
-	mi := &file_api_zhipin_position_proto_msgTypes[19]
+	mi := &file_zhipin_position_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1192,7 +1192,7 @@ func (x *ListNeedResendPositionsReq) String() string {
 func (*ListNeedResendPositionsReq) ProtoMessage() {}
 
 func (x *ListNeedResendPositionsReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_position_proto_msgTypes[19]
+	mi := &file_zhipin_position_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1205,7 +1205,7 @@ func (x *ListNeedResendPositionsReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListNeedResendPositionsReq.ProtoReflect.Descriptor instead.
 func (*ListNeedResendPositionsReq) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{19}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *ListNeedResendPositionsReq) GetLatestResumeVersion() string {
@@ -1225,7 +1225,7 @@ type UpdateEncBossIdReq struct {
 
 func (x *UpdateEncBossIdReq) Reset() {
 	*x = UpdateEncBossIdReq{}
-	mi := &file_api_zhipin_position_proto_msgTypes[20]
+	mi := &file_zhipin_position_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1237,7 +1237,7 @@ func (x *UpdateEncBossIdReq) String() string {
 func (*UpdateEncBossIdReq) ProtoMessage() {}
 
 func (x *UpdateEncBossIdReq) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_position_proto_msgTypes[20]
+	mi := &file_zhipin_position_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1250,7 +1250,7 @@ func (x *UpdateEncBossIdReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateEncBossIdReq.ProtoReflect.Descriptor instead.
 func (*UpdateEncBossIdReq) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{20}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *UpdateEncBossIdReq) GetId() uint64 {
@@ -1296,7 +1296,7 @@ type PositionResp struct {
 
 func (x *PositionResp) Reset() {
 	*x = PositionResp{}
-	mi := &file_api_zhipin_position_proto_msgTypes[21]
+	mi := &file_zhipin_position_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1308,7 +1308,7 @@ func (x *PositionResp) String() string {
 func (*PositionResp) ProtoMessage() {}
 
 func (x *PositionResp) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_position_proto_msgTypes[21]
+	mi := &file_zhipin_position_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1321,7 +1321,7 @@ func (x *PositionResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PositionResp.ProtoReflect.Descriptor instead.
 func (*PositionResp) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{21}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *PositionResp) GetId() uint64 {
@@ -1474,7 +1474,7 @@ func (x *PositionResp) GetRequirements() string {
 type PositionDetailResp struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	Position       *PositionResp          `protobuf:"bytes,1,opt,name=position,proto3" json:"position,omitempty"`
-	MatchItems     []*MatchItemResp       `protobuf:"bytes,2,rep,name=match_items,json=matchItems,proto3" json:"match_items,omitempty"`
+	MatchItems     []*RequirementItemResp `protobuf:"bytes,2,rep,name=match_items,json=matchItems,proto3" json:"match_items,omitempty"`
 	Communications []*CommunicationResp   `protobuf:"bytes,3,rep,name=communications,proto3" json:"communications,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -1482,7 +1482,7 @@ type PositionDetailResp struct {
 
 func (x *PositionDetailResp) Reset() {
 	*x = PositionDetailResp{}
-	mi := &file_api_zhipin_position_proto_msgTypes[22]
+	mi := &file_zhipin_position_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1494,7 +1494,7 @@ func (x *PositionDetailResp) String() string {
 func (*PositionDetailResp) ProtoMessage() {}
 
 func (x *PositionDetailResp) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_position_proto_msgTypes[22]
+	mi := &file_zhipin_position_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1507,7 +1507,7 @@ func (x *PositionDetailResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PositionDetailResp.ProtoReflect.Descriptor instead.
 func (*PositionDetailResp) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{22}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *PositionDetailResp) GetPosition() *PositionResp {
@@ -1517,7 +1517,7 @@ func (x *PositionDetailResp) GetPosition() *PositionResp {
 	return nil
 }
 
-func (x *PositionDetailResp) GetMatchItems() []*MatchItemResp {
+func (x *PositionDetailResp) GetMatchItems() []*RequirementItemResp {
 	if x != nil {
 		return x.MatchItems
 	}
@@ -1541,7 +1541,7 @@ type ListPositionsResp struct {
 
 func (x *ListPositionsResp) Reset() {
 	*x = ListPositionsResp{}
-	mi := &file_api_zhipin_position_proto_msgTypes[23]
+	mi := &file_zhipin_position_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1553,7 +1553,7 @@ func (x *ListPositionsResp) String() string {
 func (*ListPositionsResp) ProtoMessage() {}
 
 func (x *ListPositionsResp) ProtoReflect() protoreflect.Message {
-	mi := &file_api_zhipin_position_proto_msgTypes[23]
+	mi := &file_zhipin_position_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1566,7 +1566,7 @@ func (x *ListPositionsResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListPositionsResp.ProtoReflect.Descriptor instead.
 func (*ListPositionsResp) Descriptor() ([]byte, []int) {
-	return file_api_zhipin_position_proto_rawDescGZIP(), []int{23}
+	return file_zhipin_position_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *ListPositionsResp) GetItems() []*PositionResp {
@@ -1583,12 +1583,12 @@ func (x *ListPositionsResp) GetTotal() int32 {
 	return 0
 }
 
-var File_api_zhipin_position_proto protoreflect.FileDescriptor
+var File_zhipin_position_proto protoreflect.FileDescriptor
 
-const file_api_zhipin_position_proto_rawDesc = "" +
+const file_zhipin_position_proto_rawDesc = "" +
 	"\n" +
-	"\x19api/zhipin/position.proto\x12\n" +
-	"api.zhipin\x1a\x1cgoogle/api/annotations.proto\x1a\x1bapi/zhipin/match_item.proto\x1a\x1eapi/zhipin/communication.proto\"\xcd\x03\n" +
+	"\x15zhipin/position.proto\x12\n" +
+	"api.zhipin\x1a\x1cgoogle/api/annotations.proto\x1a\x1dzhipin/requirement_item.proto\x1a\x1azhipin/communication.proto\"\xd3\x03\n" +
 	"\x11CreatePositionReq\x12\x15\n" +
 	"\x06job_id\x18\x01 \x01(\tR\x05jobId\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x18\n" +
@@ -1606,8 +1606,8 @@ const file_api_zhipin_position_proto_rawDesc = "" +
 	"\tis_hunter\x18\v \x01(\bR\bisHunter\x12\x16\n" +
 	"\x06duties\x18\f \x01(\tR\x06duties\x12\"\n" +
 	"\frequirements\x18\r \x01(\tR\frequirements\x12\x14\n" +
-	"\x05notes\x18\x0e \x01(\tR\x05notes\x12;\n" +
-	"\vmatch_items\x18\x0f \x03(\v2\x1a.api.zhipin.MatchItemInputR\n" +
+	"\x05notes\x18\x0e \x01(\tR\x05notes\x12A\n" +
+	"\vmatch_items\x18\x0f \x03(\v2 .api.zhipin.RequirementItemInputR\n" +
 	"matchItems\"\x82\x01\n" +
 	"\x0fUpdateSalaryReq\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12!\n" +
@@ -1700,10 +1700,10 @@ const file_api_zhipin_position_proto_rawDesc = "" +
 	"\vlast_resume\x18\x13 \x01(\tR\n" +
 	"lastResume\x12\x16\n" +
 	"\x06duties\x18\x14 \x01(\tR\x06duties\x12\"\n" +
-	"\frequirements\x18\x15 \x01(\tR\frequirements\"\xcd\x01\n" +
+	"\frequirements\x18\x15 \x01(\tR\frequirements\"\xd3\x01\n" +
 	"\x12PositionDetailResp\x124\n" +
-	"\bposition\x18\x01 \x01(\v2\x18.api.zhipin.PositionRespR\bposition\x12:\n" +
-	"\vmatch_items\x18\x02 \x03(\v2\x19.api.zhipin.MatchItemRespR\n" +
+	"\bposition\x18\x01 \x01(\v2\x18.api.zhipin.PositionRespR\bposition\x12@\n" +
+	"\vmatch_items\x18\x02 \x03(\v2\x1f.api.zhipin.RequirementItemRespR\n" +
 	"matchItems\x12E\n" +
 	"\x0ecommunications\x18\x03 \x03(\v2\x1d.api.zhipin.CommunicationRespR\x0ecommunications\"Y\n" +
 	"\x11ListPositionsResp\x12.\n" +
@@ -1744,20 +1744,20 @@ const file_api_zhipin_position_proto_rawDesc = "" +
 	"\x0fUpdateEncBossId\x12\x1e.api.zhipin.UpdateEncBossIdReq\x1a\x18.api.zhipin.PositionResp\")\x82\xd3\xe4\x93\x02#:\x01*\x1a\x1e/api/position/{id}/enc-boss-idBIZGgithub.com/yylego/smart-employee-zhipin/zhipin-kratos/api/zhipin;zhipinb\x06proto3"
 
 var (
-	file_api_zhipin_position_proto_rawDescOnce sync.Once
-	file_api_zhipin_position_proto_rawDescData []byte
+	file_zhipin_position_proto_rawDescOnce sync.Once
+	file_zhipin_position_proto_rawDescData []byte
 )
 
-func file_api_zhipin_position_proto_rawDescGZIP() []byte {
-	file_api_zhipin_position_proto_rawDescOnce.Do(func() {
-		file_api_zhipin_position_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_api_zhipin_position_proto_rawDesc), len(file_api_zhipin_position_proto_rawDesc)))
+func file_zhipin_position_proto_rawDescGZIP() []byte {
+	file_zhipin_position_proto_rawDescOnce.Do(func() {
+		file_zhipin_position_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_zhipin_position_proto_rawDesc), len(file_zhipin_position_proto_rawDesc)))
 	})
-	return file_api_zhipin_position_proto_rawDescData
+	return file_zhipin_position_proto_rawDescData
 }
 
-var file_api_zhipin_position_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_api_zhipin_position_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
-var file_api_zhipin_position_proto_goTypes = []any{
+var file_zhipin_position_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_zhipin_position_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_zhipin_position_proto_goTypes = []any{
 	(PositionStatus)(0),                // 0: api.zhipin.PositionStatus
 	(*CreatePositionReq)(nil),          // 1: api.zhipin.CreatePositionReq
 	(*UpdateSalaryReq)(nil),            // 2: api.zhipin.UpdateSalaryReq
@@ -1783,15 +1783,15 @@ var file_api_zhipin_position_proto_goTypes = []any{
 	(*PositionResp)(nil),               // 22: api.zhipin.PositionResp
 	(*PositionDetailResp)(nil),         // 23: api.zhipin.PositionDetailResp
 	(*ListPositionsResp)(nil),          // 24: api.zhipin.ListPositionsResp
-	(*MatchItemInput)(nil),             // 25: api.zhipin.MatchItemInput
-	(*MatchItemResp)(nil),              // 26: api.zhipin.MatchItemResp
+	(*RequirementItemInput)(nil),       // 25: api.zhipin.RequirementItemInput
+	(*RequirementItemResp)(nil),        // 26: api.zhipin.RequirementItemResp
 	(*CommunicationResp)(nil),          // 27: api.zhipin.CommunicationResp
 }
-var file_api_zhipin_position_proto_depIdxs = []int32{
-	25, // 0: api.zhipin.CreatePositionReq.match_items:type_name -> api.zhipin.MatchItemInput
+var file_zhipin_position_proto_depIdxs = []int32{
+	25, // 0: api.zhipin.CreatePositionReq.match_items:type_name -> api.zhipin.RequirementItemInput
 	17, // 1: api.zhipin.BatchCheckJobIdsResp.results:type_name -> api.zhipin.JobIdCheckResult
 	22, // 2: api.zhipin.PositionDetailResp.position:type_name -> api.zhipin.PositionResp
-	26, // 3: api.zhipin.PositionDetailResp.match_items:type_name -> api.zhipin.MatchItemResp
+	26, // 3: api.zhipin.PositionDetailResp.match_items:type_name -> api.zhipin.RequirementItemResp
 	27, // 4: api.zhipin.PositionDetailResp.communications:type_name -> api.zhipin.CommunicationResp
 	22, // 5: api.zhipin.ListPositionsResp.items:type_name -> api.zhipin.PositionResp
 	1,  // 6: api.zhipin.PositionService.CreatePosition:input_type -> api.zhipin.CreatePositionReq
@@ -1837,29 +1837,29 @@ var file_api_zhipin_position_proto_depIdxs = []int32{
 	0,  // [0:6] is the sub-list for field type_name
 }
 
-func init() { file_api_zhipin_position_proto_init() }
-func file_api_zhipin_position_proto_init() {
-	if File_api_zhipin_position_proto != nil {
+func init() { file_zhipin_position_proto_init() }
+func file_zhipin_position_proto_init() {
+	if File_zhipin_position_proto != nil {
 		return
 	}
-	file_api_zhipin_match_item_proto_init()
-	file_api_zhipin_communication_proto_init()
+	file_zhipin_requirement_item_proto_init()
+	file_zhipin_communication_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zhipin_position_proto_rawDesc), len(file_api_zhipin_position_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_zhipin_position_proto_rawDesc), len(file_zhipin_position_proto_rawDesc)),
 			NumEnums:      1,
 			NumMessages:   24,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_api_zhipin_position_proto_goTypes,
-		DependencyIndexes: file_api_zhipin_position_proto_depIdxs,
-		EnumInfos:         file_api_zhipin_position_proto_enumTypes,
-		MessageInfos:      file_api_zhipin_position_proto_msgTypes,
+		GoTypes:           file_zhipin_position_proto_goTypes,
+		DependencyIndexes: file_zhipin_position_proto_depIdxs,
+		EnumInfos:         file_zhipin_position_proto_enumTypes,
+		MessageInfos:      file_zhipin_position_proto_msgTypes,
 	}.Build()
-	File_api_zhipin_position_proto = out.File
-	file_api_zhipin_position_proto_goTypes = nil
-	file_api_zhipin_position_proto_depIdxs = nil
+	File_zhipin_position_proto = out.File
+	file_zhipin_position_proto_goTypes = nil
+	file_zhipin_position_proto_depIdxs = nil
 }

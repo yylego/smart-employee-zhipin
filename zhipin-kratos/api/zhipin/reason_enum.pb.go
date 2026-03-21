@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        v7.34.0
-// source: api/zhipin/reason_enum.proto
+// source: zhipin/reason_enum.proto
 
 package zhipin
 
@@ -79,11 +79,11 @@ func (x ErrorReason) String() string {
 }
 
 func (ErrorReason) Descriptor() protoreflect.EnumDescriptor {
-	return file_api_zhipin_reason_enum_proto_enumTypes[0].Descriptor()
+	return file_zhipin_reason_enum_proto_enumTypes[0].Descriptor()
 }
 
 func (ErrorReason) Type() protoreflect.EnumType {
-	return &file_api_zhipin_reason_enum_proto_enumTypes[0]
+	return &file_zhipin_reason_enum_proto_enumTypes[0]
 }
 
 func (x ErrorReason) Number() protoreflect.EnumNumber {
@@ -92,14 +92,14 @@ func (x ErrorReason) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ErrorReason.Descriptor instead.
 func (ErrorReason) EnumDescriptor() ([]byte, []int) {
-	return file_api_zhipin_reason_enum_proto_rawDescGZIP(), []int{0}
+	return file_zhipin_reason_enum_proto_rawDescGZIP(), []int{0}
 }
 
-var File_api_zhipin_reason_enum_proto protoreflect.FileDescriptor
+var File_zhipin_reason_enum_proto protoreflect.FileDescriptor
 
-const file_api_zhipin_reason_enum_proto_rawDesc = "" +
+const file_zhipin_reason_enum_proto_rawDesc = "" +
 	"\n" +
-	"\x1capi/zhipin/reason_enum.proto\x12\n" +
+	"\x18zhipin/reason_enum.proto\x12\n" +
 	"api.zhipin\x1a\x13errors/errors.proto*\xbe\x02\n" +
 	"\vErrorReason\x12\x11\n" +
 	"\aUNKNOWN\x10\x00\x1a\x04\xa8E\xf4\x03\x12\x15\n" +
@@ -115,22 +115,22 @@ const file_api_zhipin_reason_enum_proto_rawDesc = "" +
 	"\x10DUPLICATE_JOB_ID\x10Ԇ\x03\x1a\x04\xa8E\x99\x03\x1a\x04\xa0E\xf4\x03BIZGgithub.com/yylego/smart-employee-zhipin/zhipin-kratos/api/zhipin;zhipinb\x06proto3"
 
 var (
-	file_api_zhipin_reason_enum_proto_rawDescOnce sync.Once
-	file_api_zhipin_reason_enum_proto_rawDescData []byte
+	file_zhipin_reason_enum_proto_rawDescOnce sync.Once
+	file_zhipin_reason_enum_proto_rawDescData []byte
 )
 
-func file_api_zhipin_reason_enum_proto_rawDescGZIP() []byte {
-	file_api_zhipin_reason_enum_proto_rawDescOnce.Do(func() {
-		file_api_zhipin_reason_enum_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_api_zhipin_reason_enum_proto_rawDesc), len(file_api_zhipin_reason_enum_proto_rawDesc)))
+func file_zhipin_reason_enum_proto_rawDescGZIP() []byte {
+	file_zhipin_reason_enum_proto_rawDescOnce.Do(func() {
+		file_zhipin_reason_enum_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_zhipin_reason_enum_proto_rawDesc), len(file_zhipin_reason_enum_proto_rawDesc)))
 	})
-	return file_api_zhipin_reason_enum_proto_rawDescData
+	return file_zhipin_reason_enum_proto_rawDescData
 }
 
-var file_api_zhipin_reason_enum_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_api_zhipin_reason_enum_proto_goTypes = []any{
+var file_zhipin_reason_enum_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_zhipin_reason_enum_proto_goTypes = []any{
 	(ErrorReason)(0), // 0: api.zhipin.ErrorReason
 }
-var file_api_zhipin_reason_enum_proto_depIdxs = []int32{
+var file_zhipin_reason_enum_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
 	0, // [0:0] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -138,26 +138,26 @@ var file_api_zhipin_reason_enum_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_api_zhipin_reason_enum_proto_init() }
-func file_api_zhipin_reason_enum_proto_init() {
-	if File_api_zhipin_reason_enum_proto != nil {
+func init() { file_zhipin_reason_enum_proto_init() }
+func file_zhipin_reason_enum_proto_init() {
+	if File_zhipin_reason_enum_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_zhipin_reason_enum_proto_rawDesc), len(file_api_zhipin_reason_enum_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_zhipin_reason_enum_proto_rawDesc), len(file_zhipin_reason_enum_proto_rawDesc)),
 			NumEnums:      1,
 			NumMessages:   0,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_api_zhipin_reason_enum_proto_goTypes,
-		DependencyIndexes: file_api_zhipin_reason_enum_proto_depIdxs,
-		EnumInfos:         file_api_zhipin_reason_enum_proto_enumTypes,
+		GoTypes:           file_zhipin_reason_enum_proto_goTypes,
+		DependencyIndexes: file_zhipin_reason_enum_proto_depIdxs,
+		EnumInfos:         file_zhipin_reason_enum_proto_enumTypes,
 	}.Build()
-	File_api_zhipin_reason_enum_proto = out.File
-	file_api_zhipin_reason_enum_proto_goTypes = nil
-	file_api_zhipin_reason_enum_proto_depIdxs = nil
+	File_zhipin_reason_enum_proto = out.File
+	file_zhipin_reason_enum_proto_goTypes = nil
+	file_zhipin_reason_enum_proto_depIdxs = nil
 }
