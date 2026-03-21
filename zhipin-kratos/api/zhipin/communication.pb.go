@@ -10,7 +10,6 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -23,92 +22,31 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type EventType int32
-
-const (
-	EventType_EVENT_TYPE_UNKNOWN      EventType = 0
-	EventType_EVENT_TYPE_MSG_SENT     EventType = 1
-	EventType_EVENT_TYPE_MSG_RECEIVED EventType = 2
-	EventType_EVENT_TYPE_RESUME_SENT  EventType = 3
-	EventType_EVENT_TYPE_CHAT_LIMITED EventType = 4
-	EventType_EVENT_TYPE_INTERVIEW    EventType = 5
-	EventType_EVENT_TYPE_OFFER        EventType = 6
-	EventType_EVENT_TYPE_REJECTED     EventType = 7
-)
-
-// Enum value maps for EventType.
-var (
-	EventType_name = map[int32]string{
-		0: "EVENT_TYPE_UNKNOWN",
-		1: "EVENT_TYPE_MSG_SENT",
-		2: "EVENT_TYPE_MSG_RECEIVED",
-		3: "EVENT_TYPE_RESUME_SENT",
-		4: "EVENT_TYPE_CHAT_LIMITED",
-		5: "EVENT_TYPE_INTERVIEW",
-		6: "EVENT_TYPE_OFFER",
-		7: "EVENT_TYPE_REJECTED",
-	}
-	EventType_value = map[string]int32{
-		"EVENT_TYPE_UNKNOWN":      0,
-		"EVENT_TYPE_MSG_SENT":     1,
-		"EVENT_TYPE_MSG_RECEIVED": 2,
-		"EVENT_TYPE_RESUME_SENT":  3,
-		"EVENT_TYPE_CHAT_LIMITED": 4,
-		"EVENT_TYPE_INTERVIEW":    5,
-		"EVENT_TYPE_OFFER":        6,
-		"EVENT_TYPE_REJECTED":     7,
-	}
-)
-
-func (x EventType) Enum() *EventType {
-	p := new(EventType)
-	*p = x
-	return p
-}
-
-func (x EventType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (EventType) Descriptor() protoreflect.EnumDescriptor {
-	return file_zhipin_communication_proto_enumTypes[0].Descriptor()
-}
-
-func (EventType) Type() protoreflect.EnumType {
-	return &file_zhipin_communication_proto_enumTypes[0]
-}
-
-func (x EventType) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use EventType.Descriptor instead.
-func (EventType) EnumDescriptor() ([]byte, []int) {
-	return file_zhipin_communication_proto_rawDescGZIP(), []int{0}
-}
-
-type RecordMsgSentReq struct {
+type ChatMessage struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	PositionId    uint64                 `protobuf:"varint,1,opt,name=position_id,json=positionId,proto3" json:"position_id,omitempty"`
-	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
+	Direction     int32                  `protobuf:"varint,1,opt,name=direction,proto3" json:"direction,omitempty"`                             // 0=me 1=them
+	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`                                  // message text
+	Timestamp     int64                  `protobuf:"varint,3,opt,name=timestamp,proto3" json:"timestamp,omitempty"`                             // unix seconds
+	IsResume      bool                   `protobuf:"varint,4,opt,name=is_resume,json=isResume,proto3" json:"is_resume,omitempty"`               // is this a resume message
+	ResumeVersion string                 `protobuf:"bytes,5,opt,name=resume_version,json=resumeVersion,proto3" json:"resume_version,omitempty"` // resume filename if is_resume=true
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RecordMsgSentReq) Reset() {
-	*x = RecordMsgSentReq{}
+func (x *ChatMessage) Reset() {
+	*x = ChatMessage{}
 	mi := &file_zhipin_communication_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RecordMsgSentReq) String() string {
+func (x *ChatMessage) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RecordMsgSentReq) ProtoMessage() {}
+func (*ChatMessage) ProtoMessage() {}
 
-func (x *RecordMsgSentReq) ProtoReflect() protoreflect.Message {
+func (x *ChatMessage) ProtoReflect() protoreflect.Message {
 	mi := &file_zhipin_communication_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -120,435 +58,69 @@ func (x *RecordMsgSentReq) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RecordMsgSentReq.ProtoReflect.Descriptor instead.
-func (*RecordMsgSentReq) Descriptor() ([]byte, []int) {
+// Deprecated: Use ChatMessage.ProtoReflect.Descriptor instead.
+func (*ChatMessage) Descriptor() ([]byte, []int) {
 	return file_zhipin_communication_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *RecordMsgSentReq) GetPositionId() uint64 {
-	if x != nil {
-		return x.PositionId
-	}
-	return 0
-}
-
-func (x *RecordMsgSentReq) GetContent() string {
-	if x != nil {
-		return x.Content
-	}
-	return ""
-}
-
-type RecordMsgReceivedReq struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PositionId    uint64                 `protobuf:"varint,1,opt,name=position_id,json=positionId,proto3" json:"position_id,omitempty"`
-	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RecordMsgReceivedReq) Reset() {
-	*x = RecordMsgReceivedReq{}
-	mi := &file_zhipin_communication_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RecordMsgReceivedReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RecordMsgReceivedReq) ProtoMessage() {}
-
-func (x *RecordMsgReceivedReq) ProtoReflect() protoreflect.Message {
-	mi := &file_zhipin_communication_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RecordMsgReceivedReq.ProtoReflect.Descriptor instead.
-func (*RecordMsgReceivedReq) Descriptor() ([]byte, []int) {
-	return file_zhipin_communication_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *RecordMsgReceivedReq) GetPositionId() uint64 {
-	if x != nil {
-		return x.PositionId
-	}
-	return 0
-}
-
-func (x *RecordMsgReceivedReq) GetContent() string {
-	if x != nil {
-		return x.Content
-	}
-	return ""
-}
-
-type RecordResumeSentReq struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PositionId    uint64                 `protobuf:"varint,1,opt,name=position_id,json=positionId,proto3" json:"position_id,omitempty"`
-	ResumeVersion string                 `protobuf:"bytes,2,opt,name=resume_version,json=resumeVersion,proto3" json:"resume_version,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RecordResumeSentReq) Reset() {
-	*x = RecordResumeSentReq{}
-	mi := &file_zhipin_communication_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RecordResumeSentReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RecordResumeSentReq) ProtoMessage() {}
-
-func (x *RecordResumeSentReq) ProtoReflect() protoreflect.Message {
-	mi := &file_zhipin_communication_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RecordResumeSentReq.ProtoReflect.Descriptor instead.
-func (*RecordResumeSentReq) Descriptor() ([]byte, []int) {
-	return file_zhipin_communication_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *RecordResumeSentReq) GetPositionId() uint64 {
-	if x != nil {
-		return x.PositionId
-	}
-	return 0
-}
-
-func (x *RecordResumeSentReq) GetResumeVersion() string {
-	if x != nil {
-		return x.ResumeVersion
-	}
-	return ""
-}
-
-type RecordChatLimitedReq struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PositionId    uint64                 `protobuf:"varint,1,opt,name=position_id,json=positionId,proto3" json:"position_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RecordChatLimitedReq) Reset() {
-	*x = RecordChatLimitedReq{}
-	mi := &file_zhipin_communication_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RecordChatLimitedReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RecordChatLimitedReq) ProtoMessage() {}
-
-func (x *RecordChatLimitedReq) ProtoReflect() protoreflect.Message {
-	mi := &file_zhipin_communication_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RecordChatLimitedReq.ProtoReflect.Descriptor instead.
-func (*RecordChatLimitedReq) Descriptor() ([]byte, []int) {
-	return file_zhipin_communication_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *RecordChatLimitedReq) GetPositionId() uint64 {
-	if x != nil {
-		return x.PositionId
-	}
-	return 0
-}
-
-type RecordInterviewReq struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PositionId    uint64                 `protobuf:"varint,1,opt,name=position_id,json=positionId,proto3" json:"position_id,omitempty"`
-	InterviewTime *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=interview_time,json=interviewTime,proto3" json:"interview_time,omitempty"`
-	Notes         string                 `protobuf:"bytes,3,opt,name=notes,proto3" json:"notes,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RecordInterviewReq) Reset() {
-	*x = RecordInterviewReq{}
-	mi := &file_zhipin_communication_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RecordInterviewReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RecordInterviewReq) ProtoMessage() {}
-
-func (x *RecordInterviewReq) ProtoReflect() protoreflect.Message {
-	mi := &file_zhipin_communication_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RecordInterviewReq.ProtoReflect.Descriptor instead.
-func (*RecordInterviewReq) Descriptor() ([]byte, []int) {
-	return file_zhipin_communication_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *RecordInterviewReq) GetPositionId() uint64 {
-	if x != nil {
-		return x.PositionId
-	}
-	return 0
-}
-
-func (x *RecordInterviewReq) GetInterviewTime() *timestamppb.Timestamp {
-	if x != nil {
-		return x.InterviewTime
-	}
-	return nil
-}
-
-func (x *RecordInterviewReq) GetNotes() string {
-	if x != nil {
-		return x.Notes
-	}
-	return ""
-}
-
-type RecordRejectionReq struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PositionId    uint64                 `protobuf:"varint,1,opt,name=position_id,json=positionId,proto3" json:"position_id,omitempty"`
-	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RecordRejectionReq) Reset() {
-	*x = RecordRejectionReq{}
-	mi := &file_zhipin_communication_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RecordRejectionReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RecordRejectionReq) ProtoMessage() {}
-
-func (x *RecordRejectionReq) ProtoReflect() protoreflect.Message {
-	mi := &file_zhipin_communication_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RecordRejectionReq.ProtoReflect.Descriptor instead.
-func (*RecordRejectionReq) Descriptor() ([]byte, []int) {
-	return file_zhipin_communication_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *RecordRejectionReq) GetPositionId() uint64 {
-	if x != nil {
-		return x.PositionId
-	}
-	return 0
-}
-
-func (x *RecordRejectionReq) GetContent() string {
-	if x != nil {
-		return x.Content
-	}
-	return ""
-}
-
-type ListCommunicationsReq struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PositionId    uint64                 `protobuf:"varint,1,opt,name=position_id,json=positionId,proto3" json:"position_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListCommunicationsReq) Reset() {
-	*x = ListCommunicationsReq{}
-	mi := &file_zhipin_communication_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListCommunicationsReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListCommunicationsReq) ProtoMessage() {}
-
-func (x *ListCommunicationsReq) ProtoReflect() protoreflect.Message {
-	mi := &file_zhipin_communication_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListCommunicationsReq.ProtoReflect.Descriptor instead.
-func (*ListCommunicationsReq) Descriptor() ([]byte, []int) {
-	return file_zhipin_communication_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *ListCommunicationsReq) GetPositionId() uint64 {
-	if x != nil {
-		return x.PositionId
-	}
-	return 0
-}
-
-type CommunicationResp struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	PositionId    uint64                 `protobuf:"varint,2,opt,name=position_id,json=positionId,proto3" json:"position_id,omitempty"`
-	EventType     int32                  `protobuf:"varint,3,opt,name=event_type,json=eventType,proto3" json:"event_type,omitempty"`
-	EventTime     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=event_time,json=eventTime,proto3" json:"event_time,omitempty"`
-	Content       string                 `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`
-	Direction     int32                  `protobuf:"varint,6,opt,name=direction,proto3" json:"direction,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CommunicationResp) Reset() {
-	*x = CommunicationResp{}
-	mi := &file_zhipin_communication_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CommunicationResp) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CommunicationResp) ProtoMessage() {}
-
-func (x *CommunicationResp) ProtoReflect() protoreflect.Message {
-	mi := &file_zhipin_communication_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CommunicationResp.ProtoReflect.Descriptor instead.
-func (*CommunicationResp) Descriptor() ([]byte, []int) {
-	return file_zhipin_communication_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *CommunicationResp) GetId() uint64 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-func (x *CommunicationResp) GetPositionId() uint64 {
-	if x != nil {
-		return x.PositionId
-	}
-	return 0
-}
-
-func (x *CommunicationResp) GetEventType() int32 {
-	if x != nil {
-		return x.EventType
-	}
-	return 0
-}
-
-func (x *CommunicationResp) GetEventTime() *timestamppb.Timestamp {
-	if x != nil {
-		return x.EventTime
-	}
-	return nil
-}
-
-func (x *CommunicationResp) GetContent() string {
-	if x != nil {
-		return x.Content
-	}
-	return ""
-}
-
-func (x *CommunicationResp) GetDirection() int32 {
+func (x *ChatMessage) GetDirection() int32 {
 	if x != nil {
 		return x.Direction
 	}
 	return 0
 }
 
-type ListCommunicationsResp struct {
+func (x *ChatMessage) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *ChatMessage) GetTimestamp() int64 {
+	if x != nil {
+		return x.Timestamp
+	}
+	return 0
+}
+
+func (x *ChatMessage) GetIsResume() bool {
+	if x != nil {
+		return x.IsResume
+	}
+	return false
+}
+
+func (x *ChatMessage) GetResumeVersion() string {
+	if x != nil {
+		return x.ResumeVersion
+	}
+	return ""
+}
+
+type SyncChatReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Items         []*CommunicationResp   `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	PositionId    uint64                 `protobuf:"varint,1,opt,name=position_id,json=positionId,proto3" json:"position_id,omitempty"`
+	Messages      []*ChatMessage         `protobuf:"bytes,2,rep,name=messages,proto3" json:"messages,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListCommunicationsResp) Reset() {
-	*x = ListCommunicationsResp{}
-	mi := &file_zhipin_communication_proto_msgTypes[8]
+func (x *SyncChatReq) Reset() {
+	*x = SyncChatReq{}
+	mi := &file_zhipin_communication_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListCommunicationsResp) String() string {
+func (x *SyncChatReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListCommunicationsResp) ProtoMessage() {}
+func (*SyncChatReq) ProtoMessage() {}
 
-func (x *ListCommunicationsResp) ProtoReflect() protoreflect.Message {
-	mi := &file_zhipin_communication_proto_msgTypes[8]
+func (x *SyncChatReq) ProtoReflect() protoreflect.Message {
+	mi := &file_zhipin_communication_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -559,14 +131,177 @@ func (x *ListCommunicationsResp) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListCommunicationsResp.ProtoReflect.Descriptor instead.
-func (*ListCommunicationsResp) Descriptor() ([]byte, []int) {
-	return file_zhipin_communication_proto_rawDescGZIP(), []int{8}
+// Deprecated: Use SyncChatReq.ProtoReflect.Descriptor instead.
+func (*SyncChatReq) Descriptor() ([]byte, []int) {
+	return file_zhipin_communication_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *ListCommunicationsResp) GetItems() []*CommunicationResp {
+func (x *SyncChatReq) GetPositionId() uint64 {
 	if x != nil {
-		return x.Items
+		return x.PositionId
+	}
+	return 0
+}
+
+func (x *SyncChatReq) GetMessages() []*ChatMessage {
+	if x != nil {
+		return x.Messages
+	}
+	return nil
+}
+
+type SyncChatResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	LastCommAt    int64                  `protobuf:"varint,1,opt,name=last_comm_at,json=lastCommAt,proto3" json:"last_comm_at,omitempty"`    // extracted from messages
+	LastCommDir   int32                  `protobuf:"varint,2,opt,name=last_comm_dir,json=lastCommDir,proto3" json:"last_comm_dir,omitempty"` // extracted from messages
+	LastResume    string                 `protobuf:"bytes,3,opt,name=last_resume,json=lastResume,proto3" json:"last_resume,omitempty"`       // extracted from messages
+	MessageCount  int32                  `protobuf:"varint,4,opt,name=message_count,json=messageCount,proto3" json:"message_count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SyncChatResp) Reset() {
+	*x = SyncChatResp{}
+	mi := &file_zhipin_communication_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SyncChatResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SyncChatResp) ProtoMessage() {}
+
+func (x *SyncChatResp) ProtoReflect() protoreflect.Message {
+	mi := &file_zhipin_communication_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SyncChatResp.ProtoReflect.Descriptor instead.
+func (*SyncChatResp) Descriptor() ([]byte, []int) {
+	return file_zhipin_communication_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *SyncChatResp) GetLastCommAt() int64 {
+	if x != nil {
+		return x.LastCommAt
+	}
+	return 0
+}
+
+func (x *SyncChatResp) GetLastCommDir() int32 {
+	if x != nil {
+		return x.LastCommDir
+	}
+	return 0
+}
+
+func (x *SyncChatResp) GetLastResume() string {
+	if x != nil {
+		return x.LastResume
+	}
+	return ""
+}
+
+func (x *SyncChatResp) GetMessageCount() int32 {
+	if x != nil {
+		return x.MessageCount
+	}
+	return 0
+}
+
+type GetChatReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	PositionId    uint64                 `protobuf:"varint,1,opt,name=position_id,json=positionId,proto3" json:"position_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetChatReq) Reset() {
+	*x = GetChatReq{}
+	mi := &file_zhipin_communication_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetChatReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetChatReq) ProtoMessage() {}
+
+func (x *GetChatReq) ProtoReflect() protoreflect.Message {
+	mi := &file_zhipin_communication_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetChatReq.ProtoReflect.Descriptor instead.
+func (*GetChatReq) Descriptor() ([]byte, []int) {
+	return file_zhipin_communication_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GetChatReq) GetPositionId() uint64 {
+	if x != nil {
+		return x.PositionId
+	}
+	return 0
+}
+
+type GetChatResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Messages      []*ChatMessage         `protobuf:"bytes,1,rep,name=messages,proto3" json:"messages,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetChatResp) Reset() {
+	*x = GetChatResp{}
+	mi := &file_zhipin_communication_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetChatResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetChatResp) ProtoMessage() {}
+
+func (x *GetChatResp) ProtoReflect() protoreflect.Message {
+	mi := &file_zhipin_communication_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetChatResp.ProtoReflect.Descriptor instead.
+func (*GetChatResp) Descriptor() ([]byte, []int) {
+	return file_zhipin_communication_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetChatResp) GetMessages() []*ChatMessage {
+	if x != nil {
+		return x.Messages
 	}
 	return nil
 }
@@ -576,63 +311,33 @@ var File_zhipin_communication_proto protoreflect.FileDescriptor
 const file_zhipin_communication_proto_rawDesc = "" +
 	"\n" +
 	"\x1azhipin/communication.proto\x12\n" +
-	"api.zhipin\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"M\n" +
-	"\x10RecordMsgSentReq\x12\x1f\n" +
+	"api.zhipin\x1a\x1cgoogle/api/annotations.proto\"\xa7\x01\n" +
+	"\vChatMessage\x12\x1c\n" +
+	"\tdirection\x18\x01 \x01(\x05R\tdirection\x12\x18\n" +
+	"\acontent\x18\x02 \x01(\tR\acontent\x12\x1c\n" +
+	"\ttimestamp\x18\x03 \x01(\x03R\ttimestamp\x12\x1b\n" +
+	"\tis_resume\x18\x04 \x01(\bR\bisResume\x12%\n" +
+	"\x0eresume_version\x18\x05 \x01(\tR\rresumeVersion\"c\n" +
+	"\vSyncChatReq\x12\x1f\n" +
 	"\vposition_id\x18\x01 \x01(\x04R\n" +
-	"positionId\x12\x18\n" +
-	"\acontent\x18\x02 \x01(\tR\acontent\"Q\n" +
-	"\x14RecordMsgReceivedReq\x12\x1f\n" +
-	"\vposition_id\x18\x01 \x01(\x04R\n" +
-	"positionId\x12\x18\n" +
-	"\acontent\x18\x02 \x01(\tR\acontent\"]\n" +
-	"\x13RecordResumeSentReq\x12\x1f\n" +
-	"\vposition_id\x18\x01 \x01(\x04R\n" +
-	"positionId\x12%\n" +
-	"\x0eresume_version\x18\x02 \x01(\tR\rresumeVersion\"7\n" +
-	"\x14RecordChatLimitedReq\x12\x1f\n" +
-	"\vposition_id\x18\x01 \x01(\x04R\n" +
-	"positionId\"\x8e\x01\n" +
-	"\x12RecordInterviewReq\x12\x1f\n" +
-	"\vposition_id\x18\x01 \x01(\x04R\n" +
-	"positionId\x12A\n" +
-	"\x0einterview_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\rinterviewTime\x12\x14\n" +
-	"\x05notes\x18\x03 \x01(\tR\x05notes\"O\n" +
-	"\x12RecordRejectionReq\x12\x1f\n" +
-	"\vposition_id\x18\x01 \x01(\x04R\n" +
-	"positionId\x12\x18\n" +
-	"\acontent\x18\x02 \x01(\tR\acontent\"8\n" +
-	"\x15ListCommunicationsReq\x12\x1f\n" +
-	"\vposition_id\x18\x01 \x01(\x04R\n" +
-	"positionId\"\xd6\x01\n" +
-	"\x11CommunicationResp\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x1f\n" +
-	"\vposition_id\x18\x02 \x01(\x04R\n" +
-	"positionId\x12\x1d\n" +
+	"positionId\x123\n" +
+	"\bmessages\x18\x02 \x03(\v2\x17.api.zhipin.ChatMessageR\bmessages\"\x9a\x01\n" +
+	"\fSyncChatResp\x12 \n" +
+	"\flast_comm_at\x18\x01 \x01(\x03R\n" +
+	"lastCommAt\x12\"\n" +
+	"\rlast_comm_dir\x18\x02 \x01(\x05R\vlastCommDir\x12\x1f\n" +
+	"\vlast_resume\x18\x03 \x01(\tR\n" +
+	"lastResume\x12#\n" +
+	"\rmessage_count\x18\x04 \x01(\x05R\fmessageCount\"-\n" +
 	"\n" +
-	"event_type\x18\x03 \x01(\x05R\teventType\x129\n" +
-	"\n" +
-	"event_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\teventTime\x12\x18\n" +
-	"\acontent\x18\x05 \x01(\tR\acontent\x12\x1c\n" +
-	"\tdirection\x18\x06 \x01(\x05R\tdirection\"M\n" +
-	"\x16ListCommunicationsResp\x123\n" +
-	"\x05items\x18\x01 \x03(\v2\x1d.api.zhipin.CommunicationRespR\x05items*\xdb\x01\n" +
-	"\tEventType\x12\x16\n" +
-	"\x12EVENT_TYPE_UNKNOWN\x10\x00\x12\x17\n" +
-	"\x13EVENT_TYPE_MSG_SENT\x10\x01\x12\x1b\n" +
-	"\x17EVENT_TYPE_MSG_RECEIVED\x10\x02\x12\x1a\n" +
-	"\x16EVENT_TYPE_RESUME_SENT\x10\x03\x12\x1b\n" +
-	"\x17EVENT_TYPE_CHAT_LIMITED\x10\x04\x12\x18\n" +
-	"\x14EVENT_TYPE_INTERVIEW\x10\x05\x12\x14\n" +
-	"\x10EVENT_TYPE_OFFER\x10\x06\x12\x17\n" +
-	"\x13EVENT_TYPE_REJECTED\x10\a2\xd2\a\n" +
-	"\x14CommunicationService\x12}\n" +
-	"\rRecordMsgSent\x12\x1c.api.zhipin.RecordMsgSentReq\x1a\x1d.api.zhipin.CommunicationResp\"/\x82\xd3\xe4\x93\x02):\x01*\"$/api/position/{position_id}/msg-sent\x12\x89\x01\n" +
-	"\x11RecordMsgReceived\x12 .api.zhipin.RecordMsgReceivedReq\x1a\x1d.api.zhipin.CommunicationResp\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/api/position/{position_id}/msg-received\x12\x86\x01\n" +
-	"\x10RecordResumeSent\x12\x1f.api.zhipin.RecordResumeSentReq\x1a\x1d.api.zhipin.CommunicationResp\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/api/position/{position_id}/resume-sent\x12\x89\x01\n" +
-	"\x11RecordChatLimited\x12 .api.zhipin.RecordChatLimitedReq\x1a\x1d.api.zhipin.CommunicationResp\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/api/position/{position_id}/chat-limited\x12\x82\x01\n" +
-	"\x0fRecordInterview\x12\x1e.api.zhipin.RecordInterviewReq\x1a\x1d.api.zhipin.CommunicationResp\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/api/position/{position_id}/interview\x12\x82\x01\n" +
-	"\x0fRecordRejection\x12\x1e.api.zhipin.RecordRejectionReq\x1a\x1d.api.zhipin.CommunicationResp\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/api/position/{position_id}/rejection\x12\x8f\x01\n" +
-	"\x12ListCommunications\x12!.api.zhipin.ListCommunicationsReq\x1a\".api.zhipin.ListCommunicationsResp\"2\x82\xd3\xe4\x93\x02,\x12*/api/position/{position_id}/communicationsBIZGgithub.com/yylego/smart-employee-zhipin/zhipin-kratos/api/zhipin;zhipinb\x06proto3"
+	"GetChatReq\x12\x1f\n" +
+	"\vposition_id\x18\x01 \x01(\x04R\n" +
+	"positionId\"B\n" +
+	"\vGetChatResp\x123\n" +
+	"\bmessages\x18\x01 \x03(\v2\x17.api.zhipin.ChatMessageR\bmessages2\xe8\x01\n" +
+	"\x14CommunicationService\x12j\n" +
+	"\bSyncChat\x12\x17.api.zhipin.SyncChatReq\x1a\x18.api.zhipin.SyncChatResp\"+\x82\xd3\xe4\x93\x02%:\x01*\" /api/position/{position_id}/chat\x12d\n" +
+	"\aGetChat\x12\x16.api.zhipin.GetChatReq\x1a\x17.api.zhipin.GetChatResp\"(\x82\xd3\xe4\x93\x02\"\x12 /api/position/{position_id}/chatBIZGgithub.com/yylego/smart-employee-zhipin/zhipin-kratos/api/zhipin;zhipinb\x06proto3"
 
 var (
 	file_zhipin_communication_proto_rawDescOnce sync.Once
@@ -646,44 +351,26 @@ func file_zhipin_communication_proto_rawDescGZIP() []byte {
 	return file_zhipin_communication_proto_rawDescData
 }
 
-var file_zhipin_communication_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_zhipin_communication_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_zhipin_communication_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_zhipin_communication_proto_goTypes = []any{
-	(EventType)(0),                 // 0: api.zhipin.EventType
-	(*RecordMsgSentReq)(nil),       // 1: api.zhipin.RecordMsgSentReq
-	(*RecordMsgReceivedReq)(nil),   // 2: api.zhipin.RecordMsgReceivedReq
-	(*RecordResumeSentReq)(nil),    // 3: api.zhipin.RecordResumeSentReq
-	(*RecordChatLimitedReq)(nil),   // 4: api.zhipin.RecordChatLimitedReq
-	(*RecordInterviewReq)(nil),     // 5: api.zhipin.RecordInterviewReq
-	(*RecordRejectionReq)(nil),     // 6: api.zhipin.RecordRejectionReq
-	(*ListCommunicationsReq)(nil),  // 7: api.zhipin.ListCommunicationsReq
-	(*CommunicationResp)(nil),      // 8: api.zhipin.CommunicationResp
-	(*ListCommunicationsResp)(nil), // 9: api.zhipin.ListCommunicationsResp
-	(*timestamppb.Timestamp)(nil),  // 10: google.protobuf.Timestamp
+	(*ChatMessage)(nil),  // 0: api.zhipin.ChatMessage
+	(*SyncChatReq)(nil),  // 1: api.zhipin.SyncChatReq
+	(*SyncChatResp)(nil), // 2: api.zhipin.SyncChatResp
+	(*GetChatReq)(nil),   // 3: api.zhipin.GetChatReq
+	(*GetChatResp)(nil),  // 4: api.zhipin.GetChatResp
 }
 var file_zhipin_communication_proto_depIdxs = []int32{
-	10, // 0: api.zhipin.RecordInterviewReq.interview_time:type_name -> google.protobuf.Timestamp
-	10, // 1: api.zhipin.CommunicationResp.event_time:type_name -> google.protobuf.Timestamp
-	8,  // 2: api.zhipin.ListCommunicationsResp.items:type_name -> api.zhipin.CommunicationResp
-	1,  // 3: api.zhipin.CommunicationService.RecordMsgSent:input_type -> api.zhipin.RecordMsgSentReq
-	2,  // 4: api.zhipin.CommunicationService.RecordMsgReceived:input_type -> api.zhipin.RecordMsgReceivedReq
-	3,  // 5: api.zhipin.CommunicationService.RecordResumeSent:input_type -> api.zhipin.RecordResumeSentReq
-	4,  // 6: api.zhipin.CommunicationService.RecordChatLimited:input_type -> api.zhipin.RecordChatLimitedReq
-	5,  // 7: api.zhipin.CommunicationService.RecordInterview:input_type -> api.zhipin.RecordInterviewReq
-	6,  // 8: api.zhipin.CommunicationService.RecordRejection:input_type -> api.zhipin.RecordRejectionReq
-	7,  // 9: api.zhipin.CommunicationService.ListCommunications:input_type -> api.zhipin.ListCommunicationsReq
-	8,  // 10: api.zhipin.CommunicationService.RecordMsgSent:output_type -> api.zhipin.CommunicationResp
-	8,  // 11: api.zhipin.CommunicationService.RecordMsgReceived:output_type -> api.zhipin.CommunicationResp
-	8,  // 12: api.zhipin.CommunicationService.RecordResumeSent:output_type -> api.zhipin.CommunicationResp
-	8,  // 13: api.zhipin.CommunicationService.RecordChatLimited:output_type -> api.zhipin.CommunicationResp
-	8,  // 14: api.zhipin.CommunicationService.RecordInterview:output_type -> api.zhipin.CommunicationResp
-	8,  // 15: api.zhipin.CommunicationService.RecordRejection:output_type -> api.zhipin.CommunicationResp
-	9,  // 16: api.zhipin.CommunicationService.ListCommunications:output_type -> api.zhipin.ListCommunicationsResp
-	10, // [10:17] is the sub-list for method output_type
-	3,  // [3:10] is the sub-list for method input_type
-	3,  // [3:3] is the sub-list for extension type_name
-	3,  // [3:3] is the sub-list for extension extendee
-	0,  // [0:3] is the sub-list for field type_name
+	0, // 0: api.zhipin.SyncChatReq.messages:type_name -> api.zhipin.ChatMessage
+	0, // 1: api.zhipin.GetChatResp.messages:type_name -> api.zhipin.ChatMessage
+	1, // 2: api.zhipin.CommunicationService.SyncChat:input_type -> api.zhipin.SyncChatReq
+	3, // 3: api.zhipin.CommunicationService.GetChat:input_type -> api.zhipin.GetChatReq
+	2, // 4: api.zhipin.CommunicationService.SyncChat:output_type -> api.zhipin.SyncChatResp
+	4, // 5: api.zhipin.CommunicationService.GetChat:output_type -> api.zhipin.GetChatResp
+	4, // [4:6] is the sub-list for method output_type
+	2, // [2:4] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_zhipin_communication_proto_init() }
@@ -696,14 +383,13 @@ func file_zhipin_communication_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_zhipin_communication_proto_rawDesc), len(file_zhipin_communication_proto_rawDesc)),
-			NumEnums:      1,
-			NumMessages:   9,
+			NumEnums:      0,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_zhipin_communication_proto_goTypes,
 		DependencyIndexes: file_zhipin_communication_proto_depIdxs,
-		EnumInfos:         file_zhipin_communication_proto_enumTypes,
 		MessageInfos:      file_zhipin_communication_proto_msgTypes,
 	}.Build()
 	File_zhipin_communication_proto = out.File

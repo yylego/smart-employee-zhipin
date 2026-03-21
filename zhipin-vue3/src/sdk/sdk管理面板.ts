@@ -36,17 +36,18 @@ export interface T匹配项 {
     s补充说明: string
 }
 
-export interface T沟通项 {
-    n事件类型: number
-    s事件时间: string
-    s消息内容: string
+export interface T聊天消息 {
     n消息方向: number
+    s消息内容: string
+    n消息时间: number
+    b简历消息: boolean
+    s简历版本: string
 }
 
 export interface T岗位详情 {
     s岗位: T岗位摘要
     s匹配列表: T匹配项[]
-    s沟通列表: T沟通项[]
+    s聊天列表: T聊天消息[]
     s岗位职责: string
     s岗位要求: string
     s备注: string
@@ -120,11 +121,12 @@ export class Sdk管理面板 {
                 s简历对应: v.resumePoint,
                 s补充说明: v.remark,
             })),
-            s沟通列表: d.communications.map(v => ({
-                n事件类型: v.eventType,
-                s事件时间: v.eventTime?.seconds || '',
-                s消息内容: v.content,
+            s聊天列表: d.chatMessages.map(v => ({
                 n消息方向: v.direction,
+                s消息内容: v.content,
+                n消息时间: v.timestamp,
+                b简历消息: v.isResume,
+                s简历版本: v.resumeVersion,
             })),
             s岗位职责: d.duties,
             s岗位要求: d.requirements,

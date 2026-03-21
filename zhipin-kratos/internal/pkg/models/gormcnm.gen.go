@@ -115,10 +115,11 @@ func (c *T沟通记录) Columns() *T沟通记录Columns {
 		UpdatedAt: gormcnm.Cnm(c.UpdatedAt, "updated_at"),
 		DeletedAt: gormcnm.Cnm(c.DeletedAt, "deleted_at"),
 		P岗位主键:     gormcnm.Cnm(c.P岗位主键, "position_id"),
-		E事件类型:     gormcnm.Cnm(c.E事件类型, "event_type"),
-		E事件时间:     gormcnm.Cnm(c.E事件时间, "event_time"),
-		C消息内容:     gormcnm.Cnm(c.C消息内容, "content"),
 		D消息方向:     gormcnm.Cnm(c.D消息方向, "direction"),
+		C消息内容:     gormcnm.Cnm(c.C消息内容, "content"),
+		T消息时间:     gormcnm.Cnm(c.T消息时间, "timestamp"),
+		B简历消息:     gormcnm.Cnm(c.B简历消息, "is_resume"),
+		R简历版本:     gormcnm.Cnm(c.R简历版本, "resume_version"),
 	}
 }
 
@@ -131,10 +132,11 @@ type T沟通记录Columns struct {
 	UpdatedAt gormcnm.ColumnName[time.Time]
 	DeletedAt gormcnm.ColumnName[gorm.DeletedAt]
 	P岗位主键     gormcnm.ColumnName[uint]
-	E事件类型     gormcnm.ColumnName[E事件类型]
-	E事件时间     gormcnm.ColumnName[time.Time]
-	C消息内容     gormcnm.ColumnName[string]
 	D消息方向     gormcnm.ColumnName[int32]
+	C消息内容     gormcnm.ColumnName[string]
+	T消息时间     gormcnm.ColumnName[int64]
+	B简历消息     gormcnm.ColumnName[bool]
+	R简历版本     gormcnm.ColumnName[string]
 }
 
 func (c *T黑名单) Columns() *T黑名单Columns {

@@ -19,28 +19,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	CommunicationService_RecordMsgSent_FullMethodName      = "/api.zhipin.CommunicationService/RecordMsgSent"
-	CommunicationService_RecordMsgReceived_FullMethodName  = "/api.zhipin.CommunicationService/RecordMsgReceived"
-	CommunicationService_RecordResumeSent_FullMethodName   = "/api.zhipin.CommunicationService/RecordResumeSent"
-	CommunicationService_RecordChatLimited_FullMethodName  = "/api.zhipin.CommunicationService/RecordChatLimited"
-	CommunicationService_RecordInterview_FullMethodName    = "/api.zhipin.CommunicationService/RecordInterview"
-	CommunicationService_RecordRejection_FullMethodName    = "/api.zhipin.CommunicationService/RecordRejection"
-	CommunicationService_ListCommunications_FullMethodName = "/api.zhipin.CommunicationService/ListCommunications"
+	CommunicationService_SyncChat_FullMethodName = "/api.zhipin.CommunicationService/SyncChat"
+	CommunicationService_GetChat_FullMethodName  = "/api.zhipin.CommunicationService/GetChat"
 )
 
 // CommunicationServiceClient is the client API for CommunicationService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// CommunicationService — fine-grained interaction events per position
+// CommunicationService — sync and retrieve chat records per position
 type CommunicationServiceClient interface {
-	RecordMsgSent(ctx context.Context, in *RecordMsgSentReq, opts ...grpc.CallOption) (*CommunicationResp, error)
-	RecordMsgReceived(ctx context.Context, in *RecordMsgReceivedReq, opts ...grpc.CallOption) (*CommunicationResp, error)
-	RecordResumeSent(ctx context.Context, in *RecordResumeSentReq, opts ...grpc.CallOption) (*CommunicationResp, error)
-	RecordChatLimited(ctx context.Context, in *RecordChatLimitedReq, opts ...grpc.CallOption) (*CommunicationResp, error)
-	RecordInterview(ctx context.Context, in *RecordInterviewReq, opts ...grpc.CallOption) (*CommunicationResp, error)
-	RecordRejection(ctx context.Context, in *RecordRejectionReq, opts ...grpc.CallOption) (*CommunicationResp, error)
-	ListCommunications(ctx context.Context, in *ListCommunicationsReq, opts ...grpc.CallOption) (*ListCommunicationsResp, error)
+	SyncChat(ctx context.Context, in *SyncChatReq, opts ...grpc.CallOption) (*SyncChatResp, error)
+	GetChat(ctx context.Context, in *GetChatReq, opts ...grpc.CallOption) (*GetChatResp, error)
 }
 
 type communicationServiceClient struct {
@@ -51,70 +41,20 @@ func NewCommunicationServiceClient(cc grpc.ClientConnInterface) CommunicationSer
 	return &communicationServiceClient{cc}
 }
 
-func (c *communicationServiceClient) RecordMsgSent(ctx context.Context, in *RecordMsgSentReq, opts ...grpc.CallOption) (*CommunicationResp, error) {
+func (c *communicationServiceClient) SyncChat(ctx context.Context, in *SyncChatReq, opts ...grpc.CallOption) (*SyncChatResp, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CommunicationResp)
-	err := c.cc.Invoke(ctx, CommunicationService_RecordMsgSent_FullMethodName, in, out, cOpts...)
+	out := new(SyncChatResp)
+	err := c.cc.Invoke(ctx, CommunicationService_SyncChat_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *communicationServiceClient) RecordMsgReceived(ctx context.Context, in *RecordMsgReceivedReq, opts ...grpc.CallOption) (*CommunicationResp, error) {
+func (c *communicationServiceClient) GetChat(ctx context.Context, in *GetChatReq, opts ...grpc.CallOption) (*GetChatResp, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CommunicationResp)
-	err := c.cc.Invoke(ctx, CommunicationService_RecordMsgReceived_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *communicationServiceClient) RecordResumeSent(ctx context.Context, in *RecordResumeSentReq, opts ...grpc.CallOption) (*CommunicationResp, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CommunicationResp)
-	err := c.cc.Invoke(ctx, CommunicationService_RecordResumeSent_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *communicationServiceClient) RecordChatLimited(ctx context.Context, in *RecordChatLimitedReq, opts ...grpc.CallOption) (*CommunicationResp, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CommunicationResp)
-	err := c.cc.Invoke(ctx, CommunicationService_RecordChatLimited_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *communicationServiceClient) RecordInterview(ctx context.Context, in *RecordInterviewReq, opts ...grpc.CallOption) (*CommunicationResp, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CommunicationResp)
-	err := c.cc.Invoke(ctx, CommunicationService_RecordInterview_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *communicationServiceClient) RecordRejection(ctx context.Context, in *RecordRejectionReq, opts ...grpc.CallOption) (*CommunicationResp, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CommunicationResp)
-	err := c.cc.Invoke(ctx, CommunicationService_RecordRejection_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *communicationServiceClient) ListCommunications(ctx context.Context, in *ListCommunicationsReq, opts ...grpc.CallOption) (*ListCommunicationsResp, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListCommunicationsResp)
-	err := c.cc.Invoke(ctx, CommunicationService_ListCommunications_FullMethodName, in, out, cOpts...)
+	out := new(GetChatResp)
+	err := c.cc.Invoke(ctx, CommunicationService_GetChat_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -125,15 +65,10 @@ func (c *communicationServiceClient) ListCommunications(ctx context.Context, in 
 // All implementations must embed UnimplementedCommunicationServiceServer
 // for forward compatibility.
 //
-// CommunicationService — fine-grained interaction events per position
+// CommunicationService — sync and retrieve chat records per position
 type CommunicationServiceServer interface {
-	RecordMsgSent(context.Context, *RecordMsgSentReq) (*CommunicationResp, error)
-	RecordMsgReceived(context.Context, *RecordMsgReceivedReq) (*CommunicationResp, error)
-	RecordResumeSent(context.Context, *RecordResumeSentReq) (*CommunicationResp, error)
-	RecordChatLimited(context.Context, *RecordChatLimitedReq) (*CommunicationResp, error)
-	RecordInterview(context.Context, *RecordInterviewReq) (*CommunicationResp, error)
-	RecordRejection(context.Context, *RecordRejectionReq) (*CommunicationResp, error)
-	ListCommunications(context.Context, *ListCommunicationsReq) (*ListCommunicationsResp, error)
+	SyncChat(context.Context, *SyncChatReq) (*SyncChatResp, error)
+	GetChat(context.Context, *GetChatReq) (*GetChatResp, error)
 	mustEmbedUnimplementedCommunicationServiceServer()
 }
 
@@ -144,26 +79,11 @@ type CommunicationServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedCommunicationServiceServer struct{}
 
-func (UnimplementedCommunicationServiceServer) RecordMsgSent(context.Context, *RecordMsgSentReq) (*CommunicationResp, error) {
-	return nil, status.Error(codes.Unimplemented, "method RecordMsgSent not implemented")
+func (UnimplementedCommunicationServiceServer) SyncChat(context.Context, *SyncChatReq) (*SyncChatResp, error) {
+	return nil, status.Error(codes.Unimplemented, "method SyncChat not implemented")
 }
-func (UnimplementedCommunicationServiceServer) RecordMsgReceived(context.Context, *RecordMsgReceivedReq) (*CommunicationResp, error) {
-	return nil, status.Error(codes.Unimplemented, "method RecordMsgReceived not implemented")
-}
-func (UnimplementedCommunicationServiceServer) RecordResumeSent(context.Context, *RecordResumeSentReq) (*CommunicationResp, error) {
-	return nil, status.Error(codes.Unimplemented, "method RecordResumeSent not implemented")
-}
-func (UnimplementedCommunicationServiceServer) RecordChatLimited(context.Context, *RecordChatLimitedReq) (*CommunicationResp, error) {
-	return nil, status.Error(codes.Unimplemented, "method RecordChatLimited not implemented")
-}
-func (UnimplementedCommunicationServiceServer) RecordInterview(context.Context, *RecordInterviewReq) (*CommunicationResp, error) {
-	return nil, status.Error(codes.Unimplemented, "method RecordInterview not implemented")
-}
-func (UnimplementedCommunicationServiceServer) RecordRejection(context.Context, *RecordRejectionReq) (*CommunicationResp, error) {
-	return nil, status.Error(codes.Unimplemented, "method RecordRejection not implemented")
-}
-func (UnimplementedCommunicationServiceServer) ListCommunications(context.Context, *ListCommunicationsReq) (*ListCommunicationsResp, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListCommunications not implemented")
+func (UnimplementedCommunicationServiceServer) GetChat(context.Context, *GetChatReq) (*GetChatResp, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetChat not implemented")
 }
 func (UnimplementedCommunicationServiceServer) mustEmbedUnimplementedCommunicationServiceServer() {}
 func (UnimplementedCommunicationServiceServer) testEmbeddedByValue()                              {}
@@ -186,128 +106,38 @@ func RegisterCommunicationServiceServer(s grpc.ServiceRegistrar, srv Communicati
 	s.RegisterService(&CommunicationService_ServiceDesc, srv)
 }
 
-func _CommunicationService_RecordMsgSent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RecordMsgSentReq)
+func _CommunicationService_SyncChat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SyncChatReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CommunicationServiceServer).RecordMsgSent(ctx, in)
+		return srv.(CommunicationServiceServer).SyncChat(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: CommunicationService_RecordMsgSent_FullMethodName,
+		FullMethod: CommunicationService_SyncChat_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CommunicationServiceServer).RecordMsgSent(ctx, req.(*RecordMsgSentReq))
+		return srv.(CommunicationServiceServer).SyncChat(ctx, req.(*SyncChatReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CommunicationService_RecordMsgReceived_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RecordMsgReceivedReq)
+func _CommunicationService_GetChat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetChatReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CommunicationServiceServer).RecordMsgReceived(ctx, in)
+		return srv.(CommunicationServiceServer).GetChat(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: CommunicationService_RecordMsgReceived_FullMethodName,
+		FullMethod: CommunicationService_GetChat_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CommunicationServiceServer).RecordMsgReceived(ctx, req.(*RecordMsgReceivedReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CommunicationService_RecordResumeSent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RecordResumeSentReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CommunicationServiceServer).RecordResumeSent(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CommunicationService_RecordResumeSent_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CommunicationServiceServer).RecordResumeSent(ctx, req.(*RecordResumeSentReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CommunicationService_RecordChatLimited_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RecordChatLimitedReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CommunicationServiceServer).RecordChatLimited(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CommunicationService_RecordChatLimited_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CommunicationServiceServer).RecordChatLimited(ctx, req.(*RecordChatLimitedReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CommunicationService_RecordInterview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RecordInterviewReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CommunicationServiceServer).RecordInterview(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CommunicationService_RecordInterview_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CommunicationServiceServer).RecordInterview(ctx, req.(*RecordInterviewReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CommunicationService_RecordRejection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RecordRejectionReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CommunicationServiceServer).RecordRejection(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CommunicationService_RecordRejection_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CommunicationServiceServer).RecordRejection(ctx, req.(*RecordRejectionReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CommunicationService_ListCommunications_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListCommunicationsReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CommunicationServiceServer).ListCommunications(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CommunicationService_ListCommunications_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CommunicationServiceServer).ListCommunications(ctx, req.(*ListCommunicationsReq))
+		return srv.(CommunicationServiceServer).GetChat(ctx, req.(*GetChatReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -320,32 +150,12 @@ var CommunicationService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*CommunicationServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "RecordMsgSent",
-			Handler:    _CommunicationService_RecordMsgSent_Handler,
+			MethodName: "SyncChat",
+			Handler:    _CommunicationService_SyncChat_Handler,
 		},
 		{
-			MethodName: "RecordMsgReceived",
-			Handler:    _CommunicationService_RecordMsgReceived_Handler,
-		},
-		{
-			MethodName: "RecordResumeSent",
-			Handler:    _CommunicationService_RecordResumeSent_Handler,
-		},
-		{
-			MethodName: "RecordChatLimited",
-			Handler:    _CommunicationService_RecordChatLimited_Handler,
-		},
-		{
-			MethodName: "RecordInterview",
-			Handler:    _CommunicationService_RecordInterview_Handler,
-		},
-		{
-			MethodName: "RecordRejection",
-			Handler:    _CommunicationService_RecordRejection_Handler,
-		},
-		{
-			MethodName: "ListCommunications",
-			Handler:    _CommunicationService_ListCommunications_Handler,
+			MethodName: "GetChat",
+			Handler:    _CommunicationService_GetChat_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -434,35 +434,11 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.zhipin.PositionResp'
-    /api/position/{positionId}/chat-limited:
-        post:
-            tags:
-                - CommunicationService
-            operationId: CommunicationService_RecordChatLimited
-            parameters:
-                - name: positionId
-                  in: path
-                  required: true
-                  schema:
-                    type: string
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.zhipin.RecordChatLimitedReq'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.zhipin.CommunicationResp'
-    /api/position/{positionId}/communications:
+    /api/position/{positionId}/chat:
         get:
             tags:
                 - CommunicationService
-            operationId: CommunicationService_ListCommunications
+            operationId: CommunicationService_GetChat
             parameters:
                 - name: positionId
                   in: path
@@ -475,12 +451,11 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.zhipin.ListCommunicationsResp'
-    /api/position/{positionId}/interview:
+                                $ref: '#/components/schemas/api.zhipin.GetChatResp'
         post:
             tags:
                 - CommunicationService
-            operationId: CommunicationService_RecordInterview
+            operationId: CommunicationService_SyncChat
             parameters:
                 - name: positionId
                   in: path
@@ -491,7 +466,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/api.zhipin.RecordInterviewReq'
+                            $ref: '#/components/schemas/api.zhipin.SyncChatReq'
                 required: true
             responses:
                 "200":
@@ -499,79 +474,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/api.zhipin.CommunicationResp'
-    /api/position/{positionId}/msg-received:
-        post:
-            tags:
-                - CommunicationService
-            operationId: CommunicationService_RecordMsgReceived
-            parameters:
-                - name: positionId
-                  in: path
-                  required: true
-                  schema:
-                    type: string
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.zhipin.RecordMsgReceivedReq'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.zhipin.CommunicationResp'
-    /api/position/{positionId}/msg-sent:
-        post:
-            tags:
-                - CommunicationService
-            operationId: CommunicationService_RecordMsgSent
-            parameters:
-                - name: positionId
-                  in: path
-                  required: true
-                  schema:
-                    type: string
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.zhipin.RecordMsgSentReq'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.zhipin.CommunicationResp'
-    /api/position/{positionId}/rejection:
-        post:
-            tags:
-                - CommunicationService
-            operationId: CommunicationService_RecordRejection
-            parameters:
-                - name: positionId
-                  in: path
-                  required: true
-                  schema:
-                    type: string
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.zhipin.RecordRejectionReq'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.zhipin.CommunicationResp'
+                                $ref: '#/components/schemas/api.zhipin.SyncChatResp'
     /api/position/{positionId}/requirement-items:
         get:
             tags:
@@ -613,30 +516,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.zhipin.SetRequirementItemsResp'
-    /api/position/{positionId}/resume-sent:
-        post:
-            tags:
-                - CommunicationService
-            operationId: CommunicationService_RecordResumeSent
-            parameters:
-                - name: positionId
-                  in: path
-                  required: true
-                  schema:
-                    type: string
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.zhipin.RecordResumeSentReq'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.zhipin.CommunicationResp'
     /api/positions:
         get:
             tags:
@@ -736,20 +615,20 @@ paths:
                                 $ref: '#/components/schemas/api.zhipin.ListPositionsResp'
 components:
     schemas:
-        api.admin.AdminCommItem:
+        api.admin.AdminChatMessage:
             type: object
             properties:
-                eventType:
-                    type: integer
-                    format: int32
-                eventTime:
-                    type: string
-                    format: date-time
-                content:
-                    type: string
                 direction:
                     type: integer
                     format: int32
+                content:
+                    type: string
+                timestamp:
+                    type: string
+                isResume:
+                    type: boolean
+                resumeVersion:
+                    type: string
         api.admin.AdminMatchItem:
             type: object
             properties:
@@ -771,10 +650,10 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.admin.AdminMatchItem'
-                communications:
+                chatMessages:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.admin.AdminCommItem'
+                        $ref: '#/components/schemas/api.admin.AdminChatMessage'
                 duties:
                     type: string
                 requirements:
@@ -882,6 +761,20 @@ components:
                     type: string
                 reason:
                     type: string
+        api.zhipin.ChatMessage:
+            type: object
+            properties:
+                direction:
+                    type: integer
+                    format: int32
+                content:
+                    type: string
+                timestamp:
+                    type: string
+                isResume:
+                    type: boolean
+                resumeVersion:
+                    type: string
         api.zhipin.CheckBlacklistResp:
             type: object
             properties:
@@ -895,24 +788,6 @@ components:
                 positionId:
                     type: string
                 status:
-                    type: integer
-                    format: int32
-        api.zhipin.CommunicationResp:
-            type: object
-            properties:
-                id:
-                    type: string
-                positionId:
-                    type: string
-                eventType:
-                    type: integer
-                    format: int32
-                eventTime:
-                    type: string
-                    format: date-time
-                content:
-                    type: string
-                direction:
                     type: integer
                     format: int32
         api.zhipin.CreatePositionReq:
@@ -952,6 +827,13 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.zhipin.RequirementItemInput'
+        api.zhipin.GetChatResp:
+            type: object
+            properties:
+                messages:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.zhipin.ChatMessage'
         api.zhipin.JobIdCheckResult:
             type: object
             properties:
@@ -971,13 +853,6 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.zhipin.BlacklistResp'
-        api.zhipin.ListCommunicationsResp:
-            type: object
-            properties:
-                items:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/api.zhipin.CommunicationResp'
         api.zhipin.ListPositionsResp:
             type: object
             properties:
@@ -1011,10 +886,10 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/api.zhipin.RequirementItemResp'
-                communications:
+                chatMessages:
                     type: array
                     items:
-                        $ref: '#/components/schemas/api.zhipin.CommunicationResp'
+                        $ref: '#/components/schemas/api.zhipin.ChatMessage'
         api.zhipin.PositionResp:
             type: object
             properties:
@@ -1064,49 +939,6 @@ components:
                 duties:
                     type: string
                 requirements:
-                    type: string
-        api.zhipin.RecordChatLimitedReq:
-            type: object
-            properties:
-                positionId:
-                    type: string
-        api.zhipin.RecordInterviewReq:
-            type: object
-            properties:
-                positionId:
-                    type: string
-                interviewTime:
-                    type: string
-                    format: date-time
-                notes:
-                    type: string
-        api.zhipin.RecordMsgReceivedReq:
-            type: object
-            properties:
-                positionId:
-                    type: string
-                content:
-                    type: string
-        api.zhipin.RecordMsgSentReq:
-            type: object
-            properties:
-                positionId:
-                    type: string
-                content:
-                    type: string
-        api.zhipin.RecordRejectionReq:
-            type: object
-            properties:
-                positionId:
-                    type: string
-                content:
-                    type: string
-        api.zhipin.RecordResumeSentReq:
-            type: object
-            properties:
-                positionId:
-                    type: string
-                resumeVersion:
                     type: string
         api.zhipin.RemoveBlacklistResp:
             type: object
@@ -1158,6 +990,28 @@ components:
             type: object
             properties:
                 count:
+                    type: integer
+                    format: int32
+        api.zhipin.SyncChatReq:
+            type: object
+            properties:
+                positionId:
+                    type: string
+                messages:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.zhipin.ChatMessage'
+        api.zhipin.SyncChatResp:
+            type: object
+            properties:
+                lastCommAt:
+                    type: string
+                lastCommDir:
+                    type: integer
+                    format: int32
+                lastResume:
+                    type: string
+                messageCount:
                     type: integer
                     format: int32
         api.zhipin.UpdateDutiesReq:
@@ -1230,7 +1084,7 @@ tags:
     - name: BlacklistService
       description: BlacklistService — company blacklist management
     - name: CommunicationService
-      description: CommunicationService — fine-grained interaction events per position
+      description: CommunicationService — sync and retrieve chat records per position
     - name: PositionService
       description: PositionService — job position CRUD and status tracking
     - name: RequirementItemService

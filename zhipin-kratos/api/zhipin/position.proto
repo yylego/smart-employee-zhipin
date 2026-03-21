@@ -231,7 +231,7 @@ message PositionResp {
 message PositionDetailResp {
   PositionResp position = 1;
   repeated RequirementItemResp match_items = 2;
-  repeated CommunicationResp communications = 3;
+  repeated ChatMessage chat_messages = 3;
 }
 
 message ListPositionsResp {

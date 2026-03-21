@@ -19,38 +19,23 @@ var _ = binding.EncodeURL
 
 const _ = http.SupportPackageIsVersion1
 
-const OperationCommunicationServiceListCommunications = "/api.zhipin.CommunicationService/ListCommunications"
-const OperationCommunicationServiceRecordChatLimited = "/api.zhipin.CommunicationService/RecordChatLimited"
-const OperationCommunicationServiceRecordInterview = "/api.zhipin.CommunicationService/RecordInterview"
-const OperationCommunicationServiceRecordMsgReceived = "/api.zhipin.CommunicationService/RecordMsgReceived"
-const OperationCommunicationServiceRecordMsgSent = "/api.zhipin.CommunicationService/RecordMsgSent"
-const OperationCommunicationServiceRecordRejection = "/api.zhipin.CommunicationService/RecordRejection"
-const OperationCommunicationServiceRecordResumeSent = "/api.zhipin.CommunicationService/RecordResumeSent"
+const OperationCommunicationServiceGetChat = "/api.zhipin.CommunicationService/GetChat"
+const OperationCommunicationServiceSyncChat = "/api.zhipin.CommunicationService/SyncChat"
 
 type CommunicationServiceHTTPServer interface {
-	ListCommunications(context.Context, *ListCommunicationsReq) (*ListCommunicationsResp, error)
-	RecordChatLimited(context.Context, *RecordChatLimitedReq) (*CommunicationResp, error)
-	RecordInterview(context.Context, *RecordInterviewReq) (*CommunicationResp, error)
-	RecordMsgReceived(context.Context, *RecordMsgReceivedReq) (*CommunicationResp, error)
-	RecordMsgSent(context.Context, *RecordMsgSentReq) (*CommunicationResp, error)
-	RecordRejection(context.Context, *RecordRejectionReq) (*CommunicationResp, error)
-	RecordResumeSent(context.Context, *RecordResumeSentReq) (*CommunicationResp, error)
+	GetChat(context.Context, *GetChatReq) (*GetChatResp, error)
+	SyncChat(context.Context, *SyncChatReq) (*SyncChatResp, error)
 }
 
 func RegisterCommunicationServiceHTTPServer(s *http.Server, srv CommunicationServiceHTTPServer) {
 	r := s.Route("/")
-	r.POST("/api/position/{position_id}/msg-sent", _CommunicationService_RecordMsgSent0_HTTP_Handler(srv))
-	r.POST("/api/position/{position_id}/msg-received", _CommunicationService_RecordMsgReceived0_HTTP_Handler(srv))
-	r.POST("/api/position/{position_id}/resume-sent", _CommunicationService_RecordResumeSent0_HTTP_Handler(srv))
-	r.POST("/api/position/{position_id}/chat-limited", _CommunicationService_RecordChatLimited0_HTTP_Handler(srv))
-	r.POST("/api/position/{position_id}/interview", _CommunicationService_RecordInterview0_HTTP_Handler(srv))
-	r.POST("/api/position/{position_id}/rejection", _CommunicationService_RecordRejection0_HTTP_Handler(srv))
-	r.GET("/api/position/{position_id}/communications", _CommunicationService_ListCommunications0_HTTP_Handler(srv))
+	r.POST("/api/position/{position_id}/chat", _CommunicationService_SyncChat0_HTTP_Handler(srv))
+	r.GET("/api/position/{position_id}/chat", _CommunicationService_GetChat0_HTTP_Handler(srv))
 }
 
-func _CommunicationService_RecordMsgSent0_HTTP_Handler(srv CommunicationServiceHTTPServer) func(ctx http.Context) error {
+func _CommunicationService_SyncChat0_HTTP_Handler(srv CommunicationServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in RecordMsgSentReq
+		var in SyncChatReq
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
@@ -60,174 +45,44 @@ func _CommunicationService_RecordMsgSent0_HTTP_Handler(srv CommunicationServiceH
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationCommunicationServiceRecordMsgSent)
+		http.SetOperation(ctx, OperationCommunicationServiceSyncChat)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.RecordMsgSent(ctx, req.(*RecordMsgSentReq))
+			return srv.SyncChat(ctx, req.(*SyncChatReq))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*CommunicationResp)
+		reply := out.(*SyncChatResp)
 		return ctx.Result(200, reply)
 	}
 }
 
-func _CommunicationService_RecordMsgReceived0_HTTP_Handler(srv CommunicationServiceHTTPServer) func(ctx http.Context) error {
+func _CommunicationService_GetChat0_HTTP_Handler(srv CommunicationServiceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in RecordMsgReceivedReq
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
+		var in GetChatReq
 		if err := ctx.BindQuery(&in); err != nil {
 			return err
 		}
 		if err := ctx.BindVars(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, OperationCommunicationServiceRecordMsgReceived)
+		http.SetOperation(ctx, OperationCommunicationServiceGetChat)
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.RecordMsgReceived(ctx, req.(*RecordMsgReceivedReq))
+			return srv.GetChat(ctx, req.(*GetChatReq))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*CommunicationResp)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _CommunicationService_RecordResumeSent0_HTTP_Handler(srv CommunicationServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in RecordResumeSentReq
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindVars(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationCommunicationServiceRecordResumeSent)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.RecordResumeSent(ctx, req.(*RecordResumeSentReq))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*CommunicationResp)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _CommunicationService_RecordChatLimited0_HTTP_Handler(srv CommunicationServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in RecordChatLimitedReq
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindVars(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationCommunicationServiceRecordChatLimited)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.RecordChatLimited(ctx, req.(*RecordChatLimitedReq))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*CommunicationResp)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _CommunicationService_RecordInterview0_HTTP_Handler(srv CommunicationServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in RecordInterviewReq
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindVars(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationCommunicationServiceRecordInterview)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.RecordInterview(ctx, req.(*RecordInterviewReq))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*CommunicationResp)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _CommunicationService_RecordRejection0_HTTP_Handler(srv CommunicationServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in RecordRejectionReq
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindVars(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationCommunicationServiceRecordRejection)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.RecordRejection(ctx, req.(*RecordRejectionReq))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*CommunicationResp)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _CommunicationService_ListCommunications0_HTTP_Handler(srv CommunicationServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in ListCommunicationsReq
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		if err := ctx.BindVars(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationCommunicationServiceListCommunications)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListCommunications(ctx, req.(*ListCommunicationsReq))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ListCommunicationsResp)
+		reply := out.(*GetChatResp)
 		return ctx.Result(200, reply)
 	}
 }
 
 type CommunicationServiceHTTPClient interface {
-	ListCommunications(ctx context.Context, req *ListCommunicationsReq, opts ...http.CallOption) (rsp *ListCommunicationsResp, err error)
-	RecordChatLimited(ctx context.Context, req *RecordChatLimitedReq, opts ...http.CallOption) (rsp *CommunicationResp, err error)
-	RecordInterview(ctx context.Context, req *RecordInterviewReq, opts ...http.CallOption) (rsp *CommunicationResp, err error)
-	RecordMsgReceived(ctx context.Context, req *RecordMsgReceivedReq, opts ...http.CallOption) (rsp *CommunicationResp, err error)
-	RecordMsgSent(ctx context.Context, req *RecordMsgSentReq, opts ...http.CallOption) (rsp *CommunicationResp, err error)
-	RecordRejection(ctx context.Context, req *RecordRejectionReq, opts ...http.CallOption) (rsp *CommunicationResp, err error)
-	RecordResumeSent(ctx context.Context, req *RecordResumeSentReq, opts ...http.CallOption) (rsp *CommunicationResp, err error)
+	GetChat(ctx context.Context, req *GetChatReq, opts ...http.CallOption) (rsp *GetChatResp, err error)
+	SyncChat(ctx context.Context, req *SyncChatReq, opts ...http.CallOption) (rsp *SyncChatResp, err error)
 }
 
 type CommunicationServiceHTTPClientImpl struct {
@@ -238,11 +93,11 @@ func NewCommunicationServiceHTTPClient(client *http.Client) CommunicationService
 	return &CommunicationServiceHTTPClientImpl{client}
 }
 
-func (c *CommunicationServiceHTTPClientImpl) ListCommunications(ctx context.Context, in *ListCommunicationsReq, opts ...http.CallOption) (*ListCommunicationsResp, error) {
-	var out ListCommunicationsResp
-	pattern := "/api/position/{position_id}/communications"
+func (c *CommunicationServiceHTTPClientImpl) GetChat(ctx context.Context, in *GetChatReq, opts ...http.CallOption) (*GetChatResp, error) {
+	var out GetChatResp
+	pattern := "/api/position/{position_id}/chat"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationCommunicationServiceListCommunications))
+	opts = append(opts, http.Operation(OperationCommunicationServiceGetChat))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
@@ -251,76 +106,11 @@ func (c *CommunicationServiceHTTPClientImpl) ListCommunications(ctx context.Cont
 	return &out, nil
 }
 
-func (c *CommunicationServiceHTTPClientImpl) RecordChatLimited(ctx context.Context, in *RecordChatLimitedReq, opts ...http.CallOption) (*CommunicationResp, error) {
-	var out CommunicationResp
-	pattern := "/api/position/{position_id}/chat-limited"
+func (c *CommunicationServiceHTTPClientImpl) SyncChat(ctx context.Context, in *SyncChatReq, opts ...http.CallOption) (*SyncChatResp, error) {
+	var out SyncChatResp
+	pattern := "/api/position/{position_id}/chat"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationCommunicationServiceRecordChatLimited))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *CommunicationServiceHTTPClientImpl) RecordInterview(ctx context.Context, in *RecordInterviewReq, opts ...http.CallOption) (*CommunicationResp, error) {
-	var out CommunicationResp
-	pattern := "/api/position/{position_id}/interview"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationCommunicationServiceRecordInterview))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *CommunicationServiceHTTPClientImpl) RecordMsgReceived(ctx context.Context, in *RecordMsgReceivedReq, opts ...http.CallOption) (*CommunicationResp, error) {
-	var out CommunicationResp
-	pattern := "/api/position/{position_id}/msg-received"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationCommunicationServiceRecordMsgReceived))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *CommunicationServiceHTTPClientImpl) RecordMsgSent(ctx context.Context, in *RecordMsgSentReq, opts ...http.CallOption) (*CommunicationResp, error) {
-	var out CommunicationResp
-	pattern := "/api/position/{position_id}/msg-sent"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationCommunicationServiceRecordMsgSent))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *CommunicationServiceHTTPClientImpl) RecordRejection(ctx context.Context, in *RecordRejectionReq, opts ...http.CallOption) (*CommunicationResp, error) {
-	var out CommunicationResp
-	pattern := "/api/position/{position_id}/rejection"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationCommunicationServiceRecordRejection))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *CommunicationServiceHTTPClientImpl) RecordResumeSent(ctx context.Context, in *RecordResumeSentReq, opts ...http.CallOption) (*CommunicationResp, error) {
-	var out CommunicationResp
-	pattern := "/api/position/{position_id}/resume-sent"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation(OperationCommunicationServiceRecordResumeSent))
+	opts = append(opts, http.Operation(OperationCommunicationServiceSyncChat))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {

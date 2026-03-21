@@ -5,8 +5,6 @@ package api.admin;
 option go_package = "github.com/yylego/smart-employee-zhipin/zhipin-kratos/api/admin;admin";
 
 import "google/api/annotations.proto";
-import "google/protobuf/timestamp.proto";
-
 // AdminService — admin dashboard queries, separate from AI-facing APIs
 service AdminService {
   // Today's positions — most important for the admin to see progress
@@ -79,17 +77,18 @@ message AdminMatchItem {
   string remark = 4;
 }
 
-message AdminCommItem {
-  int32  event_type = 1;
-  google.protobuf.Timestamp event_time = 2;
-  string content = 3;
-  int32  direction = 4;
+message AdminChatMessage {
+  int32  direction = 1;       // 0=me 1=them
+  string content = 2;
+  int64  timestamp = 3;       // unix seconds
+  bool   is_resume = 4;
+  string resume_version = 5;
 }
 
 message AdminPositionDetailResp {
   AdminPositionItem position = 1;
   repeated AdminMatchItem match_items = 2;
-  repeated AdminCommItem communications = 3;
+  repeated AdminChatMessage chat_messages = 3;
   string duties = 4;
   string requirements = 5;
   string notes = 6;

@@ -1472,12 +1472,12 @@ func (x *PositionResp) GetRequirements() string {
 }
 
 type PositionDetailResp struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	Position       *PositionResp          `protobuf:"bytes,1,opt,name=position,proto3" json:"position,omitempty"`
-	MatchItems     []*RequirementItemResp `protobuf:"bytes,2,rep,name=match_items,json=matchItems,proto3" json:"match_items,omitempty"`
-	Communications []*CommunicationResp   `protobuf:"bytes,3,rep,name=communications,proto3" json:"communications,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Position      *PositionResp          `protobuf:"bytes,1,opt,name=position,proto3" json:"position,omitempty"`
+	MatchItems    []*RequirementItemResp `protobuf:"bytes,2,rep,name=match_items,json=matchItems,proto3" json:"match_items,omitempty"`
+	ChatMessages  []*ChatMessage         `protobuf:"bytes,3,rep,name=chat_messages,json=chatMessages,proto3" json:"chat_messages,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *PositionDetailResp) Reset() {
@@ -1524,9 +1524,9 @@ func (x *PositionDetailResp) GetMatchItems() []*RequirementItemResp {
 	return nil
 }
 
-func (x *PositionDetailResp) GetCommunications() []*CommunicationResp {
+func (x *PositionDetailResp) GetChatMessages() []*ChatMessage {
 	if x != nil {
-		return x.Communications
+		return x.ChatMessages
 	}
 	return nil
 }
@@ -1700,12 +1700,12 @@ const file_zhipin_position_proto_rawDesc = "" +
 	"\vlast_resume\x18\x13 \x01(\tR\n" +
 	"lastResume\x12\x16\n" +
 	"\x06duties\x18\x14 \x01(\tR\x06duties\x12\"\n" +
-	"\frequirements\x18\x15 \x01(\tR\frequirements\"\xd3\x01\n" +
+	"\frequirements\x18\x15 \x01(\tR\frequirements\"\xca\x01\n" +
 	"\x12PositionDetailResp\x124\n" +
 	"\bposition\x18\x01 \x01(\v2\x18.api.zhipin.PositionRespR\bposition\x12@\n" +
 	"\vmatch_items\x18\x02 \x03(\v2\x1f.api.zhipin.RequirementItemRespR\n" +
-	"matchItems\x12E\n" +
-	"\x0ecommunications\x18\x03 \x03(\v2\x1d.api.zhipin.CommunicationRespR\x0ecommunications\"Y\n" +
+	"matchItems\x12<\n" +
+	"\rchat_messages\x18\x03 \x03(\v2\x17.api.zhipin.ChatMessageR\fchatMessages\"Y\n" +
 	"\x11ListPositionsResp\x12.\n" +
 	"\x05items\x18\x01 \x03(\v2\x18.api.zhipin.PositionRespR\x05items\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total*\xe2\x02\n" +
@@ -1785,14 +1785,14 @@ var file_zhipin_position_proto_goTypes = []any{
 	(*ListPositionsResp)(nil),          // 24: api.zhipin.ListPositionsResp
 	(*RequirementItemInput)(nil),       // 25: api.zhipin.RequirementItemInput
 	(*RequirementItemResp)(nil),        // 26: api.zhipin.RequirementItemResp
-	(*CommunicationResp)(nil),          // 27: api.zhipin.CommunicationResp
+	(*ChatMessage)(nil),                // 27: api.zhipin.ChatMessage
 }
 var file_zhipin_position_proto_depIdxs = []int32{
 	25, // 0: api.zhipin.CreatePositionReq.match_items:type_name -> api.zhipin.RequirementItemInput
 	17, // 1: api.zhipin.BatchCheckJobIdsResp.results:type_name -> api.zhipin.JobIdCheckResult
 	22, // 2: api.zhipin.PositionDetailResp.position:type_name -> api.zhipin.PositionResp
 	26, // 3: api.zhipin.PositionDetailResp.match_items:type_name -> api.zhipin.RequirementItemResp
-	27, // 4: api.zhipin.PositionDetailResp.communications:type_name -> api.zhipin.CommunicationResp
+	27, // 4: api.zhipin.PositionDetailResp.chat_messages:type_name -> api.zhipin.ChatMessage
 	22, // 5: api.zhipin.ListPositionsResp.items:type_name -> api.zhipin.PositionResp
 	1,  // 6: api.zhipin.PositionService.CreatePosition:input_type -> api.zhipin.CreatePositionReq
 	2,  // 7: api.zhipin.PositionService.UpdateSalary:input_type -> api.zhipin.UpdateSalaryReq

@@ -10,7 +10,6 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -483,30 +482,31 @@ func (x *AdminMatchItem) GetRemark() string {
 	return ""
 }
 
-type AdminCommItem struct {
+type AdminChatMessage struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	EventType     int32                  `protobuf:"varint,1,opt,name=event_type,json=eventType,proto3" json:"event_type,omitempty"`
-	EventTime     *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=event_time,json=eventTime,proto3" json:"event_time,omitempty"`
-	Content       string                 `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
-	Direction     int32                  `protobuf:"varint,4,opt,name=direction,proto3" json:"direction,omitempty"`
+	Direction     int32                  `protobuf:"varint,1,opt,name=direction,proto3" json:"direction,omitempty"` // 0=me 1=them
+	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
+	Timestamp     int64                  `protobuf:"varint,3,opt,name=timestamp,proto3" json:"timestamp,omitempty"` // unix seconds
+	IsResume      bool                   `protobuf:"varint,4,opt,name=is_resume,json=isResume,proto3" json:"is_resume,omitempty"`
+	ResumeVersion string                 `protobuf:"bytes,5,opt,name=resume_version,json=resumeVersion,proto3" json:"resume_version,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AdminCommItem) Reset() {
-	*x = AdminCommItem{}
+func (x *AdminChatMessage) Reset() {
+	*x = AdminChatMessage{}
 	mi := &file_admin_admin_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AdminCommItem) String() string {
+func (x *AdminChatMessage) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AdminCommItem) ProtoMessage() {}
+func (*AdminChatMessage) ProtoMessage() {}
 
-func (x *AdminCommItem) ProtoReflect() protoreflect.Message {
+func (x *AdminChatMessage) ProtoReflect() protoreflect.Message {
 	mi := &file_admin_admin_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -518,50 +518,57 @@ func (x *AdminCommItem) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AdminCommItem.ProtoReflect.Descriptor instead.
-func (*AdminCommItem) Descriptor() ([]byte, []int) {
+// Deprecated: Use AdminChatMessage.ProtoReflect.Descriptor instead.
+func (*AdminChatMessage) Descriptor() ([]byte, []int) {
 	return file_admin_admin_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *AdminCommItem) GetEventType() int32 {
-	if x != nil {
-		return x.EventType
-	}
-	return 0
-}
-
-func (x *AdminCommItem) GetEventTime() *timestamppb.Timestamp {
-	if x != nil {
-		return x.EventTime
-	}
-	return nil
-}
-
-func (x *AdminCommItem) GetContent() string {
-	if x != nil {
-		return x.Content
-	}
-	return ""
-}
-
-func (x *AdminCommItem) GetDirection() int32 {
+func (x *AdminChatMessage) GetDirection() int32 {
 	if x != nil {
 		return x.Direction
 	}
 	return 0
 }
 
+func (x *AdminChatMessage) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+func (x *AdminChatMessage) GetTimestamp() int64 {
+	if x != nil {
+		return x.Timestamp
+	}
+	return 0
+}
+
+func (x *AdminChatMessage) GetIsResume() bool {
+	if x != nil {
+		return x.IsResume
+	}
+	return false
+}
+
+func (x *AdminChatMessage) GetResumeVersion() string {
+	if x != nil {
+		return x.ResumeVersion
+	}
+	return ""
+}
+
 type AdminPositionDetailResp struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	Position       *AdminPositionItem     `protobuf:"bytes,1,opt,name=position,proto3" json:"position,omitempty"`
-	MatchItems     []*AdminMatchItem      `protobuf:"bytes,2,rep,name=match_items,json=matchItems,proto3" json:"match_items,omitempty"`
-	Communications []*AdminCommItem       `protobuf:"bytes,3,rep,name=communications,proto3" json:"communications,omitempty"`
-	Duties         string                 `protobuf:"bytes,4,opt,name=duties,proto3" json:"duties,omitempty"`
-	Requirements   string                 `protobuf:"bytes,5,opt,name=requirements,proto3" json:"requirements,omitempty"`
-	Notes          string                 `protobuf:"bytes,6,opt,name=notes,proto3" json:"notes,omitempty"`
-	SkipReason     string                 `protobuf:"bytes,7,opt,name=skip_reason,json=skipReason,proto3" json:"skip_reason,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Position      *AdminPositionItem     `protobuf:"bytes,1,opt,name=position,proto3" json:"position,omitempty"`
+	MatchItems    []*AdminMatchItem      `protobuf:"bytes,2,rep,name=match_items,json=matchItems,proto3" json:"match_items,omitempty"`
+	ChatMessages  []*AdminChatMessage    `protobuf:"bytes,3,rep,name=chat_messages,json=chatMessages,proto3" json:"chat_messages,omitempty"`
+	Duties        string                 `protobuf:"bytes,4,opt,name=duties,proto3" json:"duties,omitempty"`
+	Requirements  string                 `protobuf:"bytes,5,opt,name=requirements,proto3" json:"requirements,omitempty"`
+	Notes         string                 `protobuf:"bytes,6,opt,name=notes,proto3" json:"notes,omitempty"`
+	SkipReason    string                 `protobuf:"bytes,7,opt,name=skip_reason,json=skipReason,proto3" json:"skip_reason,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *AdminPositionDetailResp) Reset() {
@@ -608,9 +615,9 @@ func (x *AdminPositionDetailResp) GetMatchItems() []*AdminMatchItem {
 	return nil
 }
 
-func (x *AdminPositionDetailResp) GetCommunications() []*AdminCommItem {
+func (x *AdminPositionDetailResp) GetChatMessages() []*AdminChatMessage {
 	if x != nil {
-		return x.Communications
+		return x.ChatMessages
 	}
 	return nil
 }
@@ -751,7 +758,7 @@ var File_admin_admin_proto protoreflect.FileDescriptor
 
 const file_admin_admin_proto_rawDesc = "" +
 	"\n" +
-	"\x11admin/admin.proto\x12\tapi.admin\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x17\n" +
+	"\x11admin/admin.proto\x12\tapi.admin\x1a\x1cgoogle/api/annotations.proto\"\x17\n" +
 	"\x15ListTodayPositionsReq\"^\n" +
 	"\x13ListAllPositionsReq\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\x05R\x06status\x12\x12\n" +
@@ -790,19 +797,18 @@ const file_admin_admin_proto_rawDesc = "" +
 	"\vrequirement\x18\x01 \x01(\tR\vrequirement\x12!\n" +
 	"\fmatch_status\x18\x02 \x01(\x05R\vmatchStatus\x12!\n" +
 	"\fresume_point\x18\x03 \x01(\tR\vresumePoint\x12\x16\n" +
-	"\x06remark\x18\x04 \x01(\tR\x06remark\"\xa1\x01\n" +
-	"\rAdminCommItem\x12\x1d\n" +
-	"\n" +
-	"event_type\x18\x01 \x01(\x05R\teventType\x129\n" +
-	"\n" +
-	"event_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\teventTime\x12\x18\n" +
-	"\acontent\x18\x03 \x01(\tR\acontent\x12\x1c\n" +
-	"\tdirection\x18\x04 \x01(\x05R\tdirection\"\xc4\x02\n" +
+	"\x06remark\x18\x04 \x01(\tR\x06remark\"\xac\x01\n" +
+	"\x10AdminChatMessage\x12\x1c\n" +
+	"\tdirection\x18\x01 \x01(\x05R\tdirection\x12\x18\n" +
+	"\acontent\x18\x02 \x01(\tR\acontent\x12\x1c\n" +
+	"\ttimestamp\x18\x03 \x01(\x03R\ttimestamp\x12\x1b\n" +
+	"\tis_resume\x18\x04 \x01(\bR\bisResume\x12%\n" +
+	"\x0eresume_version\x18\x05 \x01(\tR\rresumeVersion\"\xc4\x02\n" +
 	"\x17AdminPositionDetailResp\x128\n" +
 	"\bposition\x18\x01 \x01(\v2\x1c.api.admin.AdminPositionItemR\bposition\x12:\n" +
 	"\vmatch_items\x18\x02 \x03(\v2\x19.api.admin.AdminMatchItemR\n" +
 	"matchItems\x12@\n" +
-	"\x0ecommunications\x18\x03 \x03(\v2\x18.api.admin.AdminCommItemR\x0ecommunications\x12\x16\n" +
+	"\rchat_messages\x18\x03 \x03(\v2\x1b.api.admin.AdminChatMessageR\fchatMessages\x12\x16\n" +
 	"\x06duties\x18\x04 \x01(\tR\x06duties\x12\"\n" +
 	"\frequirements\x18\x05 \x01(\tR\frequirements\x12\x14\n" +
 	"\x05notes\x18\x06 \x01(\tR\x05notes\x12\x1f\n" +
@@ -841,32 +847,30 @@ var file_admin_admin_proto_goTypes = []any{
 	(*AdminPositionItem)(nil),       // 4: api.admin.AdminPositionItem
 	(*AdminPositionListResp)(nil),   // 5: api.admin.AdminPositionListResp
 	(*AdminMatchItem)(nil),          // 6: api.admin.AdminMatchItem
-	(*AdminCommItem)(nil),           // 7: api.admin.AdminCommItem
+	(*AdminChatMessage)(nil),        // 7: api.admin.AdminChatMessage
 	(*AdminPositionDetailResp)(nil), // 8: api.admin.AdminPositionDetailResp
 	(*StatusCount)(nil),             // 9: api.admin.StatusCount
 	(*GetStatsResp)(nil),            // 10: api.admin.GetStatsResp
-	(*timestamppb.Timestamp)(nil),   // 11: google.protobuf.Timestamp
 }
 var file_admin_admin_proto_depIdxs = []int32{
 	4,  // 0: api.admin.AdminPositionListResp.items:type_name -> api.admin.AdminPositionItem
-	11, // 1: api.admin.AdminCommItem.event_time:type_name -> google.protobuf.Timestamp
-	4,  // 2: api.admin.AdminPositionDetailResp.position:type_name -> api.admin.AdminPositionItem
-	6,  // 3: api.admin.AdminPositionDetailResp.match_items:type_name -> api.admin.AdminMatchItem
-	7,  // 4: api.admin.AdminPositionDetailResp.communications:type_name -> api.admin.AdminCommItem
-	9,  // 5: api.admin.GetStatsResp.status_counts:type_name -> api.admin.StatusCount
-	0,  // 6: api.admin.AdminService.ListTodayPositions:input_type -> api.admin.ListTodayPositionsReq
-	1,  // 7: api.admin.AdminService.ListAllPositions:input_type -> api.admin.ListAllPositionsReq
-	2,  // 8: api.admin.AdminService.GetPositionDetail:input_type -> api.admin.GetPositionDetailReq
-	3,  // 9: api.admin.AdminService.GetStats:input_type -> api.admin.GetStatsReq
-	5,  // 10: api.admin.AdminService.ListTodayPositions:output_type -> api.admin.AdminPositionListResp
-	5,  // 11: api.admin.AdminService.ListAllPositions:output_type -> api.admin.AdminPositionListResp
-	8,  // 12: api.admin.AdminService.GetPositionDetail:output_type -> api.admin.AdminPositionDetailResp
-	10, // 13: api.admin.AdminService.GetStats:output_type -> api.admin.GetStatsResp
-	10, // [10:14] is the sub-list for method output_type
-	6,  // [6:10] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	4,  // 1: api.admin.AdminPositionDetailResp.position:type_name -> api.admin.AdminPositionItem
+	6,  // 2: api.admin.AdminPositionDetailResp.match_items:type_name -> api.admin.AdminMatchItem
+	7,  // 3: api.admin.AdminPositionDetailResp.chat_messages:type_name -> api.admin.AdminChatMessage
+	9,  // 4: api.admin.GetStatsResp.status_counts:type_name -> api.admin.StatusCount
+	0,  // 5: api.admin.AdminService.ListTodayPositions:input_type -> api.admin.ListTodayPositionsReq
+	1,  // 6: api.admin.AdminService.ListAllPositions:input_type -> api.admin.ListAllPositionsReq
+	2,  // 7: api.admin.AdminService.GetPositionDetail:input_type -> api.admin.GetPositionDetailReq
+	3,  // 8: api.admin.AdminService.GetStats:input_type -> api.admin.GetStatsReq
+	5,  // 9: api.admin.AdminService.ListTodayPositions:output_type -> api.admin.AdminPositionListResp
+	5,  // 10: api.admin.AdminService.ListAllPositions:output_type -> api.admin.AdminPositionListResp
+	8,  // 11: api.admin.AdminService.GetPositionDetail:output_type -> api.admin.AdminPositionDetailResp
+	10, // 12: api.admin.AdminService.GetStats:output_type -> api.admin.GetStatsResp
+	9,  // [9:13] is the sub-list for method output_type
+	5,  // [5:9] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_admin_admin_proto_init() }

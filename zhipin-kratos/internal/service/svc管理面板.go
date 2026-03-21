@@ -8,7 +8,6 @@ import (
 	"github.com/yylego/smart-employee-zhipin/zhipin-kratos/internal/biz"
 	"github.com/yylego/smart-employee-zhipin/zhipin-kratos/internal/enums"
 	"github.com/yylego/smart-employee-zhipin/zhipin-kratos/internal/pkg/models"
-	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type Svc管理面板 struct {
@@ -67,7 +66,7 @@ func (s *Svc管理面板) GetPositionDetail(ctx context.Context, req *pb.GetPosi
 	if ebz != nil {
 		return nil, ebz.Erk
 	}
-	v沟通们, ebz := s.uc沟通.Get沟通列表(ctx, uint(req.Id))
+	v沟通们, ebz := s.uc沟通.Get聊天记录(ctx, uint(req.Id))
 	if ebz != nil {
 		return nil, ebz.Erk
 	}
@@ -82,20 +81,21 @@ func (s *Svc管理面板) GetPositionDetail(ctx context.Context, req *pb.GetPosi
 		})
 	}
 
-	commItems := make([]*pb.AdminCommItem, 0, len(v沟通们))
+	chatMessages := make([]*pb.AdminChatMessage, 0, len(v沟通们))
 	for _, v := range v沟通们 {
-		commItems = append(commItems, &pb.AdminCommItem{
-			EventType: int32(enums.Enum事件类型映射表.MustGetByBasic(v.E事件类型).Proto()),
-			EventTime: timestamppb.New(v.E事件时间),
-			Content:   v.C消息内容,
-			Direction: v.D消息方向,
+		chatMessages = append(chatMessages, &pb.AdminChatMessage{
+			Direction:     v.D消息方向,
+			Content:       v.C消息内容,
+			Timestamp:     v.T消息时间,
+			IsResume:      v.B简历消息,
+			ResumeVersion: v.R简历版本,
 		})
 	}
 
 	return &pb.AdminPositionDetailResp{
-		Position:       toAdminPositionItem(v岗位),
-		MatchItems:     matchItems,
-		Communications: commItems,
+		Position:     toAdminPositionItem(v岗位),
+		MatchItems:   matchItems,
+		ChatMessages: chatMessages,
 		Duties:         v岗位.D岗位职责,
 		Requirements:   v岗位.R岗位要求,
 		Notes:          v岗位.N备注信息,

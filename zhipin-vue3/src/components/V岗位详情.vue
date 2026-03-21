@@ -14,9 +14,10 @@ const matchStatusMap: Record<number, { text: string; type: string }> = {
     3: { text: '❌ 不匹配', type: 'danger' },
 }
 
-const eventTypeMap: Record<number, string> = {
-    0: '未知', 1: '发消息', 2: '收消息', 3: '发简历',
-    4: '开聊限制', 5: '安排面试', 6: '收到邀请', 7: '被拒绝',
+function formatTime(ts: number): string {
+    if (!ts) return ''
+    const d = new Date(ts * 1000)
+    return d.toLocaleString('zh-CN')
 }
 
 async function loadDetail() {
@@ -72,25 +73,26 @@ watch(() => props.positionId, loadDetail)
                 </el-table-column>
             </el-table>
 
-            <!-- 沟通记录 -->
-            <h3 style="margin: 16px 0 8px">沟通记录</h3>
-            <el-timeline v-if="detail.s沟通列表.length">
+            <!-- 聊天记录 -->
+            <h3 style="margin: 16px 0 8px">聊天记录</h3>
+            <el-timeline v-if="detail.s聊天列表.length">
                 <el-timeline-item
-                    v-for="(comm, idx) in detail.s沟通列表"
+                    v-for="(msg, idx) in detail.s聊天列表"
                     :key="idx"
-                    :type="comm.n消息方向 === 0 ? 'primary' : 'success'"
-                    :hollow="comm.n消息方向 === 1"
+                    :type="msg.n消息方向 === 0 ? 'primary' : 'success'"
+                    :hollow="msg.n消息方向 === 1"
                 >
                     <div style="display: flex; gap: 8px; align-items: baseline">
-                        <el-tag size="small" :type="comm.n消息方向 === 0 ? 'primary' : 'success'">
-                            {{ comm.n消息方向 === 0 ? '我→对方' : '对方→我' }}
+                        <el-tag size="small" :type="msg.n消息方向 === 0 ? 'primary' : 'success'">
+                            {{ msg.n消息方向 === 0 ? '我→对方' : '对方→我' }}
                         </el-tag>
-                        <span style="color: #909399; font-size: 12px">{{ eventTypeMap[comm.n事件类型] || '未知' }}</span>
+                        <span style="color: #909399; font-size: 12px">{{ formatTime(msg.n消息时间) }}</span>
+                        <el-tag v-if="msg.b简历消息" size="small" type="warning">简历: {{ msg.s简历版本 }}</el-tag>
                     </div>
-                    <p style="margin: 4px 0 0; color: #303133">{{ comm.s消息内容 }}</p>
+                    <p style="margin: 4px 0 0; color: #303133">{{ msg.s消息内容 }}</p>
                 </el-timeline-item>
             </el-timeline>
-            <el-empty v-else description="暂无沟通记录" />
+            <el-empty v-else description="暂无聊天记录" />
 
             <!-- 岗位职责和要求 -->
             <template v-if="detail.s岗位职责">
