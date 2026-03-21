@@ -18,6 +18,7 @@ const (
 type T需求匹配项 struct {
 	gorm.Model
 	P岗位主键 uint     `gorm:"column:position_id;index:idx_requirement_items_position_id;not null"` // 关联岗位ID
+	J岗位编号 string   `gorm:"column:job_id;type:varchar(28);index:idx_requirement_items_job_id;not null"` // 28位岗位编号
 	R岗位要求 string   `gorm:"column:requirement;type:text;not null"`        // 岗位的一条要求
 	M匹配状态 E匹配状态 `gorm:"column:match_status;type:varchar(32);not null"` // 匹配状态
 	R简历对应 string   `gorm:"column:resume_point;type:text"`                // 简历中对应的经验

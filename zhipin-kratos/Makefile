@@ -90,7 +90,7 @@ web_api_grpc_ts:
 	--plugin=protoc-gen-ts=$$PROTOC_GEN_TS \
 	--ts_opt long_type_string \
 	--ts_out=./bin/web_api_grpc_ts.out \
-	--proto_path=. \
+	--proto_path=./api \
 	--proto_path=./third_party \
 	$(API_PROTO_FILES)
 

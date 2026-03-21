@@ -152,7 +152,7 @@ func (x *RequirementItemInput) GetSortIndex() int32 {
 
 type SetRequirementItemsReq struct {
 	state         protoimpl.MessageState  `protogen:"open.v1"`
-	PositionId    uint64                  `protobuf:"varint,1,opt,name=position_id,json=positionId,proto3" json:"position_id,omitempty"`
+	JobId         string                  `protobuf:"bytes,1,opt,name=job_id,json=jobId,proto3" json:"job_id,omitempty"`
 	Items         []*RequirementItemInput `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -188,11 +188,11 @@ func (*SetRequirementItemsReq) Descriptor() ([]byte, []int) {
 	return file_zhipin_requirement_item_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *SetRequirementItemsReq) GetPositionId() uint64 {
+func (x *SetRequirementItemsReq) GetJobId() string {
 	if x != nil {
-		return x.PositionId
+		return x.JobId
 	}
-	return 0
+	return ""
 }
 
 func (x *SetRequirementItemsReq) GetItems() []*RequirementItemInput {
@@ -248,7 +248,7 @@ func (x *SetRequirementItemsResp) GetCount() int32 {
 
 type ListRequirementItemsReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	PositionId    uint64                 `protobuf:"varint,1,opt,name=position_id,json=positionId,proto3" json:"position_id,omitempty"`
+	JobId         string                 `protobuf:"bytes,1,opt,name=job_id,json=jobId,proto3" json:"job_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -283,17 +283,17 @@ func (*ListRequirementItemsReq) Descriptor() ([]byte, []int) {
 	return file_zhipin_requirement_item_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *ListRequirementItemsReq) GetPositionId() uint64 {
+func (x *ListRequirementItemsReq) GetJobId() string {
 	if x != nil {
-		return x.PositionId
+		return x.JobId
 	}
-	return 0
+	return ""
 }
 
 type RequirementItemResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	PositionId    uint64                 `protobuf:"varint,2,opt,name=position_id,json=positionId,proto3" json:"position_id,omitempty"`
+	JobId         string                 `protobuf:"bytes,2,opt,name=job_id,json=jobId,proto3" json:"job_id,omitempty"`
 	Requirement   string                 `protobuf:"bytes,3,opt,name=requirement,proto3" json:"requirement,omitempty"`
 	MatchStatus   int32                  `protobuf:"varint,4,opt,name=match_status,json=matchStatus,proto3" json:"match_status,omitempty"`
 	ResumePoint   string                 `protobuf:"bytes,5,opt,name=resume_point,json=resumePoint,proto3" json:"resume_point,omitempty"`
@@ -340,11 +340,11 @@ func (x *RequirementItemResp) GetId() uint64 {
 	return 0
 }
 
-func (x *RequirementItemResp) GetPositionId() uint64 {
+func (x *RequirementItemResp) GetJobId() string {
 	if x != nil {
-		return x.PositionId
+		return x.JobId
 	}
-	return 0
+	return ""
 }
 
 func (x *RequirementItemResp) GetRequirement() string {
@@ -438,20 +438,17 @@ const file_zhipin_requirement_item_proto_rawDesc = "" +
 	"\fresume_point\x18\x03 \x01(\tR\vresumePoint\x12\x16\n" +
 	"\x06remark\x18\x04 \x01(\tR\x06remark\x12\x1d\n" +
 	"\n" +
-	"sort_index\x18\x05 \x01(\x05R\tsortIndex\"q\n" +
-	"\x16SetRequirementItemsReq\x12\x1f\n" +
-	"\vposition_id\x18\x01 \x01(\x04R\n" +
-	"positionId\x126\n" +
+	"sort_index\x18\x05 \x01(\x05R\tsortIndex\"g\n" +
+	"\x16SetRequirementItemsReq\x12\x15\n" +
+	"\x06job_id\x18\x01 \x01(\tR\x05jobId\x126\n" +
 	"\x05items\x18\x02 \x03(\v2 .api.zhipin.RequirementItemInputR\x05items\"/\n" +
 	"\x17SetRequirementItemsResp\x12\x14\n" +
-	"\x05count\x18\x01 \x01(\x05R\x05count\":\n" +
-	"\x17ListRequirementItemsReq\x12\x1f\n" +
-	"\vposition_id\x18\x01 \x01(\x04R\n" +
-	"positionId\"\xe5\x01\n" +
+	"\x05count\x18\x01 \x01(\x05R\x05count\"0\n" +
+	"\x17ListRequirementItemsReq\x12\x15\n" +
+	"\x06job_id\x18\x01 \x01(\tR\x05jobId\"\xdb\x01\n" +
 	"\x13RequirementItemResp\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x1f\n" +
-	"\vposition_id\x18\x02 \x01(\x04R\n" +
-	"positionId\x12 \n" +
+	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x15\n" +
+	"\x06job_id\x18\x02 \x01(\tR\x05jobId\x12 \n" +
 	"\vrequirement\x18\x03 \x01(\tR\vrequirement\x12!\n" +
 	"\fmatch_status\x18\x04 \x01(\x05R\vmatchStatus\x12!\n" +
 	"\fresume_point\x18\x05 \x01(\tR\vresumePoint\x12\x16\n" +
@@ -464,10 +461,10 @@ const file_zhipin_requirement_item_proto_rawDesc = "" +
 	"\x14MATCH_STATUS_UNKNOWN\x10\x00\x12\x18\n" +
 	"\x14MATCH_STATUS_MATCHED\x10\x01\x12\x18\n" +
 	"\x14MATCH_STATUS_PARTIAL\x10\x02\x12\x18\n" +
-	"\x14MATCH_STATUS_MISSING\x10\x032\xce\x02\n" +
-	"\x16RequirementItemService\x12\x98\x01\n" +
-	"\x13SetRequirementItems\x12\".api.zhipin.SetRequirementItemsReq\x1a#.api.zhipin.SetRequirementItemsResp\"8\x82\xd3\xe4\x93\x022:\x01*\"-/api/position/{position_id}/requirement-items\x12\x98\x01\n" +
-	"\x14ListRequirementItems\x12#.api.zhipin.ListRequirementItemsReq\x1a$.api.zhipin.ListRequirementItemsResp\"5\x82\xd3\xe4\x93\x02/\x12-/api/position/{position_id}/requirement-itemsBIZGgithub.com/yylego/smart-employee-zhipin/zhipin-kratos/api/zhipin;zhipinb\x06proto3"
+	"\x14MATCH_STATUS_MISSING\x10\x032\xb2\x02\n" +
+	"\x16RequirementItemService\x12\x8a\x01\n" +
+	"\x13SetRequirementItems\x12\".api.zhipin.SetRequirementItemsReq\x1a#.api.zhipin.SetRequirementItemsResp\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/api/requirement-items/{job_id}\x12\x8a\x01\n" +
+	"\x14ListRequirementItems\x12#.api.zhipin.ListRequirementItemsReq\x1a$.api.zhipin.ListRequirementItemsResp\"'\x82\xd3\xe4\x93\x02!\x12\x1f/api/requirement-items/{job_id}BIZGgithub.com/yylego/smart-employee-zhipin/zhipin-kratos/api/zhipin;zhipinb\x06proto3"
 
 var (
 	file_zhipin_requirement_item_proto_rawDescOnce sync.Once

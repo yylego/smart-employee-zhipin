@@ -29,7 +29,8 @@ func (s *Svc需求匹配) SetRequirementItems(ctx context.Context, req *pb.SetRe
 			S排序序号: item.SortIndex,
 		})
 	}
-	count, ebz := s.uc.Xqt批量设置(ctx, uint(req.PositionId), items)
+	count, ebz := s.uc.Xqt批量设置(ctx, req.JobId, items)
+
 	if ebz != nil {
 		return nil, ebz.Erk
 	}
@@ -37,7 +38,7 @@ func (s *Svc需求匹配) SetRequirementItems(ctx context.Context, req *pb.SetRe
 }
 
 func (s *Svc需求匹配) ListRequirementItems(ctx context.Context, req *pb.ListRequirementItemsReq) (*pb.ListRequirementItemsResp, error) {
-	v匹配们, ebz := s.uc.Get匹配列表(ctx, uint(req.PositionId))
+	v匹配们, ebz := s.uc.Get匹配列表(ctx, req.JobId)
 	if ebz != nil {
 		return nil, ebz.Erk
 	}
@@ -45,7 +46,7 @@ func (s *Svc需求匹配) ListRequirementItems(ctx context.Context, req *pb.List
 	for _, v := range v匹配们 {
 		items = append(items, &pb.RequirementItemResp{
 			Id:          uint64(v.ID),
-			PositionId:  uint64(v.P岗位主键),
+			JobId:       v.J岗位编号,
 			Requirement: v.R岗位要求,
 			MatchStatus: int32(enums.Enum匹配状态映射表.MustGetByBasic(v.M匹配状态).Proto()),
 			ResumePoint: v.R简历对应,

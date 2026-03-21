@@ -59,7 +59,7 @@ func (s *Svc岗位管理) CreatePosition(ctx context.Context, req *pb.CreatePosi
 				S排序序号: item.SortIndex,
 			})
 		}
-		if _, ebz := s.ucMatch.Xqt批量设置(ctx, v岗位.ID, items); ebz != nil {
+		if _, ebz := s.ucMatch.Xqt批量设置(ctx, v岗位.J岗位编号, items); ebz != nil {
 			return nil, ebz.Erk
 		}
 	}

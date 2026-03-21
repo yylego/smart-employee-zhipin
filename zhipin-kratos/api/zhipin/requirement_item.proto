@@ -16,10 +16,10 @@ enum MatchStatus {
 // RequirementItemService — per-requirement match analysis
 service RequirementItemService {
   rpc SetRequirementItems (SetRequirementItemsReq) returns (SetRequirementItemsResp) {
-    option (google.api.http) = { post: "/api/position/{position_id}/requirement-items", body: "*" };
+    option (google.api.http) = { post: "/api/requirement-items/{job_id}", body: "*" };
   }
   rpc ListRequirementItems (ListRequirementItemsReq) returns (ListRequirementItemsResp) {
-    option (google.api.http) = { get: "/api/position/{position_id}/requirement-items" };
+    option (google.api.http) = { get: "/api/requirement-items/{job_id}" };
   }
 }
 
@@ -32,7 +32,7 @@ message RequirementItemInput {
 }
 
 message SetRequirementItemsReq {
-  uint64 position_id = 1;
+  string job_id = 1;
   repeated RequirementItemInput items = 2;
 }
 
@@ -41,12 +41,12 @@ message SetRequirementItemsResp {
 }
 
 message ListRequirementItemsReq {
-  uint64 position_id = 1;
+  string job_id = 1;
 }
 
 message RequirementItemResp {
   uint64 id = 1;
-  uint64 position_id = 2;
+  string job_id = 2;
   string requirement = 3;
   int32  match_status = 4;
   string resume_point = 5;

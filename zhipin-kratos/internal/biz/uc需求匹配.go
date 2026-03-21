@@ -16,16 +16,18 @@ import (
 )
 
 type Uc需求匹配 struct {
-	data *data.Data
-	repo *gormrepo.Repo[models.T需求匹配项, *models.T需求匹配项Columns]
-	zapLog *zaplog.Zap
+	data     *data.Data
+	repo     *gormrepo.Repo[models.T需求匹配项, *models.T需求匹配项Columns]
+	repo岗位 *gormrepo.Repo[models.T岗位, *models.T岗位Columns]
+	zapLog   *zaplog.Zap
 }
 
 func NewUc需求匹配(data *data.Data, zapKratos *zapkratos.ZapKratos) *Uc需求匹配 {
 	return &Uc需求匹配{
-		data: data,
-		repo: gormrepo.NewRepo(gormclass.Use(&models.T需求匹配项{})),
-		zapLog: zapKratos.SubZap(),
+		data:     data,
+		repo:     gormrepo.NewRepo(gormclass.Use(&models.T需求匹配项{})),
+		repo岗位: gormrepo.NewRepo(gormclass.Use(&models.T岗位{})),
+		zapLog:   zapKratos.SubZap(),
 	}
 }
 
@@ -37,9 +39,17 @@ type Req需求匹配项 struct {
 	S排序序号 int32
 }
 
-func (uc *Uc需求匹配) Xqt批量设置(ctx context.Context, p岗位主键 uint, items []*Req需求匹配项) (int32, *ebzkratos.Ebz) {
-	must.True(p岗位主键 > 0)
+func (uc *Uc需求匹配) Xqt批量设置(ctx context.Context, j岗位编号 string, items []*Req需求匹配项) (int32, *ebzkratos.Ebz) {
+	must.True(len(j岗位编号) == 28)
 	db := uc.data.DB()
+
+	v岗位, err := uc.repo岗位.With(ctx, db).First(func(db *gorm.DB, cls *models.T岗位Columns) *gorm.DB {
+		return db.Where(cls.J岗位编号.Eq(j岗位编号))
+	})
+	if err != nil {
+		return 0, ebzkratos.New(pb.ErrorPositionNotFound("job_id=%s", j岗位编号))
+	}
+	p岗位主键 := v岗位.ID
 
 	if err := uc.repo.With(ctx, db).DeleteW(func(db *gorm.DB, cls *models.T需求匹配项Columns) *gorm.DB {
 		return db.Where(cls.P岗位主键.Eq(p岗位主键))
@@ -49,6 +59,7 @@ func (uc *Uc需求匹配) Xqt批量设置(ctx context.Context, p岗位主键 uin
 	for _, item := range items {
 		v匹配 := &models.T需求匹配项{
 			P岗位主键: p岗位主键,
+			J岗位编号: j岗位编号,
 			R岗位要求: item.R岗位要求,
 			M匹配状态: item.M匹配状态,
 			R简历对应: item.R简历对应,
@@ -62,11 +73,19 @@ func (uc *Uc需求匹配) Xqt批量设置(ctx context.Context, p岗位主键 uin
 	return int32(len(items)), nil
 }
 
-func (uc *Uc需求匹配) Get匹配列表(ctx context.Context, p岗位主键 uint) ([]*models.T需求匹配项, *ebzkratos.Ebz) {
-	must.True(p岗位主键 > 0)
+func (uc *Uc需求匹配) Get匹配列表(ctx context.Context, j岗位编号 string) ([]*models.T需求匹配项, *ebzkratos.Ebz) {
+	must.True(len(j岗位编号) == 28)
 	db := uc.data.DB()
+
+	v岗位, err := uc.repo岗位.With(ctx, db).First(func(db *gorm.DB, cls *models.T岗位Columns) *gorm.DB {
+		return db.Where(cls.J岗位编号.Eq(j岗位编号))
+	})
+	if err != nil {
+		return nil, ebzkratos.New(pb.ErrorPositionNotFound("job_id=%s", j岗位编号))
+	}
+
 	v匹配们, err := uc.repo.With(ctx, db).Find(func(db *gorm.DB, cls *models.T需求匹配项Columns) *gorm.DB {
-		return db.Where(cls.P岗位主键.Eq(p岗位主键)).Order(cls.S排序序号.Ob("ASC").Ox())
+		return db.Where(cls.P岗位主键.Eq(v岗位.ID)).Order(cls.S排序序号.Ob("ASC").Ox())
 	})
 	if err != nil {
 		return nil, ebzkratos.New(pb.ErrorDbError("list: %v", err))

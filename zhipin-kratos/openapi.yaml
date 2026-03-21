@@ -475,47 +475,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.zhipin.PositionResp'
-    /api/position/{positionId}/requirement-items:
-        get:
-            tags:
-                - RequirementItemService
-            operationId: RequirementItemService_ListRequirementItems
-            parameters:
-                - name: positionId
-                  in: path
-                  required: true
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.zhipin.ListRequirementItemsResp'
-        post:
-            tags:
-                - RequirementItemService
-            operationId: RequirementItemService_SetRequirementItems
-            parameters:
-                - name: positionId
-                  in: path
-                  required: true
-                  schema:
-                    type: string
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/api.zhipin.SetRequirementItemsReq'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.zhipin.SetRequirementItemsResp'
     /api/positions:
         get:
             tags:
@@ -613,6 +572,47 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.zhipin.ListPositionsResp'
+    /api/requirement-items/{jobId}:
+        get:
+            tags:
+                - RequirementItemService
+            operationId: RequirementItemService_ListRequirementItems
+            parameters:
+                - name: jobId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.ListRequirementItemsResp'
+        post:
+            tags:
+                - RequirementItemService
+            operationId: RequirementItemService_SetRequirementItems
+            parameters:
+                - name: jobId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.zhipin.SetRequirementItemsReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.zhipin.SetRequirementItemsResp'
 components:
     schemas:
         api.admin.AdminChatMessage:
@@ -971,7 +971,7 @@ components:
             properties:
                 id:
                     type: string
-                positionId:
+                jobId:
                     type: string
                 requirement:
                     type: string
@@ -988,7 +988,7 @@ components:
         api.zhipin.SetRequirementItemsReq:
             type: object
             properties:
-                positionId:
+                jobId:
                     type: string
                 items:
                     type: array

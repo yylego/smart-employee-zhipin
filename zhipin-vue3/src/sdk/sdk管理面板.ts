@@ -1,12 +1,12 @@
 import type { RpcTransport } from '@protobuf-ts/runtime-rpc'
 
-import { AdminServiceClient } from '../rpc/zhipin/api/admin/admin.client'
+import { AdminServiceClient } from '../rpc/zhipin/admin/admin.client'
 import {
     ListTodayPositionsReq,
     ListAllPositionsReq,
     GetPositionDetailReq,
     GetStatsReq,
-} from '../rpc/zhipin/api/admin/admin'
+} from '../rpc/zhipin/admin/admin'
 
 // ========================== 响应类型定义 ==========================
 

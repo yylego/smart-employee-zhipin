@@ -115,8 +115,16 @@ func (uc *Uc沟通管理) Xqt同步聊天(ctx context.Context, j岗位编号 str
 func (uc *Uc沟通管理) Get聊天记录(ctx context.Context, j岗位编号 string) ([]*models.T沟通记录, *ebzkratos.Ebz) {
 	must.True(len(j岗位编号) == 28)
 	db := uc.data.DB()
+
+	v岗位, err := uc.repo岗位.With(ctx, db).First(func(db *gorm.DB, cls *models.T岗位Columns) *gorm.DB {
+		return db.Where(cls.J岗位编号.Eq(j岗位编号))
+	})
+	if err != nil {
+		return nil, ebzkratos.New(pb.ErrorPositionNotFound("job_id=%s", j岗位编号))
+	}
+
 	v记录们, err := uc.repo.With(ctx, db).Find(func(db *gorm.DB, cls *models.T沟通记录Columns) *gorm.DB {
-		return db.Where(cls.J岗位编号.Eq(j岗位编号)).Order(cls.T消息时间.Ob("ASC").Ox())
+		return db.Where(cls.P岗位主键.Eq(v岗位.ID)).Order(cls.T消息时间.Ob("ASC").Ox())
 	})
 	if err != nil {
 		return nil, ebzkratos.New(pb.ErrorDbError("get: %v", err))

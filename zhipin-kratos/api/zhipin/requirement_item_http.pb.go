@@ -29,8 +29,8 @@ type RequirementItemServiceHTTPServer interface {
 
 func RegisterRequirementItemServiceHTTPServer(s *http.Server, srv RequirementItemServiceHTTPServer) {
 	r := s.Route("/")
-	r.POST("/api/position/{position_id}/requirement-items", _RequirementItemService_SetRequirementItems0_HTTP_Handler(srv))
-	r.GET("/api/position/{position_id}/requirement-items", _RequirementItemService_ListRequirementItems0_HTTP_Handler(srv))
+	r.POST("/api/requirement-items/{job_id}", _RequirementItemService_SetRequirementItems0_HTTP_Handler(srv))
+	r.GET("/api/requirement-items/{job_id}", _RequirementItemService_ListRequirementItems0_HTTP_Handler(srv))
 }
 
 func _RequirementItemService_SetRequirementItems0_HTTP_Handler(srv RequirementItemServiceHTTPServer) func(ctx http.Context) error {
@@ -95,7 +95,7 @@ func NewRequirementItemServiceHTTPClient(client *http.Client) RequirementItemSer
 
 func (c *RequirementItemServiceHTTPClientImpl) ListRequirementItems(ctx context.Context, in *ListRequirementItemsReq, opts ...http.CallOption) (*ListRequirementItemsResp, error) {
 	var out ListRequirementItemsResp
-	pattern := "/api/position/{position_id}/requirement-items"
+	pattern := "/api/requirement-items/{job_id}"
 	path := binding.EncodeURL(pattern, in, true)
 	opts = append(opts, http.Operation(OperationRequirementItemServiceListRequirementItems))
 	opts = append(opts, http.PathTemplate(pattern))
@@ -108,7 +108,7 @@ func (c *RequirementItemServiceHTTPClientImpl) ListRequirementItems(ctx context.
 
 func (c *RequirementItemServiceHTTPClientImpl) SetRequirementItems(ctx context.Context, in *SetRequirementItemsReq, opts ...http.CallOption) (*SetRequirementItemsResp, error) {
 	var out SetRequirementItemsResp
-	pattern := "/api/position/{position_id}/requirement-items"
+	pattern := "/api/requirement-items/{job_id}"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation(OperationRequirementItemServiceSetRequirementItems))
 	opts = append(opts, http.PathTemplate(pattern))

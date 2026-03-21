@@ -83,6 +83,7 @@ func (c *T需求匹配项) Columns() *T需求匹配项Columns {
 		UpdatedAt: gormcnm.Cnm(c.UpdatedAt, "updated_at"),
 		DeletedAt: gormcnm.Cnm(c.DeletedAt, "deleted_at"),
 		P岗位主键:     gormcnm.Cnm(c.P岗位主键, "position_id"),
+		J岗位编号:     gormcnm.Cnm(c.J岗位编号, "job_id"),
 		R岗位要求:     gormcnm.Cnm(c.R岗位要求, "requirement"),
 		M匹配状态:     gormcnm.Cnm(c.M匹配状态, "match_status"),
 		R简历对应:     gormcnm.Cnm(c.R简历对应, "resume_point"),
@@ -100,6 +101,7 @@ type T需求匹配项Columns struct {
 	UpdatedAt gormcnm.ColumnName[time.Time]
 	DeletedAt gormcnm.ColumnName[gorm.DeletedAt]
 	P岗位主键     gormcnm.ColumnName[uint]
+	J岗位编号     gormcnm.ColumnName[string]
 	R岗位要求     gormcnm.ColumnName[string]
 	M匹配状态     gormcnm.ColumnName[E匹配状态]
 	R简历对应     gormcnm.ColumnName[string]
