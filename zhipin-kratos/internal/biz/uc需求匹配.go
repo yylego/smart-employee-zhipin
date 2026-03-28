@@ -3,31 +3,31 @@ package biz
 import (
 	"context"
 
-	"github.com/yylego/kratos-zap/zapkratos"
-	"github.com/yylego/zaplog"
 	"github.com/yylego/gormrepo"
 	"github.com/yylego/gormrepo/gormclass"
 	"github.com/yylego/kratos-ebz/ebzkratos"
+	"github.com/yylego/kratos-zap/zapkratos"
 	"github.com/yylego/must"
 	pb "github.com/yylego/smart-employee-zhipin/zhipin-kratos/api/zhipin"
 	"github.com/yylego/smart-employee-zhipin/zhipin-kratos/internal/data"
 	"github.com/yylego/smart-employee-zhipin/zhipin-kratos/internal/pkg/models"
+	"github.com/yylego/zaplog"
 	"gorm.io/gorm"
 )
 
 type Uc需求匹配 struct {
-	data     *data.Data
-	repo     *gormrepo.Repo[models.T需求匹配项, *models.T需求匹配项Columns]
+	data   *data.Data
+	repo   *gormrepo.Repo[models.T需求匹配项, *models.T需求匹配项Columns]
 	repo岗位 *gormrepo.Repo[models.T岗位, *models.T岗位Columns]
-	zapLog   *zaplog.Zap
+	zapLog *zaplog.Zap
 }
 
 func NewUc需求匹配(data *data.Data, zapKratos *zapkratos.ZapKratos) *Uc需求匹配 {
 	return &Uc需求匹配{
-		data:     data,
-		repo:     gormrepo.NewRepo(gormclass.Use(&models.T需求匹配项{})),
+		data:   data,
+		repo:   gormrepo.NewRepo(gormclass.Use(&models.T需求匹配项{})),
 		repo岗位: gormrepo.NewRepo(gormclass.Use(&models.T岗位{})),
-		zapLog:   zapKratos.SubZap(),
+		zapLog: zapKratos.SubZap(),
 	}
 }
 

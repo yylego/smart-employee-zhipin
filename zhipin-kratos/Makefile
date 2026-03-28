@@ -88,7 +88,9 @@ web_api_grpc_ts:
 	PROTOC_GEN_TS=$$(which protoc-gen-ts) && \
 	protoc \
 	--plugin=protoc-gen-ts=$$PROTOC_GEN_TS \
-	--ts_opt long_type_string \
+	--ts_opt=ts_nocheck \
+	--ts_opt=eslint_disable \
+	--ts_opt=long_type_string \
 	--ts_out=./bin/web_api_grpc_ts.out \
 	--proto_path=./api \
 	--proto_path=./third_party \
@@ -97,7 +99,9 @@ web_api_grpc_ts:
 	PROTOC_GEN_TS=$$(which protoc-gen-ts) && \
 	protoc \
 	--plugin=protoc-gen-ts=$$PROTOC_GEN_TS \
-	--ts_opt long_type_string \
+	--ts_opt=ts_nocheck \
+	--ts_opt=eslint_disable \
+	--ts_opt=long_type_string \
 	--ts_out=./bin/web_api_grpc_ts.out \
 	--proto_path=./third_party \
 	$(THIRD_PARTY_GOOGLE_API_PROTO_FILES)

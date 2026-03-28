@@ -4,7 +4,7 @@ go 1.26.1
 
 require (
 	github.com/yylego/done v0.0.0
-	github.com/yylego/kratos-vue3 v0.0.1
+	github.com/yylego/kratos-vue3 v0.0.2
 	github.com/yylego/must v0.0.0
 	github.com/yylego/osexec v0.0.0
 	github.com/yylego/osexistpath v0.0.0

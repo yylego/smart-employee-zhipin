@@ -17,18 +17,18 @@ import (
 )
 
 type Uc沟通管理 struct {
-	data     *data.Data
-	repo     *gormrepo.Repo[models.T沟通记录, *models.T沟通记录Columns]
+	data   *data.Data
+	repo   *gormrepo.Repo[models.T沟通记录, *models.T沟通记录Columns]
 	repo岗位 *gormrepo.Repo[models.T岗位, *models.T岗位Columns]
-	zapLog   *zaplog.Zap
+	zapLog *zaplog.Zap
 }
 
 func NewUc沟通管理(data *data.Data, zapKratos *zapkratos.ZapKratos) *Uc沟通管理 {
 	return &Uc沟通管理{
-		data:     data,
-		repo:     gormrepo.NewRepo(gormclass.Use(&models.T沟通记录{})),
+		data:   data,
+		repo:   gormrepo.NewRepo(gormclass.Use(&models.T沟通记录{})),
 		repo岗位: gormrepo.NewRepo(gormclass.Use(&models.T岗位{})),
-		zapLog:   zapKratos.SubZap(),
+		zapLog: zapKratos.SubZap(),
 	}
 }
 

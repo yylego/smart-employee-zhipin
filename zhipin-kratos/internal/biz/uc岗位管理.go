@@ -5,30 +5,30 @@ import (
 	"time"
 
 	"github.com/go-kratos/kratos/v2/errors"
-	"github.com/yylego/kratos-zap/zapkratos"
-	"github.com/yylego/zaplog"
 	"github.com/yylego/gormcnm"
 	"github.com/yylego/gormrepo"
 	"github.com/yylego/gormrepo/gormclass"
 	"github.com/yylego/kratos-ebz/ebzkratos"
 	"github.com/yylego/kratos-gorm/gormkratos"
+	"github.com/yylego/kratos-zap/zapkratos"
 	"github.com/yylego/must"
 	pb "github.com/yylego/smart-employee-zhipin/zhipin-kratos/api/zhipin"
 	"github.com/yylego/smart-employee-zhipin/zhipin-kratos/internal/data"
 	"github.com/yylego/smart-employee-zhipin/zhipin-kratos/internal/pkg/models"
+	"github.com/yylego/zaplog"
 	"gorm.io/gorm"
 )
 
 type Uc岗位管理 struct {
-	data *data.Data
-	repo *gormrepo.Repo[models.T岗位, *models.T岗位Columns]
+	data   *data.Data
+	repo   *gormrepo.Repo[models.T岗位, *models.T岗位Columns]
 	zapLog *zaplog.Zap
 }
 
 func NewUc岗位管理(data *data.Data, zapKratos *zapkratos.ZapKratos) *Uc岗位管理 {
 	return &Uc岗位管理{
-		data: data,
-		repo: gormrepo.NewRepo(gormclass.Use(&models.T岗位{})),
+		data:   data,
+		repo:   gormrepo.NewRepo(gormclass.Use(&models.T岗位{})),
 		zapLog: zapKratos.SubZap(),
 	}
 }
@@ -42,7 +42,7 @@ type Req创建岗位 struct {
 	S薪资上限 int32
 	C城市名称 string
 	L岗位链接 string
-	R招聘者   string
+	R招聘者  string
 	E招聘者号 string
 	I猎头标记 bool
 	S岗位状态 models.E岗位状态
@@ -111,7 +111,7 @@ func (uc *Uc岗位管理) Xqt全量更新(ctx context.Context, id uint, req *Req
 }
 
 type Req更新薪资 struct {
-	ID       uint
+	ID    uint
 	S薪资范围 string
 	S薪资下限 int32
 	S薪资上限 int32
@@ -131,7 +131,7 @@ func (uc *Uc岗位管理) Xqt更新薪资(ctx context.Context, req *Req更新薪
 }
 
 type Req更新状态 struct {
-	ID       uint
+	ID    uint
 	S岗位状态 models.E岗位状态
 }
 
@@ -149,7 +149,7 @@ func (uc *Uc岗位管理) Xqt更新状态(ctx context.Context, req *Req更新状
 }
 
 type Req标记跳过 struct {
-	ID       uint
+	ID    uint
 	S跳过原因 string
 }
 
@@ -168,7 +168,7 @@ func (uc *Uc岗位管理) Xqt标记跳过(ctx context.Context, req *Req标记跳
 }
 
 type Req更新职责 struct {
-	ID       uint
+	ID    uint
 	D岗位职责 string
 }
 
@@ -186,7 +186,7 @@ func (uc *Uc岗位管理) Xqt更新职责(ctx context.Context, req *Req更新职
 }
 
 type Req更新要求 struct {
-	ID       uint
+	ID    uint
 	R岗位要求 string
 }
 
@@ -204,7 +204,7 @@ func (uc *Uc岗位管理) Xqt更新要求(ctx context.Context, req *Req更新要
 }
 
 type Req更新匹配度 struct {
-	ID     uint
+	ID   uint
 	M匹配度 int32
 }
 
@@ -222,7 +222,7 @@ func (uc *Uc岗位管理) Xqt更新匹配度(ctx context.Context, req *Req更新
 }
 
 type Req更新备注 struct {
-	ID       uint
+	ID    uint
 	N备注信息 string
 }
 
@@ -240,7 +240,7 @@ func (uc *Uc岗位管理) Xqt更新备注(ctx context.Context, req *Req更新备
 }
 
 type Req更新招聘者 struct {
-	ID     uint
+	ID   uint
 	R招聘者 string
 }
 
@@ -288,7 +288,7 @@ func (uc *Uc岗位管理) Get按编号查(ctx context.Context, j岗位编号 str
 }
 
 type Req岗位列表 struct {
-	S岗位状态 models.E岗位状态
+	S岗位状态    models.E岗位状态
 	Page     int32
 	PageSize int32
 }
@@ -321,9 +321,9 @@ func (uc *Uc岗位管理) Get岗位列表(ctx context.Context, req *Req岗位列
 }
 
 type Res检查编号 struct {
-	Exists   bool
-	ID       uint
-	S岗位状态 models.E岗位状态
+	Exists bool
+	ID     uint
+	S岗位状态  models.E岗位状态
 }
 
 func (uc *Uc岗位管理) Get检查编号(ctx context.Context, j岗位编号 string) (*Res检查编号, *ebzkratos.Ebz) {
@@ -353,7 +353,7 @@ func (uc *Uc岗位管理) Get批量检查编号(ctx context.Context, jobIds []st
 }
 
 type Req更新招聘者号 struct {
-	ID       uint
+	ID    uint
 	E招聘者号 string
 }
 
@@ -376,7 +376,7 @@ func (uc *Uc岗位管理) Get待跟进(ctx context.Context, staleHours int32) (*
 	cutoff := time.Now().Add(-time.Duration(staleHours) * time.Hour).Unix()
 	v岗位们, err := uc.repo.With(ctx, db).Find(func(db *gorm.DB, cls *models.T岗位Columns) *gorm.DB {
 		return db.Where(cls.S岗位状态.In(models.C岗位活跃状态)).
-Where(cls.L最后沟通.Gt(int64(0))).
+			Where(cls.L最后沟通.Gt(int64(0))).
 			Where(cls.L最后沟通.Lte(cutoff)).
 			Order(cls.L最后沟通.Ob("ASC").Ox())
 	})
@@ -391,7 +391,7 @@ func (uc *Uc岗位管理) Get待回复(ctx context.Context) (*Res岗位列表, *
 	db := uc.data.DB()
 	v岗位们, err := uc.repo.With(ctx, db).Find(func(db *gorm.DB, cls *models.T岗位Columns) *gorm.DB {
 		return db.Where(cls.S岗位状态.In(models.C岗位活跃状态)).
-Where(cls.L最后方向.Eq(int32(1))). // 1 = incoming from recruiter
+			Where(cls.L最后方向.Eq(int32(1))). // 1 = incoming from recruiter
 			Order(cls.L最后沟通.Ob("ASC").Ox())
 	})
 	if err != nil {

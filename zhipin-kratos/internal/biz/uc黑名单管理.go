@@ -3,28 +3,28 @@ package biz
 import (
 	"context"
 
-	"github.com/yylego/kratos-zap/zapkratos"
-	"github.com/yylego/zaplog"
 	"github.com/yylego/gormrepo"
 	"github.com/yylego/gormrepo/gormclass"
 	"github.com/yylego/kratos-ebz/ebzkratos"
+	"github.com/yylego/kratos-zap/zapkratos"
 	"github.com/yylego/must"
 	pb "github.com/yylego/smart-employee-zhipin/zhipin-kratos/api/zhipin"
 	"github.com/yylego/smart-employee-zhipin/zhipin-kratos/internal/data"
 	"github.com/yylego/smart-employee-zhipin/zhipin-kratos/internal/pkg/models"
+	"github.com/yylego/zaplog"
 	"gorm.io/gorm"
 )
 
 type Uc黑名单管理 struct {
-	data *data.Data
-	repo *gormrepo.Repo[models.T黑名单, *models.T黑名单Columns]
+	data   *data.Data
+	repo   *gormrepo.Repo[models.T黑名单, *models.T黑名单Columns]
 	zapLog *zaplog.Zap
 }
 
 func NewUc黑名单管理(data *data.Data, zapKratos *zapkratos.ZapKratos) *Uc黑名单管理 {
 	return &Uc黑名单管理{
-		data: data,
-		repo: gormrepo.NewRepo(gormclass.Use(&models.T黑名单{})),
+		data:   data,
+		repo:   gormrepo.NewRepo(gormclass.Use(&models.T黑名单{})),
 		zapLog: zapKratos.SubZap(),
 	}
 }

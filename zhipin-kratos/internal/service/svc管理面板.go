@@ -96,10 +96,10 @@ func (s *Svc管理面板) GetPositionDetail(ctx context.Context, req *pb.GetPosi
 		Position:     toAdminPositionItem(v岗位),
 		MatchItems:   matchItems,
 		ChatMessages: chatMessages,
-		Duties:         v岗位.D岗位职责,
-		Requirements:   v岗位.R岗位要求,
-		Notes:          v岗位.N备注信息,
-		SkipReason:     v岗位.S跳过原因,
+		Duties:       v岗位.D岗位职责,
+		Requirements: v岗位.R岗位要求,
+		Notes:        v岗位.N备注信息,
+		SkipReason:   v岗位.S跳过原因,
 	}, nil
 }
 

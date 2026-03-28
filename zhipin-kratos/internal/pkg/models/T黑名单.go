@@ -8,7 +8,7 @@ import "gorm.io/gorm"
 type T黑名单 struct {
 	gorm.Model
 	C公司名称 string `gorm:"column:company;type:varchar(256);uniqueIndex:idx_blacklist_company;not null"` // 公司名称
-	R拉黑原因 string `gorm:"column:reason;type:text"`                               // 拉黑原因
+	R拉黑原因 string `gorm:"column:reason;type:text"`                                                     // 拉黑原因
 }
 
 func (T黑名单) TableName() string {
