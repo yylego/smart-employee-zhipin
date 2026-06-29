@@ -6,7 +6,7 @@
 package main
 
 import (
-	"github.com/go-kratos/kratos/v2"
+	"github.com/go-kratos/kratos/v3"
 	"github.com/yylego/kratos-zap/zapkratos"
 	"github.com/yylego/smart-employee-zhipin/zhipin-kratos/internal/biz"
 	"github.com/yylego/smart-employee-zhipin/zhipin-kratos/internal/conf"

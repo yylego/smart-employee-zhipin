@@ -1,10 +1,10 @@
 module github.com/yylego/smart-employee-zhipin
 
-go 1.26.1
+go 1.26.4
 
 require (
 	github.com/stretchr/testify v1.11.1
-	github.com/yylego/runpath v0.0.4
+	github.com/yylego/runpath v0.0.7
 )
 
 require (

@@ -19,41 +19,19 @@ endif
 .PHONY: init
 # init env
 init:
-	go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
-	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
-	go install github.com/go-kratos/kratos/cmd/kratos/v2@latest
-	go install github.com/go-kratos/kratos/cmd/protoc-gen-go-http/v2@latest
-	go install github.com/yylego/kratos-errgen/cmd/protoc-gen-orzkratos-errors@latest
-	go install github.com/google/gnostic/cmd/protoc-gen-openapi@latest
 	go install github.com/google/wire/cmd/wire@latest
+	go install github.com/bufbuild/buf/cmd/buf@latest
+	go install github.com/yylego/kratos-orz/cmd/orzkratos-srv-proto@latest
 
 .PHONY: config
 # generate internal proto
 config:
-	protoc --proto_path=./internal \
-	       --proto_path=./third_party \
- 	       --go_out=paths=source_relative:./internal \
-	       $(INTERNAL_PROTO_FILES)
+	buf generate --template buf.gen.config.yaml
 
 .PHONY: api
 # generate api proto
 api:
-	protoc --proto_path=./api \
-	       --proto_path=./third_party \
- 	       --go_out=paths=source_relative:./api \
- 	       --go-http_out=paths=source_relative:./api \
- 	       --go-grpc_out=paths=source_relative:./api \
-	       --openapi_out=fq_schema_naming=true,default_response=false:. \
-	       $(API_PROTO_FILES)
-
-.PHONY: errors
-# generate errors code
-errors:
-	protoc --proto_path=./api \
-		   --proto_path=./third_party \
-		   --go_out=paths=source_relative:./api \
-		   --orzkratos-errors_out=include_nested=true,separate_named=true,paths=source_relative:./api \
-		   $(API_PROTO_FILES)
+	buf generate --template buf.gen.yaml
 
 .PHONY: build
 # build
@@ -72,7 +50,6 @@ generate:
 # generate all
 all:
 	make api;
-	make errors;
 	make config;
 	make generate;
 
@@ -85,26 +62,7 @@ orz:
 # npm install -g @protobuf-ts/plugin
 web_api_grpc_ts:
 	mkdir -p ./bin/web_api_grpc_ts.out
-	PROTOC_GEN_TS=$$(which protoc-gen-ts) && \
-	protoc \
-	--plugin=protoc-gen-ts=$$PROTOC_GEN_TS \
-	--ts_opt=ts_nocheck \
-	--ts_opt=eslint_disable \
-	--ts_opt=long_type_string \
-	--ts_out=./bin/web_api_grpc_ts.out \
-	--proto_path=./api \
-	--proto_path=./third_party \
-	$(API_PROTO_FILES)
-
-	PROTOC_GEN_TS=$$(which protoc-gen-ts) && \
-	protoc \
-	--plugin=protoc-gen-ts=$$PROTOC_GEN_TS \
-	--ts_opt=ts_nocheck \
-	--ts_opt=eslint_disable \
-	--ts_opt=long_type_string \
-	--ts_out=./bin/web_api_grpc_ts.out \
-	--proto_path=./third_party \
-	$(THIRD_PARTY_GOOGLE_API_PROTO_FILES)
+	buf generate --template buf.gen.ts.yaml --include-imports
 
 # convert gRPC clients to HTTP clients
 # go install github.com/yylego/kratos-vue3/cmd/vue3kratos@latest

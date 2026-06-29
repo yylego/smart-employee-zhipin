@@ -124,7 +124,7 @@ export class Sdk管理面板 {
             s聊天列表: d.chatMessages.map(v => ({
                 n消息方向: v.direction,
                 s消息内容: v.content,
-                n消息时间: v.timestamp,
+                n消息时间: Number(v.timestamp),
                 b简历消息: v.isResume,
                 s简历版本: v.resumeVersion,
             })),

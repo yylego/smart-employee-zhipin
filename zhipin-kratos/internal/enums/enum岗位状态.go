@@ -5,9 +5,10 @@ import (
 	"github.com/yylego/smart-employee-zhipin/zhipin-kratos/internal/pkg/models"
 
 	"github.com/yylego/protoenum"
+	"github.com/yylego/rese"
 )
 
-var Enum岗位状态映射表 = protoenum.NewEnums(
+var Enum岗位状态映射表 = rese.P1(protoenum.NewEnums(
 	protoenum.NewEnum(pb.PositionStatus_POSITION_STATUS_UNKNOWN, models.C岗位状态_状态未知),
 	protoenum.NewEnum(pb.PositionStatus_POSITION_STATUS_PENDING, models.C岗位状态_待处理),
 	protoenum.NewEnum(pb.PositionStatus_POSITION_STATUS_SKIPPED, models.C岗位状态_已跳过),
@@ -19,4 +20,4 @@ var Enum岗位状态映射表 = protoenum.NewEnums(
 	protoenum.NewEnum(pb.PositionStatus_POSITION_STATUS_OFFERED, models.C岗位状态_已拿到),
 	protoenum.NewEnum(pb.PositionStatus_POSITION_STATUS_REJECTED, models.C岗位状态_已拒绝),
 	protoenum.NewEnum(pb.PositionStatus_POSITION_STATUS_NO_CONTACT, models.C岗位状态_不再联系),
-)
+))

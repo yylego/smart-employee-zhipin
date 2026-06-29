@@ -1,9 +1,9 @@
 package server
 
 import (
-	"github.com/go-kratos/kratos/v2/middleware/logging"
-	"github.com/go-kratos/kratos/v2/middleware/recovery"
-	"github.com/go-kratos/kratos/v2/transport/grpc"
+	"github.com/go-kratos/kratos/v3/middleware/logging"
+	"github.com/go-kratos/kratos/v3/middleware/recovery"
+	"github.com/go-kratos/kratos/v3/transport/grpc"
 	"github.com/yylego/kratos-zap/zapkratos"
 	adminpb "github.com/yylego/smart-employee-zhipin/zhipin-kratos/api/admin"
 	pb "github.com/yylego/smart-employee-zhipin/zhipin-kratos/api/zhipin"

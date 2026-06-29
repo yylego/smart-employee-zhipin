@@ -44,7 +44,7 @@ func (s *Svc管理面板) ListTodayPositions(ctx context.Context, req *pb.ListTo
 func (s *Svc管理面板) ListAllPositions(ctx context.Context, req *pb.ListAllPositionsReq) (*pb.AdminPositionListResp, error) {
 	var dbStatus models.E岗位状态
 	if req.Status > 0 {
-		dbStatus = enums.Enum岗位状态映射表.MustGetByCode(req.Status).Basic()
+		dbStatus = enums.Enum岗位状态映射表.GetByCode(req.Status).Basic()
 	}
 	res, ebz := s.uc岗位.Get岗位列表(ctx, &biz.Req岗位列表{S岗位状态: dbStatus, Page: req.Page, PageSize: req.PageSize})
 	if ebz != nil {
@@ -75,7 +75,7 @@ func (s *Svc管理面板) GetPositionDetail(ctx context.Context, req *pb.GetPosi
 	for _, v := range v匹配们 {
 		matchItems = append(matchItems, &pb.AdminMatchItem{
 			Requirement: v.R岗位要求,
-			MatchStatus: int32(enums.Enum匹配状态映射表.MustGetByBasic(v.M匹配状态).Proto()),
+			MatchStatus: int32(enums.Enum匹配状态映射表.GetByBasic(v.M匹配状态).Proto()),
 			ResumePoint: v.R简历对应,
 			Remark:      v.R补充说明,
 		})
@@ -110,7 +110,7 @@ func (s *Svc管理面板) GetStats(ctx context.Context, req *pb.GetStatsReq) (*p
 	}
 	countMap := make(map[int32]int32)
 	for _, v := range res.Items {
-		pbStatus := int32(enums.Enum岗位状态映射表.MustGetByBasic(v.S岗位状态).Proto())
+		pbStatus := int32(enums.Enum岗位状态映射表.GetByBasic(v.S岗位状态).Proto())
 		countMap[pbStatus]++
 	}
 	statusCounts := make([]*pb.StatusCount, 0, len(countMap))
@@ -132,7 +132,7 @@ func toAdminPositionItem(v *models.T岗位) *pb.AdminPositionItem {
 		City:        v.C城市名称,
 		Recruiter:   v.R招聘者,
 		IsHunter:    v.I猎头标记,
-		Status:      int32(enums.Enum岗位状态映射表.MustGetByBasic(v.S岗位状态).Proto()),
+		Status:      int32(enums.Enum岗位状态映射表.GetByBasic(v.S岗位状态).Proto()),
 		MatchRate:   v.M匹配度,
 		LastResume:  v.L简历版本,
 		LastCommAt:  v.L最后沟通,

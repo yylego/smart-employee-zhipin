@@ -23,7 +23,7 @@ func (s *Svc需求匹配) SetRequirementItems(ctx context.Context, req *pb.SetRe
 	for _, item := range req.Items {
 		items = append(items, &biz.Req需求匹配项{
 			R岗位要求: item.Requirement,
-			M匹配状态: enums.Enum匹配状态映射表.MustGetByCode(item.MatchStatus).Basic(),
+			M匹配状态: enums.Enum匹配状态映射表.GetByCode(item.MatchStatus).Basic(),
 			R简历对应: item.ResumePoint,
 			R补充说明: item.Remark,
 			S排序序号: item.SortIndex,
@@ -48,7 +48,7 @@ func (s *Svc需求匹配) ListRequirementItems(ctx context.Context, req *pb.List
 			Id:          uint64(v.ID),
 			JobId:       v.J岗位编号,
 			Requirement: v.R岗位要求,
-			MatchStatus: int32(enums.Enum匹配状态映射表.MustGetByBasic(v.M匹配状态).Proto()),
+			MatchStatus: int32(enums.Enum匹配状态映射表.GetByBasic(v.M匹配状态).Proto()),
 			ResumePoint: v.R简历对应,
 			Remark:      v.R补充说明,
 			SortIndex:   v.S排序序号,

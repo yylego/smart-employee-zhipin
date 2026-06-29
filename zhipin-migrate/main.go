@@ -16,8 +16,6 @@ import (
 	"github.com/yylego/go-migrate/migrationparam"
 	"github.com/yylego/go-migrate/migrationstate"
 	"github.com/yylego/go-migrate/newmigrate"
-	"github.com/yylego/go-migrate/newscripts"
-	"github.com/yylego/go-migrate/previewmigrate"
 	"github.com/yylego/must"
 	"github.com/yylego/osexistpath/osmustexist"
 	"github.com/yylego/rese"
@@ -76,13 +74,7 @@ func main() {
 		},
 	}
 	rootCmd.PersistentFlags().BoolVar(&debugMode, "debug", false, "enable debug mode")
-	rootCmd.AddCommand(newscripts.NewScriptCmd(&newscripts.Config{
-		Param:   param,
-		Options: newscripts.NewOptions(scriptsInRoot),
-		Objects: objects,
-	}))
 	rootCmd.AddCommand(cobramigration.NewMigrateCmd(param))
-	rootCmd.AddCommand(previewmigrate.NewPreviewCmd(param, scriptsInRoot))
 	rootCmd.AddCommand(migrationstate.NewStatusCmd(&migrationstate.Config{
 		Param:       param,
 		ScriptsPath: scriptsInRoot,

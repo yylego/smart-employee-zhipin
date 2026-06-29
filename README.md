@@ -21,14 +21,14 @@
 
 ## Overview
 
-Upgrade the manual Markdown-based job tracking workflow into a structured API service + visual admin panel, supporting:
+Upgrade the old Markdown-based job tracking workflow into a structured API service + admin dashboard, supporting:
 
 - Position recording and status management (pending, messaged, interviewing, etc.)
-- Requirement-level match analysis (compare each job requirement against resume)
+- Requirement match analysis (compare each job requirement against resume)
 - Chat sync — push entire conversation at once, auto-extract last contact time and resume status
-- Company blacklist management
+- Firm blacklist management
 - Smart filtering: stale positions, need-response, need-resend
-- Admin dashboard for browsing positions and chat histories
+- Admin dashboard to browse positions and chat histories
 
 ## Project Structure
 
@@ -51,7 +51,7 @@ smart-employee-zhipin/
 
 | Layer | Technology |
 |-------|------------|
-| Backend | [Kratos](https://github.com/go-kratos/kratos) v2 |
+| Backend | [Kratos](https://github.com/go-kratos/kratos) v3 |
 | API | Protocol Buffers + gRPC / HTTP |
 | ORM | GORM + [gormcnm](https://github.com/yylego/gormcnm) (type-safe column names) |
 | DI | [Wire](https://github.com/google/wire) |
@@ -78,11 +78,15 @@ Database connection is configured in `zhipin-kratos/configs/config.yaml`.
 
 ### Generate Proto Code
 
+Regenerate the backend proto code (Go) and auto-sync service stubs — this runs `zhipin-kratos` buf generation plus the orzkratos service sync:
+
 ```bash
 make orz
 ```
 
 ### Generate TypeScript Clients
+
+One command drives the whole frontend client workflow through the `zhipin-codegen` program: clean old output, buf-generate the gRPC TypeScript client, convert it into an HTTP client, sync into `zhipin-vue3/src/rpc/zhipin`, then clean up. Run it when a proto changes:
 
 ```bash
 make gen
@@ -181,3 +185,9 @@ Welcome to contribute to this project via submitting merge requests and reportin
 **Have Fun Coding with this package!** 🎉🎉🎉
 
 <!-- TEMPLATE (EN) END: STANDARD PROJECT FOOTER -->
+
+---
+
+## GitHub Stars
+
+[![Stargazers](https://starchart.cc/yylego/smart-employee-zhipin.svg?variant=adaptive)](https://starchart.cc/yylego/smart-employee-zhipin)

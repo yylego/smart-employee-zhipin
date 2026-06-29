@@ -51,7 +51,7 @@ smart-employee-zhipin/
 
 | 层级 | 技术 |
 |------|------|
-| 后端框架 | [Kratos](https://github.com/go-kratos/kratos) v2 |
+| 后端框架 | [Kratos](https://github.com/go-kratos/kratos) v3 |
 | API 定义 | Protocol Buffers + gRPC / HTTP |
 | 数据库 ORM | GORM + [gormcnm](https://github.com/yylego/gormcnm)（类型安全列名） |
 | 依赖注入 | [Wire](https://github.com/google/wire) |
@@ -78,11 +78,15 @@ docker exec $(docker ps -qf "name=postgres") psql -U postgres -c "CREATE DATABAS
 
 ### 生成 Proto 代码
 
+重新生成后端 proto 代码（Go）并自动同步 service 实现——执行 zhipin-kratos 的 buf 生成 + orzkratos service 同步：
+
 ```bash
 make orz
 ```
 
 ### 生成 TypeScript 客户端
+
+一个命令由 zhipin-codegen 程序驱动整个前端客户端流程：清理旧产物 → buf 生成 gRPC TypeScript 客户端 → 转成 HTTP 客户端 → 同步到 zhipin-vue3/src/rpc/zhipin → 再清理。改动 proto 后执行：
 
 ```bash
 make gen
@@ -181,3 +185,9 @@ MIT 许可证 - 详见 [LICENSE](LICENSE)。
 **祝你用这个包编程愉快！** 🎉🎉🎉
 
 <!-- TEMPLATE (ZH) END: STANDARD PROJECT FOOTER -->
+
+---
+
+## GitHub 标星点赞
+
+[![Stargazers](https://starchart.cc/yylego/smart-employee-zhipin.svg?variant=adaptive)](https://starchart.cc/yylego/smart-employee-zhipin)

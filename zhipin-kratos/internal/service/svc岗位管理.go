@@ -39,7 +39,7 @@ func (s *Svc岗位管理) CreatePosition(ctx context.Context, req *pb.CreatePosi
 		R招聘者:  req.Recruiter,
 		E招聘者号: req.EncBossId,
 		I猎头标记: req.IsHunter,
-		S岗位状态: enums.Enum岗位状态映射表.MustGetByCode(req.Status).Basic(),
+		S岗位状态: enums.Enum岗位状态映射表.GetByCode(req.Status).Basic(),
 		D岗位职责: req.Duties,
 		R岗位要求: req.Requirements,
 		N备注信息: req.Notes,
@@ -54,7 +54,7 @@ func (s *Svc岗位管理) CreatePosition(ctx context.Context, req *pb.CreatePosi
 		for _, item := range req.MatchItems {
 			items = append(items, &biz.Req需求匹配项{
 				R岗位要求: item.Requirement,
-				M匹配状态: enums.Enum匹配状态映射表.MustGetByCode(item.MatchStatus).Basic(),
+				M匹配状态: enums.Enum匹配状态映射表.GetByCode(item.MatchStatus).Basic(),
 				R简历对应: item.ResumePoint,
 				R补充说明: item.Remark,
 				S排序序号: item.SortIndex,
@@ -80,7 +80,7 @@ func (s *Svc岗位管理) UpdateSalary(ctx context.Context, req *pb.UpdateSalary
 }
 
 func (s *Svc岗位管理) UpdateStatus(ctx context.Context, req *pb.UpdateStatusReq) (*pb.PositionResp, error) {
-	if ebz := s.uc.Xqt更新状态(ctx, &biz.Req更新状态{ID: uint(req.Id), S岗位状态: enums.Enum岗位状态映射表.MustGetByCode(req.Status).Basic()}); ebz != nil {
+	if ebz := s.uc.Xqt更新状态(ctx, &biz.Req更新状态{ID: uint(req.Id), S岗位状态: enums.Enum岗位状态映射表.GetByCode(req.Status).Basic()}); ebz != nil {
 		return nil, ebz.Erk
 	}
 	v岗位, ebz := s.uc.Get获取岗位(ctx, uint(req.Id))
@@ -178,7 +178,7 @@ func (s *Svc岗位管理) GetPositionByJobId(ctx context.Context, req *pb.GetPos
 func (s *Svc岗位管理) ListPositions(ctx context.Context, req *pb.ListPositionsReq) (*pb.ListPositionsResp, error) {
 	var dbStatus models.E岗位状态
 	if req.Status > 0 {
-		dbStatus = enums.Enum岗位状态映射表.MustGetByCode(req.Status).Basic()
+		dbStatus = enums.Enum岗位状态映射表.GetByCode(req.Status).Basic()
 	}
 	res, ebz := s.uc.Get岗位列表(ctx, &biz.Req岗位列表{S岗位状态: dbStatus, Page: req.Page, PageSize: req.PageSize})
 	if ebz != nil {
@@ -202,7 +202,7 @@ func (s *Svc岗位管理) CheckJobId(ctx context.Context, req *pb.CheckJobIdReq)
 	return &pb.CheckJobIdResp{
 		Exists:     res.Exists,
 		PositionId: uint64(res.ID),
-		Status:     int32(enums.Enum岗位状态映射表.MustGetByBasic(res.S岗位状态).Proto()),
+		Status:     int32(enums.Enum岗位状态映射表.GetByBasic(res.S岗位状态).Proto()),
 	}, nil
 }
 
@@ -219,7 +219,7 @@ func (s *Svc岗位管理) BatchCheckJobIds(ctx context.Context, req *pb.BatchChe
 				JobId:      jobId,
 				Exists:     true,
 				PositionId: uint64(v.ID),
-				Status:     int32(enums.Enum岗位状态映射表.MustGetByBasic(v.S岗位状态).Proto()),
+				Status:     int32(enums.Enum岗位状态映射表.GetByBasic(v.S岗位状态).Proto()),
 			})
 		} else {
 			results = append(results, &pb.JobIdCheckResult{
@@ -245,7 +245,7 @@ func toPositionResp(v *models.T岗位) *pb.PositionResp {
 		Recruiter:    v.R招聘者,
 		EncBossId:    v.E招聘者号,
 		IsHunter:     v.I猎头标记,
-		Status:       int32(enums.Enum岗位状态映射表.MustGetByBasic(v.S岗位状态).Proto()),
+		Status:       int32(enums.Enum岗位状态映射表.GetByBasic(v.S岗位状态).Proto()),
 		SkipReason:   v.S跳过原因,
 		MatchRate:    v.M匹配度,
 		Notes:        v.N备注信息,
@@ -355,7 +355,7 @@ func (s *Svc岗位管理) SyncPosition(ctx context.Context, req *pb.SyncPosition
 		R招聘者:  req.Recruiter,
 		E招聘者号: req.EncBossId,
 		I猎头标记: req.IsHunter,
-		S岗位状态: enums.Enum岗位状态映射表.MustGetByCode(req.Status).Basic(),
+		S岗位状态: enums.Enum岗位状态映射表.GetByCode(req.Status).Basic(),
 		D岗位职责: req.Duties,
 		R岗位要求: req.Requirements,
 		N备注信息: req.Notes,
@@ -381,7 +381,7 @@ func (s *Svc岗位管理) SyncPosition(ctx context.Context, req *pb.SyncPosition
 	for _, item := range req.MatchItems {
 		matchItems = append(matchItems, &biz.Req需求匹配项{
 			R岗位要求: item.Requirement,
-			M匹配状态: enums.Enum匹配状态映射表.MustGetByCode(item.MatchStatus).Basic(),
+			M匹配状态: enums.Enum匹配状态映射表.GetByCode(item.MatchStatus).Basic(),
 			R简历对应: item.ResumePoint,
 			R补充说明: item.Remark,
 			S排序序号: item.SortIndex,
